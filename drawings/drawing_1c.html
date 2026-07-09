@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drawing Overview — AA250228L1V03</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topnav">
+    <span class="launcher"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+    <span class="brand">temenos</span>
+    <span class="crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a><span class="sep">/</span><a href="../deals/deal_1.html">Acquisition Financing</a><span class="sep">/</span><a href="../facilities/facility_1.html">Term Loan A</a><span class="sep">/</span><span class="cur">Cash Loan (Pending)</span></span>
+    <span class="right">
+      <div class="navsearch">
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <span class="navprofile"><span class="navavatar"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>CSA User</span>
+      <span class="navicon" title="Settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+      <span class="navicon" title="Log out"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></span>
+    </span>
+  </div>
+
+  <div class="pagehead">
+    <div class="ph-left">
+      <div class="title-switcher">
+        <button class="title-trigger" onclick="toggleTitleMenu(event)">
+          <span class="tt-name">Cash Loan</span><span class="tt-id">••1V03</span><span class="tt-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="title-menu" id="titleMenu">
+          <div class="tm-head">3 Drawings</div>
+          <div class="tm-item" onclick="location.href='drawing_1a.html'"><div class="tm-top"><span>Cash Loan</span><span class="tm-sub">AA250128L1V01</span></div><div class="tm-meta"><span>Amount <b>£120.0m</b></span><span>Status <b>Active</b></span></div></div>
+          <div class="tm-item" onclick="location.href='drawing_1b.html'"><div class="tm-top"><span>Cash Loan</span><span class="tm-sub">AA250128L1V02</span></div><div class="tm-meta"><span>Amount <b>£50.0m</b></span><span>Status <b>Active</b></span></div></div>
+          <div class="tm-item on"><div class="tm-top"><span>Cash Loan (Pending)</span><span class="tm-sub">AA250228L1V03</span></div><div class="tm-meta"><span>Amount <b>€30.0m</b></span><span>Status <b>Pending</b></span></div></div>
+        </div>
+      </div>
+      <span class="pill pill-warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Pending — awaiting disbursement approval</span>
+      <span class="pill pill-info">Ref SR-10456</span>
+    </div>
+    <div class="ph-right">
+      <div class="svc-wrap">
+        <button class="svc-trigger" onclick="toggleSvcMenu(event)"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Actions <span style="opacity:.75">▾</span></button>
+        <div class="svc-menu" id="svcMenu">
+          <div class="mi" onclick="openServiceSheet('new-drawing', svcCtx)">Resume Drawing Request</div>
+          <div class="mi" onclick="cancelPendingRequest()">Cancel Request</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdr">
+    <div class="hdr-row">
+      <div class="av">MH</div>
+      <div class="hcol"><a class="hname" href="../customer_360.html">Meridian Holdings Ltd</a><span class="hlbl">Borrowing Group Member</span></div>
+      <div class="hcol"><span class="hlbl">Drawing ID</span><span class="hval">AA250228L1V03</span></div>
+      <div class="hcol"><span class="hlbl">Product</span><span class="hval">Cash Loan</span></div>
+      <div class="hcol"><span class="hlbl">Currency</span><span class="hval">EUR</span></div>
+      <div class="hcol"><span class="hlbl">Requested Amount</span><span class="hval">€30,000,000</span></div>
+      <div class="hcol"><span class="hlbl">Parent Facility</span><a class="hval" href="../facilities/facility_1.html">AA250114F1V01 →</a></div>
+    </div>
+    <div class="hdr-dates">
+      <div class="dc"><span class="dl">Requested Drawdown Date</span><span class="dv">28 Feb 2025</span></div>
+      <div class="dc"><span class="dl">Days Pending</span><span class="dv" style="color:var(--red-600)">497 days</span></div>
+      <div class="dc"><span class="dl">Proposed Interest Period</span><span class="dv">3 Months</span></div>
+      <div class="dc"><span class="dl">Proposed Maturity Date</span><span class="dv">14 Jan 2030</span></div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="hero2">
+      <div class="card">
+        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Proposed Terms</span></div>
+        <div class="finpage on" id="finpage-0">
+          <div class="row"><span class="l">Requested Amount</span><span class="v">€30,000,000</span></div>
+          <div class="row"><span class="l">Borrower</span><span class="v">Meridian Holdings Ltd</span></div>
+          <div class="row"><span class="l">Currency Basis</span><span class="v">Permitted List (GBP, USD, EUR)</span></div>
+          <div class="row"><span class="l">Sublimit Check</span><span class="v"><span class="st st-a">Within Commitment</span></span></div>
+        </div>
+        <div class="finpage" id="finpage-1">
+          <div class="row"><span class="l">Reference Rate</span><span class="v">3M EURIBOR</span></div>
+          <div class="row"><span class="l">Indicative Fixing</span><span class="v">3.41%</span></div>
+          <div class="row"><span class="l">Margin</span><span class="v">2.25%</span></div>
+          <div class="row"><span class="l">Indicative All-in Rate</span><span class="v">5.66%</span></div>
+        </div>
+        <div class="finnav">
+          <button id="finPrev" onclick="finPage(-1)" disabled>‹</button>
+          <button id="finNext" onclick="finPage(1)">›</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tlhead"><span class="ttl2">Approval Progress</span></div>
+        <div class="stepper">
+          <div class="apstep"><span class="dot"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="lbl">Requested</span><span class="sub">28 Feb 2025</span></div>
+          <div class="apstep"><span class="dot"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="lbl">Credit Approved</span><span class="sub">05 Mar 2025</span></div>
+          <div class="apstep"><span class="dot"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="lbl">KYC Verified</span><span class="sub">10 Mar 2025</span></div>
+          <div class="apstep pending"><span class="dot"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="lbl">Settlement &amp; Disbursement</span><span class="sub">Blocked</span></div>
+        </div>
+        <div class="unavail-sm" style="margin-top:22px">
+          ⚠ Outstanding since 28 Feb 2025 (497 days) pending Group Treasury sign-off on the EUR settlement account for Meridian Holdings Ltd. Escalated to Credit Ops on 02 Jul 2026.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="sectionhdr collapse-head" style="padding:16px 20px;margin-bottom:0;border-bottom:1px solid var(--border)" onclick="toggleCollapse('drawDetails', this)">
+        <span class="t">Drawing Details<span class="freshness">Updated just now</span></span>
+        <span class="chev">▾</span>
+      </div>
+      <div class="collapse-body" id="drawDetails">
+        <div class="detailwrap" style="border:none;border-radius:0">
+          <div class="sidetabs" id="sidetabs"></div>
+          <div class="detailbody" id="detailbody"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../assets/servicesheet.js"></script>
+<script src="../assets/pilloverflow.js"></script>
+<script src="../assets/search.js"></script>
+<script>
+const svcCtx = { customer:'Meridian Foods PLC', facility:'AA250114F1V01', ref:'SR-10456' };
+function cancelPendingRequest(){
+  document.getElementById('svcMenu').classList.remove('on');
+  alert('Cancellation would withdraw request SR-10456. This action requires Credit Officer sign-off.');
+}
+
+function toggleCollapse(id, headEl){
+  document.getElementById(id).classList.toggle('closed');
+  headEl.classList.toggle('closed');
+}
+
+let finIdx = 0;
+const finPages = document.querySelectorAll('.finpage');
+function finPage(dir){
+  finPages[finIdx].classList.remove('on');
+  finIdx = Math.max(0, Math.min(finPages.length - 1, finIdx + dir));
+  finPages[finIdx].classList.add('on');
+  document.getElementById('finPrev').disabled = finIdx === 0;
+  document.getElementById('finNext').disabled = finIdx === finPages.length - 1;
+}
+
+const tabs = [
+  {
+    label:'Approval Checklist',
+    html:`<div class="secttl">Approval Checklist</div>
+    <div class="row"><span class="l">Credit Approval</span><span class="v"><span class="st st-a">Approved</span></span></div>
+    <div class="row"><span class="l">KYC — Meridian Holdings Ltd</span><span class="v"><span class="st st-a">Verified</span></span></div>
+    <div class="row"><span class="l">EUR Settlement Account</span><span class="v"><span class="st st-p">Pending Treasury Sign-off</span></span></div>
+    <div class="row"><span class="l">Final Disbursement</span><span class="v"><span class="st st-p">Blocked</span></span></div>`
+  },
+  {
+    label:'Activity Log',
+    html:`<div class="secttl">Activity Log</div>
+    <table><thead><tr><th>Date</th><th>Activity</th><th>User</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>28 Feb 2025</td><td>Drawing Request Submitted (SR-10456)</td><td>L. Novak</td><td><span class="st st-a">Completed</span></td></tr>
+      <tr><td>05 Mar 2025</td><td>Credit Approval Granted</td><td>A. Whitfield</td><td><span class="st st-a">Completed</span></td></tr>
+      <tr><td>10 Mar 2025</td><td>KYC Verification Completed</td><td>System</td><td><span class="st st-a">Completed</span></td></tr>
+      <tr><td>02 Jul 2026</td><td>Escalated to Credit Ops — Settlement Account Pending</td><td>R. Gerling</td><td><span class="st st-p">Pending</span></td></tr>
+    </tbody></table>`
+  }
+];
+
+const sideEl = document.getElementById('sidetabs');
+const bodyEl = document.getElementById('detailbody');
+function showTab(idx){
+  sideEl.querySelectorAll('.sidetab').forEach((t,i) => t.classList.toggle('on', i === idx));
+  bodyEl.innerHTML = tabs[idx].html;
+}
+tabs.forEach((t,i) => {
+  const d = document.createElement('div');
+  d.className = 'sidetab' + (i === 0 ? ' on' : '');
+  d.textContent = t.label;
+  d.addEventListener('click', () => showTab(i));
+  sideEl.appendChild(d);
+});
+bodyEl.innerHTML = tabs[0].html;
+</script>
+</body>
+</html>

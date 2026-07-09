@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Service Request</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topnav">
+    <span class="launcher"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+    <span class="brand">temenos</span>
+    <span class="crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a><span class="sep">/</span><span class="cur">Service Request</span></span>
+    <span class="right">
+      <div class="navsearch">
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <span class="navprofile"><span class="navavatar"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>CSA User</span>
+      <span class="navicon" title="Settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+      <span class="navicon" title="Log out"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></span>
+    </span>
+  </div>
+
+  <div class="pagehead">
+    <div class="ph-left"><span class="ph-title">Service Request</span><span class="sub" id="pageSub">Select a request type to begin</span></div>
+  </div>
+
+  <div class="body">
+
+    <div class="ctxbanner" id="ctxBanner"></div>
+
+    <div class="detailwrap" style="min-height:520px">
+      <div class="sidetabs reqnav" id="reqnav" style="width:220px"></div>
+      <div class="detailbody" id="formHost"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../assets/servicesheet.js"></script>
+<script src="../assets/search.js"></script>
+<script>
+const qs = new URLSearchParams(location.search);
+ssSetCtx({
+  action: qs.get('action') || '',
+  facility: qs.get('facility') || '',
+  drawing: qs.get('drawing') || '',
+  customer: (qs.get('customer') || 'Meridian Foods PLC').replace(/\+/g, ' '),
+  ref: qs.get('ref') || ''
+});
+
+function renderCtx(){
+  document.getElementById('ctxBanner').innerHTML = ssCtxBannerHTML();
+}
+
+function renderNav(activeId){
+  const nav = document.getElementById('reqnav');
+  nav.innerHTML = '';
+  SS_REQUESTS.forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'rn' + (r.id === activeId ? ' on' : '');
+    d.textContent = r.label;
+    d.addEventListener('click', () => selectRequest(r.id));
+    nav.appendChild(d);
+  });
+}
+
+function selectRequest(id){
+  ssCtx.action = id;
+  const params = new URLSearchParams(location.search);
+  params.set('action', id);
+  history.replaceState(null, '', location.pathname + '?' + params.toString());
+  renderNav(id);
+  const req = SS_REQUESTS.find(r => r.id === id);
+  document.getElementById('pageSub').textContent = req.label;
+  const host = document.getElementById('formHost');
+  const formFn = SS_FORMS[id];
+  host.innerHTML = `
+    <div class="banner-success" id="successBanner">
+      <div class="bs-icon">&#10003;</div>
+      <div><strong id="successTitle">Request submitted</strong><div id="successBody" style="margin-top:2px"></div></div>
+    </div>
+    <form id="reqForm">${formFn ? formFn() : ''}</form>
+    <div class="formfoot">
+      <button type="button" class="btn" onclick="goBack()">Cancel</button>
+      <button type="button" class="btn btn-primary" id="submitBtn" onclick="submitRequest()">Submit Request</button>
+    </div>`;
+  ssWireCovenantResult(host);
+}
+
+function goBack(){
+  if (document.referrer && document.referrer.indexOf(location.host) !== -1){
+    history.back();
+  } else if (ssCtx.facility && SS_FACILITIES[ssCtx.facility]){
+    location.href = '../facilities/facility_' + (ssCtx.facility === 'AA250114F1V01' ? '1' : ssCtx.facility === 'AA250310F1V01' ? '2' : '3') + '.html';
+  } else {
+    location.href = '../customer_360.html';
+  }
+}
+
+function submitRequest(){
+  const form = document.getElementById('reqForm');
+  if (!ssValidate(form)) return;
+  const ref = ssGenRef();
+  document.getElementById('successTitle').textContent = `Request submitted — ${ref}`;
+  document.getElementById('successBody').textContent = 'Routed to Credit Operations for review. You will be notified once actioned.';
+  document.getElementById('successBanner').classList.add('on');
+  document.getElementById('submitBtn').setAttribute('disabled', 'disabled');
+  form.querySelectorAll('input,select,textarea,button').forEach(el => el.setAttribute('disabled', 'disabled'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderCtx();
+const initial = SS_REQUESTS.some(r => r.id === ssCtx.action) ? ssCtx.action : 'new-drawing';
+selectRequest(initial);
+</script>
+</body>
+</html>
