@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facility Overview — Multi-currency Trade Finance Facility</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topnav">
+    <img class="brand-logo" src="../assets/temenos-logo.svg" alt="Temenos"><span class="brand-product">CS360</span>
+      <div class="navsearch">
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    <span class="right">
+      <span class="navprofile"><span class="navavatar"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>CSA User</span>
+      <span class="navicon" title="Settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+      <span class="navicon" title="Log out"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></span>
+    </span>
+  </div>
+
+  <div class="pagehead">
+    <div class="ph-left">
+      <div class="ph-crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a><span class="sep">/</span><a href="../deals/deal_3.html">Trade Finance</a></div>
+      <div class="ph-title-row">
+        <span class="entity-icon facility" title="Facility"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 21 7 3 7"/></svg></span>
+      <div class="title-switcher">
+        <button class="title-trigger" onclick="toggleTitleMenu(event)">
+          <span class="tt-name">Trade Finance Facility</span><span class="tt-id">••0512</span><span class="tt-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="title-menu" id="titleMenu">
+          <div class="tm-head">3 Facilities</div>
+          <div class="tm-item" onclick="location.href='facility_1.html'"><div class="tm-top"><span>Term Loan A</span><span class="tm-sub">AA250114F1V01</span></div><div class="tm-meta"><span>Commitment <b>£200.0m</b></span><span>Drawn <b>100%</b></span></div></div>
+          <div class="tm-item" onclick="location.href='facility_2.html'"><div class="tm-top"><span>Revolving Credit Facility</span><span class="tm-sub">AA250310F1V01</span></div><div class="tm-meta"><span>Commitment <b>£75.0m</b></span><span>Drawn <b>60%</b></span></div></div>
+          <div class="tm-item on"><div class="tm-top"><span>Trade Finance Facility</span><span class="tm-sub">AA250512F1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Drawn <b>43%</b></span></div></div>
+        </div>
+      </div>
+              <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active</span>
+      <span class="pill pill-warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Amend Facility request pending (SR-10799)</span>
+</div>
+
+    </div>
+    <div class="ph-right">
+      <div class="quicknav-wrap">
+        <button class="quicknav-trigger" onclick="toggleQuickNav(event,'qnDrawings')">2 Drawings <span class="qn-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="quicknav-menu" id="qnDrawings">
+          <div class="tm-head">2 Drawings</div>
+          <div class="tm-item" onclick="location.href='../drawings/drawing_3a.html'"><div class="tm-top"><span>Import Letter of Credit</span><span class="tm-sub">AA250520L3V01</span></div><div class="tm-meta"><span>Amount <b>$12.0m</b></span><span>Status <b>Active</b></span></div></div>
+          <div class="tm-item" onclick="location.href='../drawings/drawing_3b.html'"><div class="tm-top"><span>Bank Guarantee</span><span class="tm-sub">AA250715L3V02</span></div><div class="tm-meta"><span>Amount <b>$5.0m</b></span><span>Status <b>Active</b></span></div></div>
+        </div>
+      </div>
+      <div class="svc-wrap">
+        <button class="svc-trigger" onclick="toggleSvcMenu(event)"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Service Action <span style="opacity:.75">▾</span></button>
+        <div class="svc-menu" id="svcMenu">
+          <div class="mi" onclick="openServiceSheet('new-drawing', svcCtx)">New Drawing</div>
+          <div class="mi" onclick="openServiceSheet('process-repayment', svcCtx)">Process Repayment</div>
+          <div class="mi" onclick="openServiceSheet('apply-prepayment', svcCtx)">Apply Prepayment</div>
+          <div class="mi" onclick="openServiceSheet('record-covenant-test', svcCtx)">Record Covenant Test</div>
+          <div class="mi" onclick="openServiceSheet('amend-facility', svcCtx)">Amend Facility</div>
+          <div class="mi" onclick="openServiceSheet('increase-commitment', svcCtx)">Increase Commitment</div>
+          <div class="mi" onclick="openServiceSheet('cancel-commitment', svcCtx)">Cancel Commitment</div>
+          <div class="mi" onclick="openServiceSheet('close-facility', svcCtx)">Close Facility</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdr">
+    <div class="hdr-row">
+      <div class="hdr-identity">
+        <div class="av">MF</div>
+        <div class="hcol"><a class="hname" href="../customer_360.html">Meridian Foods PLC</a><span class="hlbl">CUST 482211</span></div>
+      </div>
+    <div class="hdr-fields">
+      <div class="hcol"><span class="hlbl">Facility Name</span><span class="hval">Multi-currency Trade Finance Facility</span></div>
+      <div class="hcol"><span class="hlbl">Facility ID</span><span class="hval">AA250512F1V01</span></div>
+      <div class="hcol"><span class="hlbl">Product</span><span class="hval">Trade Finance (LC &amp; Guarantee)</span></div>
+      <div class="hcol"><span class="hlbl">Currency</span><span class="hval">USD</span></div>
+      <div class="hcol"><span class="hlbl">Commitment</span><span class="hval key">$40,000,000</span></div>
+      <div class="hcol"><span class="hlbl">Parent Deal</span><a class="hval" href="../deals/deal_3.html">AA250512D1V01 →</a></div>
+    
+    </div>
+  </div>
+    <div class="hdr-dates">
+      <div class="dc"><span class="dl">Agreement Date</span><span class="dv">12 May 2025</span></div>
+      <div class="dc"><span class="dl">Closing Date</span><span class="dv">16 May 2025</span></div>
+      <div class="dc"><span class="dl">Availability End</span><span class="dv">12 Apr 2028</span></div>
+      <div class="dc"><span class="dl">Termination Date</span><span class="dv">12 May 2028</span></div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="hero2">
+      <div class="card">
+        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Financial Summary</span></div>
+        <div class="finpage on" id="finpage-0">
+          <div class="row"><span class="l">Total Commitment</span><span class="v">$40,000,000</span></div>
+          <div class="row"><span class="l">Utilised</span><span class="v">$17,000,000</span></div>
+          <div class="row"><span class="l">Available</span><span class="v">$23,000,000</span></div>
+          <div class="row"><span class="l">Utilisation %</span><span class="v">43%</span></div>
+          <div class="row"><span class="l">Open Instruments</span><span class="v">2 (1 LC, 1 Guarantee)</span></div>
+        </div>
+        <div class="finpage" id="finpage-1">
+          <div class="row"><span class="l">Import LC Sublimit</span><span class="v">$30,000,000</span></div>
+          <div class="row"><span class="l">— Used</span><span class="v">$12,000,000</span></div>
+          <div class="row"><span class="l">— Utilisation %</span><span class="v">40%</span></div>
+          <div class="row" style="border-top:1px solid var(--border);padding-top:10px;margin-top:6px"><span class="l">Bank Guarantee Sublimit</span><span class="v">$15,000,000</span></div>
+          <div class="row"><span class="l">— Used</span><span class="v">$5,000,000</span></div>
+          <div class="row"><span class="l">— Utilisation %</span><span class="v">33%</span></div>
+          <div class="unavail-sm" style="background:var(--brand-50);color:var(--navy)">◷ SR-10799 — Amend Facility submitted 28 Jun 2026</div>
+        </div>
+        <div class="finnav">
+          <button id="finPrev" onclick="finPage(-1)" disabled>‹</button>
+          <button id="finNext" onclick="finPage(1)">›</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tlhead"><span class="ttl2">Upcoming Cash Events</span></div>
+        <div class="eventbars-total"><span>Next scheduled instrument fees</span><b>$56,250 across 2 events</b></div>
+        <div class="eventbars-wrap" id="eventBars"></div>
+        <div class="chart-caption" id="eventBarsCount"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Covenant Basis</span><div class="compliance-badge"><span class="l">Cross-defaulted to Group package</span><span class="b">N/A</span></div></div>
+      <p style="color:var(--text2);font-size:13px">No facility-specific financial covenants. Governed by sublimit caps and cross-default to Group covenant package.</p>
+    </div>
+
+    <div class="card">
+      <div class="sectionhdr collapse-head" onclick="toggleCollapse('drawSection', this)">
+        <span class="t">Drawings <span class="cnt">2</span></span>
+        <span style="display:flex;align-items:center;gap:10px">
+          <button class="btn btn-primary" onclick="event.stopPropagation();openServiceSheet('new-drawing', svcCtx)">+ New Drawing</button>
+          <span class="chev">▾</span>
+        </span>
+      </div>
+      <div class="collapse-body" id="drawSection">
+      <table>
+        <thead><tr><th>Drawing ID</th><th>Product</th><th>Borrower</th><th>Currency</th><th>Amount</th><th>Issue Date</th><th>Expiry Date</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="clk" onclick="location.href='../drawings/drawing_3a.html'"><td class="lnk2">AA250520L3V01</td><td>Import LC</td><td>Meridian Foods PLC</td><td>USD</td><td>$12,000,000</td><td>20 May 2025</td><td>20 Nov 2026</td><td><span class="st st-a">Active</span></td></tr>
+          <tr class="clk" onclick="location.href='../drawings/drawing_3b.html'"><td class="lnk2">AA250715L3V02</td><td>Bank Guarantee</td><td>Meridian Holdings Ltd</td><td>USD</td><td>$5,000,000</td><td>15 Jul 2025</td><td>15 Jul 2027</td><td><span class="st st-a">Active</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="sectionhdr collapse-head" style="padding:16px 20px;margin-bottom:0;border-bottom:1px solid var(--border)" onclick="toggleCollapse('facDetails', this)">
+        <span class="t">Facility Details<span class="freshness">Updated just now</span></span>
+        <span class="chev">▾</span>
+      </div>
+      <div class="collapse-body" id="facDetails">
+        <div class="detailwrap" style="border:none;border-radius:0">
+          <div class="sidetabs" id="sidetabs"></div>
+          <div class="detailbody" id="detailbody"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../assets/charts.js"></script>
+<script src="../assets/quicknav.js"></script>
+<script src="../assets/servicesheet.js"></script>
+<script src="../assets/pilloverflow.js"></script>
+<script src="../assets/search.js"></script>
+<script>
+const svcCtx = { customer:'Meridian Foods PLC', facility:'AA250512F1V01' };
+
+renderEventBars('eventBars', [
+  { date:'15 Jul 2026', label:'Guarantee fee', amountLabel:'$18,750', value:18750, state:'next', title:'Drawing 3b — $18,750 guarantee fee due' },
+  { date:'20 Aug 2026', label:'Import LC fee', amountLabel:'$37,500', value:37500, state:'future', title:'Drawing 3a — $37,500 LC fee due' }
+], '2 of 2 events shown');
+
+function toggleCollapse(id, headEl){
+  document.getElementById(id).classList.toggle('closed');
+  headEl.classList.toggle('closed');
+}
+
+let finIdx = 0;
+const finPages = document.querySelectorAll('.finpage');
+function finPage(dir){
+  finPages[finIdx].classList.remove('on');
+  finIdx = Math.max(0, Math.min(finPages.length - 1, finIdx + dir));
+  finPages[finIdx].classList.add('on');
+  document.getElementById('finPrev').disabled = finIdx === 0;
+  document.getElementById('finNext').disabled = finIdx === finPages.length - 1;
+}
+
+const tabs = [
+  {
+    id:'facility-terms', label:'Facility Terms',
+    html:`<div class="secttl">Commitment &amp; Term</div>
+    <div class="dgrid">
+      <div class="df"><span class="l">Commitment Amount</span><span class="v">$40,000,000</span></div>
+      <div class="df"><span class="l">Currency</span><span class="v">USD (multi-currency drawdown)</span></div>
+      <div class="df"><span class="l">Revolving</span><span class="v">Revolving (uncommitted)</span></div>
+      <div class="df"><span class="l">Term</span><span class="v">3 Years</span></div>
+      <div class="df"><span class="l">Availability End</span><span class="v">12 Apr 2028</span></div>
+      <div class="df"><span class="l">Termination Date</span><span class="v">12 May 2028</span></div>
+      <div class="df"><span class="l">Date Convention</span><span class="v">Following Business Day</span></div>
+    </div>`
+  },
+  {
+    id:'facility-fees', label:'Facility Fees',
+    html:`<div class="secttl">Facility Fees</div>
+    <div class="subsecttl">Facility Fee</div>
+    <div class="dgrid">
+      <div class="df"><span class="l">Rate</span><span class="v">0.20% p.a.</span></div>
+      <div class="df"><span class="l">Calculation Basis</span><span class="v">Undrawn Commitment</span></div>
+      <div class="df"><span class="l">Day Count Basis</span><span class="v">Act/360</span></div>
+      <div class="df"><span class="l">Payment Frequency</span><span class="v">Quarterly in arrear</span></div>
+    </div>
+    <hr class="divider">
+    <div class="subsecttl">Import LC Issuance Fee</div>
+    <div class="dgrid">
+      <div class="df"><span class="l">Rate</span><span class="v">1.25% p.a.</span></div>
+      <div class="df"><span class="l">Calculation Basis</span><span class="v">Face Value</span></div>
+      <div class="df"><span class="l">Payment Frequency</span><span class="v">Quarterly in advance</span></div>
+    </div>
+    <hr class="divider">
+    <div class="subsecttl">Bank Guarantee Issuance Fee</div>
+    <div class="dgrid">
+      <div class="df"><span class="l">Rate</span><span class="v">1.50% p.a.</span></div>
+      <div class="df"><span class="l">Calculation Basis</span><span class="v">Face Value</span></div>
+      <div class="df"><span class="l">Payment Frequency</span><span class="v">Quarterly in advance</span></div>
+    </div>
+    <hr class="divider">
+    <div class="subsecttl">Upfront Arrangement Fee</div>
+    <div class="dgrid">
+      <div class="df"><span class="l">Amount</span><span class="v">$50,000 flat</span></div>
+      <div class="df"><span class="l">Payment Timing</span><span class="v">On Closing Date</span></div>
+    </div>`
+  },
+  {
+    id:'sublimits', label:'Sublimits',
+    html:`<div class="secttl">Sublimits</div>
+    <table><thead><tr><th>Criteria</th><th>Applies To</th><th>Limit Amount</th><th>Used</th><th>Available</th><th>Auto-Reduce</th></tr></thead>
+    <tbody>
+      <tr><td>Drawing Product Type</td><td>Import Letter of Credit</td><td>$30,000,000</td><td>$12,000,000</td><td>$18,000,000</td><td>No</td></tr>
+      <tr><td>Drawing Product Type</td><td>Bank Guarantee</td><td>$15,000,000</td><td>$5,000,000</td><td>$10,000,000</td><td>No</td></tr>
+    </tbody></table>`
+  },
+  {
+    id:'drawing-terms', label:'Drawing Terms',
+    html:`<div class="secttl">Drawing Terms</div>
+    <div class="dgrid">
+      <div class="df"><span class="l">Permitted Borrower Basis</span><span class="v">Borrowing Group</span></div>
+      <div class="df"><span class="l">Required Borrower</span><span class="v">Any</span></div>
+      <div class="df"><span class="l">Permitted Drawing Types</span><span class="v">Import LC, Bank Guarantee</span></div>
+      <div class="df"><span class="l">Max Concurrent Instruments</span><span class="v">15</span></div>
+      <div class="df"><span class="l">Drawing Currency Basis</span><span class="v">Permitted List</span></div>
+      <div class="df"><span class="l">Permitted Currencies</span><span class="v">USD, EUR, GBP</span></div>
+      <div class="df"><span class="l">Minimum Instrument Amount</span><span class="v">$250,000</span></div>
+      <div class="df"><span class="l">Minimum Notice Period</span><span class="v">5 Business Days</span></div>
+      <div class="df"><span class="l">Maximum Tenor</span><span class="v">24 Months</span></div>
+      <div class="df"><span class="l">Extension Permitted</span><span class="v">Yes, subject to approval</span></div>
+    </div>`
+  },
+  {
+    id:'repayment', label:'Repayment Schedule',
+    html:`<div class="secttl">Repayment Schedule</div>
+    <p style="color:var(--text2);font-size:13px">Not applicable — instruments are contingent obligations (LC / Guarantee) settled on expiry or drawn event, not amortising loans.</p>`
+  },
+  {
+    id:'settlement', label:'Settlement',
+    html:`<div class="secttl">Settlement Instructions</div>
+    <div class="dgrid">
+      <div class="df"><span class="l">Fee Settlement Account</span><span class="v">GB18 NWBK 6016 1331 4471 02</span></div>
+      <div class="df"><span class="l">Claim Settlement Account</span><span class="v">GB18 NWBK 6016 1331 4471 02</span></div>
+      <div class="df"><span class="l">Currency</span><span class="v">USD</span></div>
+      <div class="df"><span class="l">Inheritance</span><span class="v">Inherited by Drawings</span></div>
+    </div>`
+  },
+  {
+    id:'activity', label:'Activity Log',
+    html:`<div class="secttl">Activity Log</div>
+    <table><thead><tr><th>Date</th><th>Activity</th><th>User</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>16 May 2025</td><td>Facility Created</td><td>M. Chowdhury</td><td><span class="st st-a">Completed</span></td></tr>
+      <tr><td>20 May 2025</td><td>Import LC AA250520L3V01 Issued</td><td>M. Chowdhury</td><td><span class="st st-a">Completed</span></td></tr>
+      <tr><td>15 Jul 2025</td><td>Bank Guarantee AA250715L3V02 Issued</td><td>M. Chowdhury</td><td><span class="st st-a">Completed</span></td></tr>
+      <tr><td>28 Jun 2026</td><td>Amend Facility Requested (SR-10799)</td><td>M. Chowdhury</td><td><span class="st st-p">Pending</span></td></tr>
+    </tbody></table>`
+  }
+];
+
+const sideEl = document.getElementById('sidetabs');
+const bodyEl = document.getElementById('detailbody');
+
+function showTab(idx) {
+  sideEl.querySelectorAll('.sidetab').forEach((t,i) => {
+    t.classList.toggle('on', i === idx);
+  });
+  bodyEl.innerHTML = tabs[idx].html;
+}
+
+tabs.forEach((t, i) => {
+  const d = document.createElement('div');
+  d.className = 'sidetab' + (i === 0 ? ' on' : '');
+  d.textContent = t.label;
+  d.addEventListener('click', () => showTab(i));
+  sideEl.appendChild(d);
+});
+
+bodyEl.innerHTML = tabs[0].html;
+</script>
+</body>
+</html>

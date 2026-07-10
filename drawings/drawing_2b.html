@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drawing Overview — AA250620L2V02</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topnav">
+    <img class="brand-logo" src="../assets/temenos-logo.svg" alt="Temenos"><span class="brand-product">CS360</span>
+      <div class="navsearch">
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    <span class="right">
+      <span class="navprofile"><span class="navavatar"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>CSA User</span>
+      <span class="navicon" title="Settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+      <span class="navicon" title="Log out"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></span>
+    </span>
+  </div>
+
+  <div class="pagehead">
+    <div class="ph-left">
+      <div class="ph-crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a><span class="sep">/</span><a href="../deals/deal_2.html">Working Capital</a><span class="sep">/</span><a href="../facilities/facility_2.html">Revolving Credit Facility</a></div>
+      <div class="ph-title-row">
+        <span class="entity-icon drawing" title="Drawing"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span>
+      <div class="title-switcher">
+        <button class="title-trigger" onclick="toggleTitleMenu(event)">
+          <span class="tt-name">Letter of Credit</span><span class="tt-id">••2V02</span><span class="tt-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="title-menu" id="titleMenu">
+          <div class="tm-head">2 Drawings</div>
+          <div class="tm-item" onclick="location.href='drawing_2a.html'"><div class="tm-top"><span>Cash Loan (Revolving)</span><span class="tm-sub">AA250315L2V01</span></div><div class="tm-meta"><span>Amount <b>£30.0m</b></span><span>Status <b>Active</b></span></div></div>
+          <div class="tm-item on"><div class="tm-top"><span>Letter of Credit</span><span class="tm-sub">AA250620L2V02</span></div><div class="tm-meta"><span>Amount <b>£15.0m</b></span><span>Status <b>Active</b></span></div></div>
+        </div>
+      </div>
+              <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active — Issued</span>
+      <span class="pill pill-info">Expires in 5 months</span>
+</div>
+
+    </div>
+    <div class="ph-right">
+      <div class="svc-wrap">
+        <button class="svc-trigger" onclick="toggleSvcMenu(event)"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Drawing Action <span style="opacity:.75">▾</span></button>
+        <div class="svc-menu" id="svcMenu">
+          <div class="mi" onclick="openServiceSheet('amend-facility', svcCtx)">Amend / Extend LC</div>
+          <div class="mi" onclick="openServiceSheet('cancel-commitment', svcCtx)">Cancel LC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdr">
+    <div class="hdr-row">
+      <div class="hdr-identity">
+        <div class="av">MI</div>
+        <div class="hcol"><span class="hname">Meridian Foods (Ireland) Ltd</span><span class="hlbl">Borrowing Group Member</span></div>
+      </div>
+    <div class="hdr-fields">
+      <div class="hcol"><span class="hlbl">Drawing ID</span><span class="hval">AA250620L2V02</span></div>
+      <div class="hcol"><span class="hlbl">Product</span><span class="hval">Letter of Credit</span></div>
+      <div class="hcol"><span class="hlbl">Currency</span><span class="hval">GBP</span></div>
+      <div class="hcol"><span class="hlbl">Face Amount</span><span class="hval key">£15,000,000</span></div>
+      <div class="hcol"><span class="hlbl">Parent Facility</span><a class="hval" href="../facilities/facility_2.html">AA250310F1V01 →</a></div>
+    
+    </div>
+  </div>
+    <div class="hdr-dates">
+      <div class="dc"><span class="dl">Issuance Date</span><span class="dv">20 Jun 2025</span></div>
+      <div class="dc"><span class="dl">Expiry Date</span><span class="dv">20 Dec 2026</span></div>
+      <div class="dc"><span class="dl">Fee Payment Frequency</span><span class="dv">Quarterly in advance</span></div>
+      <div class="dc"><span class="dl">Sublimit</span><span class="dv">£20,000,000 (LC)</span></div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="hero2">
+      <div class="card">
+        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Fee &amp; Utilisation</span></div>
+        <div class="finpage on" id="finpage-0">
+          <div class="row"><span class="l">Face Amount</span><span class="v">£15,000,000</span></div>
+          <div class="row"><span class="l">LC Fee Rate</span><span class="v">1.10% p.a.</span></div>
+          <div class="row"><span class="l">Fee Basis</span><span class="v">Face Value</span></div>
+          <div class="row"><span class="l">Current Quarter Fee</span><span class="v">£41,250</span></div>
+          <div class="row"><span class="l">Drawn Under LC</span><span class="v">£0</span></div>
+        </div>
+        <div class="finpage" id="finpage-1">
+          <div class="row"><span class="l">Facility LC Sublimit</span><span class="v">£20,000,000</span></div>
+          <div class="row"><span class="l">Used (this LC + others)</span><span class="v">£15,000,000</span></div>
+          <div class="row"><span class="l">Available</span><span class="v">£5,000,000</span></div>
+          <div class="row"><span class="l">Utilisation %</span><span class="v">75%</span></div>
+        </div>
+        <div class="finnav">
+          <button id="finPrev" onclick="finPage(-1)" disabled>‹</button>
+          <button id="finNext" onclick="finPage(1)">›</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tlhead"><span class="ttl2">Next Fee Due</span></div>
+        <div class="milestone-big">
+          <div class="mb-lbl">LC Fee Due</div>
+          <div class="mb-date">20 Sep 2026</div>
+          <span class="mb-tag ok">Scheduled</span>
+          <div class="mb-amount">£41,250</div>
+          <div class="mb-breakdown">Quarterly fee · 1.10% p.a. on £15,000,000 face value</div>
+          <div class="mb-progress"><div style="width:20.7%"></div></div>
+          <div class="mb-progress-lbl"><span>20 Jun 2026</span><span>20.7% of fee quarter elapsed</span><span>20 Sep 2026</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardh"><span>Fee Schedule</span></div>
+      <table>
+        <thead><tr><th>Period Start</th><th>Period End</th><th>Fee Due</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>20 Mar 2026</td><td>20 Jun 2026</td><td>£41,250</td><td><span class="st st-a">Paid</span></td></tr>
+          <tr><td>20 Jun 2026</td><td>20 Sep 2026</td><td>£41,250</td><td><span class="st st-a">Paid</span></td></tr>
+          <tr><td>20 Sep 2026</td><td>20 Dec 2026</td><td>£41,250</td><td><span class="st st-d">Scheduled</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="sectionhdr collapse-head" style="padding:16px 20px;margin-bottom:0;border-bottom:1px solid var(--border)" onclick="toggleCollapse('drawDetails', this)">
+        <span class="t">Drawing Details<span class="freshness">Updated just now</span></span>
+        <span class="chev">▾</span>
+      </div>
+      <div class="collapse-body" id="drawDetails">
+        <div class="detailwrap" style="border:none;border-radius:0">
+          <div class="sidetabs" id="sidetabs"></div>
+          <div class="detailbody" id="detailbody"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../assets/servicesheet.js"></script>
+<script src="../assets/pilloverflow.js"></script>
+<script src="../assets/search.js"></script>
+<script>
+const svcCtx = { customer:'Meridian Foods PLC', facility:'AA250310F1V01', drawing:'AA250620L2V02' };
+
+function toggleCollapse(id, headEl){
+  document.getElementById(id).classList.toggle('closed');
+  headEl.classList.toggle('closed');
+}
+
+let finIdx = 0;
+const finPages = document.querySelectorAll('.finpage');
+function finPage(dir){
+  finPages[finIdx].classList.remove('on');
+  finIdx = Math.max(0, Math.min(finPages.length - 1, finIdx + dir));
+  finPages[finIdx].classList.add('on');
+  document.getElementById('finPrev').disabled = finIdx === 0;
+  document.getElementById('finNext').disabled = finIdx === finPages.length - 1;
+}
+
+const tabs = [
+  {
+    label:'LC Details',
+    html:`<div class="secttl">Letter of Credit Details</div>
+    <div class="dgrid">
+      <div class="df"><span class="l">LC Type</span><span class="v">Standby LC</span></div>
+      <div class="df"><span class="l">Beneficiary</span><span class="v">Kingsley Grain Merchants BV</span></div>
+      <div class="df"><span class="l">Applicant</span><span class="v">Meridian Foods (Ireland) Ltd</span></div>
+      <div class="df"><span class="l">Issuing Bank</span><span class="v">Temenos Bank plc</span></div>
+      <div class="df"><span class="l">Governing Rules</span><span class="v">ISP98</span></div>
+    </div>`
+  },
+  {
+    label:'Activity Log',
+    html:`<div class="secttl">Activity Log</div>
+    <table><thead><tr><th>Date</th><th>Activity</th><th>User</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>20 Jun 2025</td><td>Letter of Credit Issued</td><td>M. Chowdhury</td><td><span class="st st-a">Completed</span></td></tr>
+      <tr><td>20 Jun 2026</td><td>Quarterly Fee Collected</td><td>System</td><td><span class="st st-a">Completed</span></td></tr>
+    </tbody></table>`
+  }
+];
+
+const sideEl = document.getElementById('sidetabs');
+const bodyEl = document.getElementById('detailbody');
+function showTab(idx){
+  sideEl.querySelectorAll('.sidetab').forEach((t,i) => t.classList.toggle('on', i === idx));
+  bodyEl.innerHTML = tabs[idx].html;
+}
+tabs.forEach((t,i) => {
+  const d = document.createElement('div');
+  d.className = 'sidetab' + (i === 0 ? ' on' : '');
+  d.textContent = t.label;
+  d.addEventListener('click', () => showTab(i));
+  sideEl.appendChild(d);
+});
+bodyEl.innerHTML = tabs[0].html;
+</script>
+</body>
+</html>
