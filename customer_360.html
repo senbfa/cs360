@@ -10,8 +10,7 @@
 <div class="app">
 
   <div class="topnav">
-    <span class="launcher"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
-    <span class="brand">temenos</span>
+    <img class="brand-logo" src="assets/temenos-logo.svg" alt="Temenos"><span class="brand-product">CS360</span>
       <div class="navsearch">
         <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
@@ -28,33 +27,16 @@
     <div class="ph-left">
       <div class="ph-crumbs"><a href="index.html">Home</a></div>
       <div class="ph-title-row">
-        <span class="entity-type customer">customer</span>
+        <span class="entity-icon customer" title="Customer"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v18Z"/><path d="M6 12H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2"/><path d="M18 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg></span>
       <span class="ph-title">Meridian Foods PLC</span><span class="tt-id" style="margin-right:4px">CUST 482211</span>
-      <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active Relationship</span>
+              <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active</span>
       <span class="pill pill-warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 1 covenant near breach</span>
       <span class="pill pill-excp"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1 compliance certificate overdue</span>
       <span class="pill pill-info">4 pending service requests</span>
-    </div>
+</div>
+
     </div>
     <div class="ph-right">
-      <div class="quicknav-wrap">
-        <button class="quicknav-trigger" onclick="toggleQuickNav(event,'qnDeals')">3 Deals <span class="qn-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
-        <div class="quicknav-menu" id="qnDeals">
-          <div class="tm-head">3 Deals</div>
-          <div class="tm-item" onclick="location.href='deals/deal_1.html'"><div class="tm-top"><span>Acquisition Financing</span><span class="tm-sub">AA250112D1V01</span></div><div class="tm-meta"><span>Commitment <b>£200.0m</b></span><span>Drawn <b>100%</b></span></div></div>
-          <div class="tm-item" onclick="location.href='deals/deal_2.html'"><div class="tm-top"><span>Working Capital</span><span class="tm-sub">AA250310D1V01</span></div><div class="tm-meta"><span>Commitment <b>£75.0m</b></span><span>Drawn <b>60%</b></span></div></div>
-          <div class="tm-item" onclick="location.href='deals/deal_3.html'"><div class="tm-top"><span>Trade Finance</span><span class="tm-sub">AA250512D1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Drawn <b>43%</b></span></div></div>
-        </div>
-      </div>
-      <div class="quicknav-wrap">
-        <button class="quicknav-trigger" onclick="toggleQuickNav(event,'qnFacilities')">3 Facilities <span class="qn-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
-        <div class="quicknav-menu" id="qnFacilities">
-          <div class="tm-head">3 Facilities</div>
-          <div class="tm-item" onclick="location.href='facilities/facility_1.html'"><div class="tm-top"><span>Term Loan A</span><span class="tm-sub">AA250114F1V01</span></div><div class="tm-meta"><span>Commitment <b>£200.0m</b></span><span>Drawn <b>100%</b></span></div></div>
-          <div class="tm-item" onclick="location.href='facilities/facility_2.html'"><div class="tm-top"><span>Revolving Credit Facility</span><span class="tm-sub">AA250310F1V01</span></div><div class="tm-meta"><span>Commitment <b>£75.0m</b></span><span>Drawn <b>60%</b></span></div></div>
-          <div class="tm-item" onclick="location.href='facilities/facility_3.html'"><div class="tm-top"><span>Trade Finance Facility</span><span class="tm-sub">AA250512F1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Drawn <b>43%</b></span></div></div>
-        </div>
-      </div>
       <div class="svc-wrap">
         <button class="svc-trigger" onclick="toggleSvcMenu(event)"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Quick Action <span style="opacity:.75">▾</span></button>
         <div class="svc-menu" id="svcMenu">
@@ -73,12 +55,14 @@
         <div class="av">MF</div>
         <div class="hcol"><span class="hname">Meridian Foods PLC</span><span class="hlbl">CUST 482211 · Food &amp; Beverage Manufacturing</span></div>
       </div>
-      <div class="hcol"><span class="hlbl">Risk Rating</span><span class="hval">BBB+ · Stable</span></div>
+    <div class="hdr-fields">
+      <div class="hcol"><span class="hlbl">Risk Rating</span><span class="hval key">BBB+ · Stable</span></div>
       <div class="hcol"><span class="hlbl">Relationship Since</span><span class="hval">Mar 2019</span></div>
       <div class="hcol"><span class="hlbl">KYC / AML Status</span><span class="hval">Verified to 15 Jan 2027</span></div>
       <div class="hcol"><span class="hlbl">Domicile</span><span class="hval">United Kingdom</span></div>
-      <span class="grp"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Borrowing Group (3)</span>
+    
     </div>
+  </div>
   </div>
 
   <div class="body">
@@ -116,14 +100,13 @@
     </div>
 
     <div class="card">
-      <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Group Financial Covenants</span><span class="lnk">Tested quarterly</span></div>
+      <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Group Financial Covenants</span><span class="cardh-right"><span class="lnk">Tested quarterly</span><span class="cardh-sep">·</span><div class="compliance-badge"><span class="l">Overall Compliance</span><span class="b">MONITOR</span></div></span></div>
       <div class="covstrip">
         <div class="cs-item"><div class="cs-top"><span class="ci ok"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cs-val">3.20x</span></div><div class="cs-label">Net Leverage ≤ 4.0x</div><div class="cs-hr">headroom 0.8x</div></div>
         <div class="cs-item"><div class="cs-top"><span class="ci ok"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cs-val">4.10x</span></div><div class="cs-label">Interest Cover ≥ 3.0x</div><div class="cs-hr">headroom 1.1x</div></div>
         <div class="cs-item"><div class="cs-top"><span class="ci warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="cs-val">1.28x</span></div><div class="cs-label">DSCR ≥ 1.25x</div><div class="cs-hr">headroom 0.03x</div></div>
         <div class="cs-item"><div class="cs-top"><span class="ci ok"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cs-val">£14.0m</span></div><div class="cs-label">Capex ≤ £20m</div><div class="cs-hr">headroom £6m</div></div>
       </div>
-      <div class="compliance-badge"><span class="l">Overall Compliance</span><span class="b">MONITOR</span></div>
     </div>
 
     <div class="grid2">
@@ -185,9 +168,9 @@
 <script src="assets/search.js"></script>
 <script>
 renderCompositionBar('compBar', 'compLegend', [
-  { label:'Acquisition Term Loan', sub:'AA250114F1V01', pct:65.2, drawnPct:100, color:'var(--brand)', amountLabel:'£200.0m', href:'facilities/facility_1.html', title:'£200,000,000 commitment · 100% drawn' },
-  { label:'Working Capital RCF', sub:'AA250310F1V01', pct:24.5, drawnPct:60, color:'var(--purple-600)', amountLabel:'£75.0m', href:'facilities/facility_2.html', title:'£75,000,000 commitment · 60% drawn' },
-  { label:'Trade Finance Facility', sub:'AA250512F1V01', pct:10.3, drawnPct:43, color:'var(--amber-mid)', amountLabel:'$40.0m', href:'facilities/facility_3.html', title:'$40,000,000 commitment · 43% drawn' }
+  { label:'Acquisition Term Loan', sub:'AA250114F1V01', pct:65.2, drawnPct:100, color:'var(--chart-blue)', amountLabel:'£200.0m', href:'facilities/facility_1.html', title:'£200,000,000 commitment · 100% drawn' },
+  { label:'Working Capital RCF', sub:'AA250310F1V01', pct:24.5, drawnPct:60, color:'var(--chart-purple)', amountLabel:'£75.0m', href:'facilities/facility_2.html', title:'£75,000,000 commitment · 60% drawn' },
+  { label:'Trade Finance Facility', sub:'AA250512F1V01', pct:10.3, drawnPct:43, color:'var(--chart-amber)', amountLabel:'$40.0m', href:'facilities/facility_3.html', title:'$40,000,000 commitment · 43% drawn' }
 ]);
 
 function toggleCollapse(id, headEl){

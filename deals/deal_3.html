@@ -10,8 +10,7 @@
 <div class="app">
 
   <div class="topnav">
-    <span class="launcher"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
-    <span class="brand">temenos</span>
+    <img class="brand-logo" src="../assets/temenos-logo.svg" alt="Temenos"><span class="brand-product">CS360</span>
       <div class="navsearch">
         <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
@@ -28,7 +27,7 @@
     <div class="ph-left">
       <div class="ph-crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a></div>
       <div class="ph-title-row">
-        <span class="entity-type deal">deal</span>
+        <span class="entity-icon deal" title="Deal"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
       <div class="title-switcher">
         <button class="title-trigger" onclick="toggleTitleMenu(event)">
           <span class="tt-name">Trade Finance</span><span class="tt-id">••0512</span><span class="tt-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
@@ -40,9 +39,10 @@
           <div class="tm-item on"><div class="tm-top"><span>Trade Finance</span><span class="tm-sub">AA250512D1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Drawn <b>43%</b></span></div></div>
         </div>
       </div>
-      <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active</span>
+              <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active</span>
       <span class="pill pill-warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Amend Facility request pending</span>
-    </div>
+</div>
+
     </div>
     <div class="ph-right">
       <a class="quicknav-trigger" href="../facilities/facility_3.html">1 Facility →</a>
@@ -55,13 +55,15 @@
         <div class="av">MF</div>
         <div class="hcol"><a class="hname" href="../customer_360.html">Meridian Foods PLC</a><span class="hlbl">CUST 482211</span></div>
       </div>
+    <div class="hdr-fields">
       <div class="hcol"><span class="hlbl">Deal Name</span><span class="hval">Trade Finance Facility</span></div>
       <div class="hcol"><span class="hlbl">Deal ID</span><span class="hval">AA250512D1V01</span></div>
       <div class="hcol"><span class="hlbl">Deal Type</span><span class="hval">Uncommitted Trade Line</span></div>
       <div class="hcol"><span class="hlbl">Purpose</span><span class="hval">Import Letters of Credit &amp; bank guarantees</span></div>
       <div class="hcol"><span class="hlbl">Lead Arranger</span><span class="hval">Temenos Bank plc</span></div>
-      <span class="grp"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> 1 Facility</span>
+    
     </div>
+  </div>
     <div class="hdr-dates">
       <div class="dc"><span class="dl">Signed Date</span><span class="dv">12 May 2025</span></div>
       <div class="dc"><span class="dl">Closing Date</span><span class="dv">16 May 2025</span></div>
@@ -97,9 +99,8 @@
     </div>
 
     <div class="card">
-      <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Covenant Basis</span></div>
+      <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Covenant Basis</span><div class="compliance-badge"><span class="l">Cross-defaulted to Group package</span><span class="b">N/A</span></div></div>
       <p style="color:var(--text2);font-size:13px">This facility carries no facility-specific financial covenants. It is governed by sublimit utilisation caps and is cross-defaulted with the Group's financial covenant package under AA250112D1V01.</p>
-      <div class="compliance-badge"><span class="l">Cross-defaulted to Group package</span><span class="b">N/A</span></div>
     </div>
 
     <div class="card">

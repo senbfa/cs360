@@ -10,8 +10,7 @@
 <div class="app">
 
   <div class="topnav">
-    <span class="launcher"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
-    <span class="brand">temenos</span>
+    <img class="brand-logo" src="../assets/temenos-logo.svg" alt="Temenos"><span class="brand-product">CS360</span>
       <div class="navsearch">
         <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
@@ -28,7 +27,7 @@
     <div class="ph-left">
       <div class="ph-crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a><span class="sep">/</span><a href="../deals/deal_3.html">Trade Finance</a><span class="sep">/</span><a href="../facilities/facility_3.html">Trade Finance Facility</a></div>
       <div class="ph-title-row">
-        <span class="entity-type drawing">drawing</span>
+        <span class="entity-icon drawing" title="Drawing"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span>
       <div class="title-switcher">
         <button class="title-trigger" onclick="toggleTitleMenu(event)">
           <span class="tt-name">Import Letter of Credit</span><span class="tt-id">••3V01</span><span class="tt-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
@@ -39,9 +38,10 @@
           <div class="tm-item" onclick="location.href='drawing_3b.html'"><div class="tm-top"><span>Bank Guarantee</span><span class="tm-sub">AA250715L3V02</span></div><div class="tm-meta"><span>Amount <b>$5.0m</b></span><span>Status <b>Active</b></span></div></div>
         </div>
       </div>
-      <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active — Issued</span>
+              <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active — Issued</span>
       <span class="pill pill-info">Expires in 4 months</span>
-    </div>
+</div>
+
     </div>
     <div class="ph-right">
       <div class="svc-wrap">
@@ -60,12 +60,15 @@
         <div class="av">MF</div>
         <div class="hcol"><a class="hname" href="../customer_360.html">Meridian Foods PLC</a><span class="hlbl">CUST 482211</span></div>
       </div>
+    <div class="hdr-fields">
       <div class="hcol"><span class="hlbl">Drawing ID</span><span class="hval">AA250520L3V01</span></div>
       <div class="hcol"><span class="hlbl">Product</span><span class="hval">Import Letter of Credit</span></div>
       <div class="hcol"><span class="hlbl">Currency</span><span class="hval">USD</span></div>
-      <div class="hcol"><span class="hlbl">Face Amount</span><span class="hval">$12,000,000</span></div>
+      <div class="hcol"><span class="hlbl">Face Amount</span><span class="hval key">$12,000,000</span></div>
       <div class="hcol"><span class="hlbl">Parent Facility</span><a class="hval" href="../facilities/facility_3.html">AA250512F1V01 →</a></div>
+    
     </div>
+  </div>
     <div class="hdr-dates">
       <div class="dc"><span class="dl">Issuance Date</span><span class="dv">20 May 2025</span></div>
       <div class="dc"><span class="dl">Expiry Date</span><span class="dv">20 Nov 2026</span></div>

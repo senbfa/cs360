@@ -10,8 +10,7 @@
 <div class="app">
 
   <div class="topnav">
-    <span class="launcher"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
-    <span class="brand">temenos</span>
+    <img class="brand-logo" src="../assets/temenos-logo.svg" alt="Temenos"><span class="brand-product">CS360</span>
       <div class="navsearch">
         <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
@@ -28,7 +27,7 @@
     <div class="ph-left">
       <div class="ph-crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a><span class="sep">/</span><a href="../deals/deal_1.html">Acquisition Financing</a><span class="sep">/</span><a href="../facilities/facility_1.html">Term Loan A</a></div>
       <div class="ph-title-row">
-        <span class="entity-type drawing">drawing</span>
+        <span class="entity-icon drawing" title="Drawing"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span>
       <div class="title-switcher">
         <button class="title-trigger" onclick="toggleTitleMenu(event)">
           <span class="tt-name">Cash Loan</span><span class="tt-id">••1V03</span><span class="tt-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
@@ -40,9 +39,10 @@
           <div class="tm-item on"><div class="tm-top"><span>Cash Loan (Pending)</span><span class="tm-sub">AA250228L1V03</span></div><div class="tm-meta"><span>Amount <b>€30.0m</b></span><span>Status <b>Pending</b></span></div></div>
         </div>
       </div>
-      <span class="pill pill-warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Pending — awaiting disbursement approval</span>
+              <span class="pill pill-warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Pending — awaiting disbursement approval</span>
       <span class="pill pill-info">Ref SR-10456</span>
-    </div>
+</div>
+
     </div>
     <div class="ph-right">
       <div class="svc-wrap">
@@ -61,12 +61,15 @@
         <div class="av">MH</div>
         <div class="hcol"><a class="hname" href="../customer_360.html">Meridian Holdings Ltd</a><span class="hlbl">Borrowing Group Member</span></div>
       </div>
+    <div class="hdr-fields">
       <div class="hcol"><span class="hlbl">Drawing ID</span><span class="hval">AA250228L1V03</span></div>
       <div class="hcol"><span class="hlbl">Product</span><span class="hval">Cash Loan</span></div>
       <div class="hcol"><span class="hlbl">Currency</span><span class="hval">EUR</span></div>
-      <div class="hcol"><span class="hlbl">Requested Amount</span><span class="hval">€30,000,000</span></div>
+      <div class="hcol"><span class="hlbl">Requested Amount</span><span class="hval key">€30,000,000</span></div>
       <div class="hcol"><span class="hlbl">Parent Facility</span><a class="hval" href="../facilities/facility_1.html">AA250114F1V01 →</a></div>
+    
     </div>
+  </div>
     <div class="hdr-dates">
       <div class="dc"><span class="dl">Requested Drawdown Date</span><span class="dv">28 Feb 2025</span></div>
       <div class="dc"><span class="dl">Days Pending</span><span class="dv" style="color:var(--red-600)">497 days</span></div>

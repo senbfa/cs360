@@ -7,7 +7,8 @@
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .launch{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:linear-gradient(160deg,var(--navy),var(--blue))}
-  .launch .brandbig{color:#fff;font-size:30px;font-weight:700}
+  .launch .brandbig{display:flex;align-items:center;gap:12px;color:#fff;font-size:24px;font-weight:600}
+  .launch .brandbig img{height:30px;width:auto;filter:brightness(0) invert(1)}
   .launch .tag{color:var(--blue-100);font-size:14px;margin-top:-14px}
   .launch .card{background:var(--surface);border-radius:var(--radius);padding:26px 30px;width:420px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
   .launch .row{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--border);cursor:pointer}
@@ -20,7 +21,7 @@
 </head>
 <body>
 <div class="launch">
-  <div class="brandbig">temenos Corporate Banking</div>
+  <div class="brandbig"><img src="assets/temenos-logo.svg" alt="Temenos"><span>Corporate Banking</span></div>
   <div class="tag">Corporate Banking Officer Workbench</div>
   <div class="card">
     <div class="row" onclick="location.href='customer_360.html'">
