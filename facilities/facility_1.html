@@ -12,7 +12,6 @@
   <div class="topnav">
     <span class="launcher"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
     <span class="brand">temenos</span>
-    <span class="crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a><span class="sep">/</span><a href="../deals/deal_1.html">Acquisition Financing</a><span class="sep">/</span><span class="cur">Term Loan A</span></span>
     <span class="right">
       <div class="navsearch">
         <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -27,6 +26,9 @@
 
   <div class="pagehead">
     <div class="ph-left">
+      <div class="ph-crumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="../customer_360.html">Meridian Foods PLC</a><span class="sep">/</span><a href="../deals/deal_1.html">Acquisition Financing</a></div>
+      <div class="ph-title-row">
+        <span class="entity-type facility">facility</span>
       <div class="title-switcher">
         <button class="title-trigger" onclick="toggleTitleMenu(event)">
           <span class="tt-name">Term Loan A</span><span class="tt-id">••0114</span><span class="tt-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
@@ -38,11 +40,21 @@
           <div class="tm-item" onclick="location.href='facility_3.html'"><div class="tm-top"><span>Trade Finance Facility</span><span class="tm-sub">AA250512F1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Drawn <b>43%</b></span></div></div>
         </div>
       </div>
-      <span class="pill pill-active"><svg class="icon" width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg> Active</span>
+      <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active</span>
       <span class="pill pill-warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 1 covenant near breach</span>
       <span class="pill pill-excp"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Compliance certificate overdue</span>
     </div>
+    </div>
     <div class="ph-right">
+      <div class="quicknav-wrap">
+        <button class="quicknav-trigger" onclick="toggleQuickNav(event,'qnDrawings')">3 Drawings <span class="qn-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="quicknav-menu" id="qnDrawings">
+          <div class="tm-head">3 Drawings</div>
+          <div class="tm-item" onclick="location.href='../drawings/drawing_1a.html'"><div class="tm-top"><span>Cash Loan</span><span class="tm-sub">AA250128L1V01</span></div><div class="tm-meta"><span>Amount <b>£120.0m</b></span><span>Status <b>Active</b></span></div></div>
+          <div class="tm-item" onclick="location.href='../drawings/drawing_1b.html'"><div class="tm-top"><span>Cash Loan</span><span class="tm-sub">AA250128L1V02</span></div><div class="tm-meta"><span>Amount <b>£50.0m</b></span><span>Status <b>Active</b></span></div></div>
+          <div class="tm-item" onclick="location.href='../drawings/drawing_1c.html'"><div class="tm-top"><span>Cash Loan (Pending)</span><span class="tm-sub">AA250228L1V03</span></div><div class="tm-meta"><span>Amount <b>€30.0m</b></span><span>Status <b>Pending</b></span></div></div>
+        </div>
+      </div>
       <div class="svc-wrap">
         <button class="svc-trigger" onclick="toggleSvcMenu(event)"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Service Action <span style="opacity:.75">▾</span></button>
         <div class="svc-menu" id="svcMenu">
@@ -89,7 +101,6 @@
           <div class="row"><span class="l">Drawn / Utilised</span><span class="v">£200,000,000</span></div>
           <div class="row"><span class="l">Available</span><span class="v">£0</span></div>
           <div class="row"><span class="l">Utilisation %</span><span class="v">100%</span></div>
-          <div class="barlbl">100% drawn — fully utilised</div>
           <div class="row"><span class="l">Outstanding Principal</span><span class="v">£200,000,000</span></div>
         </div>
         <div class="finpage" id="finpage-1">
@@ -163,6 +174,7 @@
 </div>
 
 <script src="../assets/charts.js"></script>
+<script src="../assets/quicknav.js"></script>
 <script src="../assets/servicesheet.js"></script>
 <script src="../assets/pilloverflow.js"></script>
 <script src="../assets/search.js"></script>

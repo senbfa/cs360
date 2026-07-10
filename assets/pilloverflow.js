@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(){
-  var container = document.querySelector('.ph-left');
+  var container = document.querySelector('.ph-title-row');
   if(!container) return;
 
-  var VISIBLE = 3;
+  var VISIBLE = 2;
   var pills = Array.prototype.slice.call(container.children).filter(function(el){
     return el.classList && el.classList.contains('pill');
   });
