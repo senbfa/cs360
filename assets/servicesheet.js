@@ -280,6 +280,8 @@ function ssEnsureSheetDom(){
 
 function openServiceSheet(actionId, ctxObj){
   ssEnsureSheetDom();
+  const panel = document.getElementById('svcSheetPanel');
+  panel.style.width = '50vw';
   ssSetCtx(Object.assign({ action: actionId }, ctxObj || {}));
   const req = SS_REQUESTS.find(r => r.id === actionId);
   document.getElementById('svcSheetTitle').textContent = req ? req.label : 'Service Request';
@@ -310,7 +312,6 @@ function openServiceSheet(actionId, ctxObj){
 
   document.getElementById('svcSheetOverlay').classList.add('on');
   document.getElementById('svcSheetPanel').classList.add('on');
-  document.body.style.overflow = 'hidden';
 
   const menu = document.getElementById('svcMenu');
   if (menu) menu.classList.remove('on');
@@ -344,4 +345,38 @@ document.addEventListener('click', (e) => {
   if (titleMenu && titleMenu.classList.contains('on') && !titleMenu.contains(e.target) && !e.target.closest('.title-trigger')) {
     titleMenu.classList.remove('on');
   }
+});
+
+let isResizing = false;
+document.addEventListener('mousedown', (e) => {
+  const panel = document.getElementById('svcSheetPanel');
+  if (!panel || !panel.classList.contains('on')) return;
+  const rect = panel.getBoundingClientRect();
+  const isNearLeftEdge = e.clientX <= (rect.left + 12);
+  if (!isNearLeftEdge) return;
+  isResizing = true;
+  e.preventDefault();
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+
+  const handleMouseMove = (e) => {
+    if (!isResizing || !panel) return;
+    const minWidth = 300;
+    const maxWidth = window.innerWidth * 0.9;
+    const newWidth = window.innerWidth - e.clientX;
+    if (newWidth >= minWidth && newWidth <= maxWidth) {
+      panel.style.width = newWidth + 'px';
+    }
+  };
+
+  const handleMouseUp = () => {
+    isResizing = false;
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+  };
+
+  document.addEventListener('mousemove', handleMouseMove);
+  document.addEventListener('mouseup', handleMouseUp);
 });
