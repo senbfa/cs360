@@ -750,6 +750,89 @@ select{padding:8px 12px;border:1px solid var(--border2);border-radius:var(--radi
     left:0;right:0;max-width:calc(100vw - 32px);min-width:0
   }
 
+  /* Menu sizing on mobile */
+  .title-menu{min-width:calc(100vw - 32px)}
+  .quicknav-menu{min-width:calc(100vw - 32px)}
+  .svc-menu{min-width:calc(100vw - 32px)}
+  .quicknav-menu .tm-meta{flex-direction:column;gap:4px}
+  .quicknav-menu .tm-item{padding:8px 14px}
+
+  /* Customer rows mobile optimization */
+  .custrow{gap:8px;padding:10px 6px}
+  .custrow-amt{display:none}
+  .custrow .risk{display:none}
+  .custrow .st{width:auto;text-align:left}
+  .custrow-chev{display:none}
+  .av{width:36px;height:36px;font-size:12px}
+
+  /* Card styling for mobile */
+  .card{border-radius:14px}
+  .home-card{padding:14px 16px}
+  .cardh{padding:14px 16px;font-size:14px}
+
+  /* Greeting card mobile */
+  .greeting-card{border-radius:14px}
+  .card-header{padding:20px 16px}
+  .greet{font-size:18px}
+  .greet-sub{font-size:11px}
+
+  /* Pagination mobile */
+  .pagination{gap:10px;padding:12px 0}
+  .pag-info{font-size:11px}
+  .pag-btn{padding:4px}
+
+  /* Header mobile */
+  .hdr-row{padding:12px 16px;flex-direction:column;gap:12px}
+  .hdr .hcol{width:100%}
+  .hlbl{font-size:11px}
+
+  /* Buttons mobile */
+  .quicknav-trigger,.svc-trigger{font-size:12px;padding:6px 12px}
+
+  /* Hero sections */
+  .hero2{gap:12px}
+
+  /* Pills/badges mobile */
+  .pill{font-size:11px;padding:4px 10px}
+
+  /* Form elements mobile */
+  .field{gap:6px}
+  label{font-size:12px}
+  input,select,textarea{font-size:14px}
+  .formgrid .field.span2{grid-column:span 1}
+
+  /* Search results mobile */
+  .search-results{max-width:calc(100vw - 32px)}
+  .sr-item{padding:8px 12px;font-size:12px}
+
+  /* Service sheet mobile improvements */
+  .sheet-head{padding:12px 14px}
+  .sheet-body{padding:12px 14px}
+  .sheet-foot{padding:10px 14px;gap:6px}
+  .sheet-foot .btn{font-size:12px;padding:6px 12px}
+
+  /* Detailwrap mobile */
+  .detailwrap{flex-direction:column}
+  .sidetabs{border-right:none;border-bottom:1px solid var(--border)}
+
+  /* Breadcrumb mobile */
+  .ph-crumbs{font-size:12px}
+  .sep{margin:0 2px}
+
+  /* Entity info mobile */
+  .entity-icon{width:12px;height:12px}
+  .entity-label{font-size:11px}
+
+  /* KPI cards mobile */
+  .kpi{padding:12px 14px}
+  .kpi .kl{font-size:11px}
+  .kpi .kv{font-size:15px}
+
+  /* Title styling mobile */
+  .ph-title{font-size:16px}
+  .hdr .hname{font-size:16px}
+  .tt-id{font-size:11px}
+
   .milestone-big .mb-amount{font-size:22px}
   .milestone-big .mb-date{font-size:20px}
 }
