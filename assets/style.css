@@ -142,8 +142,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 
 /* ---- quick-nav chip: jump to child entities (Deals/Facilities/Drawings) without scrolling ---- */
 .quicknav-wrap{position:relative;flex-shrink:0}
-.quicknav-trigger{background:var(--surface);border:1px solid var(--border2);color:var(--text2);padding:8px 14px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;text-decoration:none;transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)}
-.quicknav-trigger:hover{background:var(--brand-50);border-color:var(--brand-100);color:var(--navy)}
+.quicknav-trigger{background:none;border:none;color:var(--navy);padding:8px 14px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;text-decoration:none;transition:background .18s var(--ease),color .18s var(--ease)}
+.quicknav-trigger:hover{background:var(--brand-50);color:var(--navy)}
 .quicknav-trigger .qn-chev{display:flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:5px;background:var(--brand-50);color:var(--brand);flex-shrink:0;transition:transform .18s,background .15s,color .15s}
 .quicknav-trigger:hover .qn-chev{background:var(--brand-100);color:var(--navy)}
 .quicknav-wrap:has(.quicknav-menu.on) .qn-chev{transform:rotate(180deg);background:var(--brand);color:#fff}
