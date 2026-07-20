@@ -37,6 +37,24 @@
 
     </div>
     <div class="ph-right">
+      <div class="quicknav-wrap">
+        <button class="quicknav-trigger" onclick="toggleQuickNav(event,'dealFacilityNav')">View Deals & Facilities <span class="qn-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="quicknav-menu" id="dealFacilityNav">
+          <div class="tm-head">3 Deals & 3 Facilities</div>
+          <div class="tm-group">
+            <div class="tm-section-title">Deals</div>
+            <div class="tm-item" onclick="location.href='deals/deal_1.html'"><div class="tm-top"><span>Acquisition of Hartley Bakeries Ltd</span><span class="tm-sub">AA250112D1V01</span></div><div class="tm-meta"><span>Commitment <b>£200.0m</b></span><span>Status <b>Active</b></span></div></div>
+            <div class="tm-item" onclick="location.href='deals/deal_2.html'"><div class="tm-top"><span>General corporate & working capital</span><span class="tm-sub">AA250310D1V01</span></div><div class="tm-meta"><span>Commitment <b>£75.0m</b></span><span>Status <b>Active</b></span></div></div>
+            <div class="tm-item" onclick="location.href='deals/deal_3.html'"><div class="tm-top"><span>Import LCs & bank guarantees</span><span class="tm-sub">AA250512D1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Status <b>Active</b></span></div></div>
+          </div>
+          <div class="tm-group">
+            <div class="tm-section-title">Facilities</div>
+            <div class="tm-item" onclick="location.href='facilities/facility_1.html'"><div class="tm-top"><span>Term Loan A</span><span class="tm-sub">AA250114F1V01</span></div><div class="tm-meta"><span>Commitment <b>£200.0m</b></span><span>Util <b>100%</b></span></div></div>
+            <div class="tm-item" onclick="location.href='facilities/facility_2.html'"><div class="tm-top"><span>Revolving Credit Facility</span><span class="tm-sub">AA250310F1V01</span></div><div class="tm-meta"><span>Commitment <b>£75.0m</b></span><span>Util <b>60%</b></span></div></div>
+            <div class="tm-item" onclick="location.href='facilities/facility_3.html'"><div class="tm-top"><span>Multi-currency Trade Finance</span><span class="tm-sub">AA250512F1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Util <b>43%</b></span></div></div>
+          </div>
+        </div>
+      </div>
       <div class="svc-wrap">
         <button class="svc-trigger" onclick="toggleSvcMenu(event)"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Quick Action <span style="opacity:.75">▾</span></button>
         <div class="svc-menu" id="svcMenu">
@@ -66,6 +84,13 @@
   </div>
 
   <div class="body">
+
+    <div class="card greeting-card" style="display:none">
+      <div class="card-header" id="greetingHeader">
+        <div class="greet" id="dashGreet">Good afternoon</div>
+        <div class="greet-sub">Relationship Manager · Corporate Banking</div>
+      </div>
+    </div>
 
     <div class="hero2">
       <div class="card">
@@ -106,30 +131,6 @@
         <div class="cs-item"><div class="cs-top"><span class="ci ok"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cs-val">4.10x</span></div><div class="cs-label">Interest Cover ≥ 3.0x</div><div class="cs-hr">headroom 1.1x</div></div>
         <div class="cs-item"><div class="cs-top"><span class="ci warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="cs-val">1.28x</span></div><div class="cs-label">DSCR ≥ 1.25x</div><div class="cs-hr">headroom 0.03x</div></div>
         <div class="cs-item"><div class="cs-top"><span class="ci ok"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cs-val">£14.0m</span></div><div class="cs-label">Capex ≤ £20m</div><div class="cs-hr">headroom £6m</div></div>
-      </div>
-    </div>
-
-    <div class="filters-bar">
-      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-        <label style="display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--text3);font-weight:500">
-          Filter by Deal
-          <select id="dealFilter" onchange="applyFilters()" style="font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:10px;background:var(--background-neutral-white-container);cursor:pointer">
-            <option value="">All Deals</option>
-            <option value="AA250112D1V01">Acquisition of Hartley Bakeries Ltd</option>
-            <option value="AA250310D1V01">General corporate & working capital</option>
-            <option value="AA250512D1V01">Import LCs & bank guarantees</option>
-          </select>
-        </label>
-        <label style="display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--text3);font-weight:500">
-          Filter by Facility
-          <select id="facilityFilter" onchange="applyFilters()" style="font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:10px;background:var(--background-neutral-white-container);cursor:pointer">
-            <option value="">All Facilities</option>
-            <option value="AA250114F1V01">Term Loan A</option>
-            <option value="AA250310F1V01">Revolving Credit Facility</option>
-            <option value="AA250512F1V01">Multi-currency Trade Finance</option>
-          </select>
-        </label>
-        <button onclick="clearFilters()" style="align-self:flex-end;font-size:12px;padding:6px 12px;background:transparent;border:1px solid var(--border);border-radius:10px;cursor:pointer;color:var(--text2);transition:all var(--ease)">Clear</button>
       </div>
     </div>
 
@@ -273,48 +274,73 @@ tabs.forEach((t,i) => {
 });
 bodyEl.innerHTML = tabs[0].html;
 
+(function(){
+  var h = new Date().getHours();
+  var part = h < 12 ? 'morning' : (h < 18 ? 'afternoon' : 'evening');
+  document.getElementById('dashGreet').textContent = 'Good ' + part;
+  document.getElementById('greetingHeader').setAttribute('data-time', part);
+})();
+
 const dealFacilityMap = {
-  'AA250112D1V01': ['AA250114F1V01'],
-  'AA250310D1V01': ['AA250310F1V01'],
-  'AA250512D1V01': ['AA250512F1V01']
+  'AA250112D1V01': 'AA250114F1V01',
+  'AA250310D1V01': 'AA250310F1V01',
+  'AA250512D1V01': 'AA250512F1V01'
 };
 
-function applyFilters() {
-  const selectedDeal = document.getElementById('dealFilter').value;
-  const selectedFacility = document.getElementById('facilityFilter').value;
-
+function applyDealFilter(dealId) {
   const dealRows = document.querySelectorAll('#dealsSection tbody tr');
   const facilityRows = document.querySelectorAll('#facSection tbody tr');
+  const relatedFacility = dealFacilityMap[dealId];
 
-  let visibleDeals = 0;
-  let visibleFacilities = 0;
+  let visibleDeals = 0, visibleFacilities = 0;
 
   dealRows.forEach(row => {
-    const dealId = row.querySelector('td').textContent.trim();
-    const matchesDeal = !selectedDeal || dealId === selectedDeal;
-    const matchesFacility = !selectedFacility || dealFacilityMap[dealId]?.includes(selectedFacility);
-    const show = matchesDeal && matchesFacility;
+    const rowDealId = row.querySelector('td').textContent.trim();
+    const show = rowDealId === dealId;
     row.style.display = show ? 'table-row' : 'none';
     if(show) visibleDeals++;
   });
 
   facilityRows.forEach(row => {
     const facilityId = row.querySelector('td').textContent.trim();
-    const matchesFacility = !selectedFacility || facilityId === selectedFacility;
-    const matchesDeal = !selectedDeal || Object.entries(dealFacilityMap).some(([deal, facs]) => deal === selectedDeal && facs.includes(facilityId));
-    const show = matchesFacility && matchesDeal;
+    const show = facilityId === relatedFacility;
     row.style.display = show ? 'table-row' : 'none';
     if(show) visibleFacilities++;
   });
 
   document.getElementById('dealCount').textContent = visibleDeals;
   document.getElementById('facilityCount').textContent = visibleFacilities;
+  closeAllMenus();
 }
 
-function clearFilters() {
-  document.getElementById('dealFilter').value = '';
-  document.getElementById('facilityFilter').value = '';
-  applyFilters();
+function applyFacilityFilter(facilityId) {
+  const dealRows = document.querySelectorAll('#dealsSection tbody tr');
+  const facilityRows = document.querySelectorAll('#facSection tbody tr');
+  const relatedDeal = Object.keys(dealFacilityMap).find(key => dealFacilityMap[key] === facilityId);
+
+  let visibleDeals = 0, visibleFacilities = 0;
+
+  dealRows.forEach(row => {
+    const dealId = row.querySelector('td').textContent.trim();
+    const show = dealId === relatedDeal;
+    row.style.display = show ? 'table-row' : 'none';
+    if(show) visibleDeals++;
+  });
+
+  facilityRows.forEach(row => {
+    const rowFacilityId = row.querySelector('td').textContent.trim();
+    const show = rowFacilityId === facilityId;
+    row.style.display = show ? 'table-row' : 'none';
+    if(show) visibleFacilities++;
+  });
+
+  document.getElementById('dealCount').textContent = visibleDeals;
+  document.getElementById('facilityCount').textContent = visibleFacilities;
+  closeAllMenus();
+}
+
+function closeAllMenus() {
+  document.querySelectorAll('.title-menu, .quicknav-menu, .svc-menu').forEach(menu => menu.style.display = 'none');
 }
 </script>
 </body>
