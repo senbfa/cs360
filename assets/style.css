@@ -32,7 +32,7 @@ html,body{font-family:var(--font-body);background:linear-gradient(180deg,#FBFDFF
 h1,h2,h3,.ph-title,.title-trigger .tt-name,.hdr .hname,.cardh,.sectionhdr .t,.tlhead .ttl2,.secttl,.subsecttl,.sheet-head .ttl,.milestone-big .mb-amount,.kpi .kv{font-family:var(--font-heading)}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
-.app{width:100%;margin:0}
+.app{width:100%;margin:0;display:flex;flex-direction:column;min-height:100vh}
 .icon{display:inline-block;vertical-align:middle;flex-shrink:0}
 
 /* ---- top nav ---- */
@@ -124,7 +124,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .title-trigger .tt-id{font-size:13px;font-weight:600;color:var(--text2)}
 .title-trigger .tt-chev{display:flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:6px;background:var(--brand-50);color:var(--brand);flex-shrink:0;transition:transform .18s,background .15s}
 .title-switcher:has(.title-menu.on) .tt-chev{transform:rotate(180deg);background:var(--brand);color:#fff}
-.title-menu,.quicknav-menu{position:absolute;top:calc(100% + 6px);left:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:0 14px 34px rgba(20,24,60,.18);min-width:340px;z-index:45;display:none;overflow:hidden}
+.title-menu,.quicknav-menu{position:absolute;top:calc(100% + 6px);left:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:0 14px 34px rgba(20,24,60,.18);min-width:340px;max-width:calc(100vw - 16px);z-index:45;display:none;overflow:hidden}
 .title-menu.on,.quicknav-menu.on{display:block}
 .title-menu .tm-head,.quicknav-menu .tm-head{padding:9px 16px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;background:var(--bg);border-bottom:1px solid var(--brand-50)}
 .title-menu .tm-item,.quicknav-menu .tm-item{padding:10px 16px;font-weight:600;color:var(--text);cursor:pointer;border-bottom:1px solid var(--brand-50);display:flex;flex-direction:column;gap:5px}
@@ -150,7 +150,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .quicknav-menu{left:auto;right:0}
 
 /* ---- hero band (navy) ---- */
-.hdr{display:flex;flex-direction:column;margin:12px 32px 0;border-radius:var(--radius);overflow:hidden;border:none;box-shadow:0 1px 3px rgba(20,24,60,.04),0 4px 10px rgba(20,24,60,.03)}
+.hdr{display:flex;flex-direction:column;margin:12px 32px 0;border-radius:var(--radius);overflow:hidden;border:none;box-shadow:0 1px 3px rgba(20,24,60,.04),0 4px 10px rgba(20,24,60,.03);width:calc(100% - 64px)}
 .hdr-row{background:#E2E9FB;color:var(--text);padding:14px 32px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
 .hdr-identity{display:flex;align-items:center;gap:11px;padding-right:24px;margin-right:4px;border-right:1px solid var(--brand-100);flex-shrink:0}
 .hdr-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:14px 28px;flex:1;align-items:start}
@@ -203,22 +203,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .dl{font-size:11px;color:var(--text2)}
 .dv{font-size:13px;font-weight:400;color:var(--text)}
 
-.body{padding:20px 32px;display:flex;flex-direction:column;gap:16px}
+.body{padding:20px 32px;display:flex;flex-direction:column;gap:16px;width:100%;box-sizing:border-box}
 
 /* ---- home page layout ---- */
 .home-greeting{text-align:center;padding:20px 0 12px;margin-bottom:4px}
 .home-greeting .greet{font-size:20px;font-weight:300;color:var(--navy);margin-bottom:8px;line-height:1.3}
 .home-greeting .greet-sub{font-size:13px;color:var(--text2);line-height:1.5}
 .home-container{width:100%;margin:0;max-width:1200px;margin-left:auto;margin-right:auto}
-.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-@media (min-width:1200px){.home-grid{grid-template-columns:1fr 1fr}}
+.home-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:28px;align-items:start}
+@media (min-width:1200px){.home-grid{grid-template-columns:1fr 1.7fr}}
 .card.greeting-card{padding:0;background:linear-gradient(135deg,#2E3A8C 0%,#6B32A8 100%) !important;border:none;overflow:hidden;box-shadow:0 1px 2px rgba(20,24,60,.03),0 3px 8px rgba(20,24,60,.03)}
 .card.greeting-card[data-time="morning"]{background:linear-gradient(135deg,#4C58C9 0%,#6B32A8 100%) !important}
 .card.greeting-card[data-time="afternoon"]{background:linear-gradient(135deg,#2E3A8C 0%,#6B32A8 100%) !important}
 .card.greeting-card[data-time="evening"]{background:linear-gradient(135deg,#6B32A8 0%,#3d1d5c 100%) !important}
 .body .greeting-card{display:none;margin-bottom:20px}
 @media (min-width:1200px){.body .greeting-card{display:block}}
-.card-header{padding:28px 24px;background:transparent;border-radius:0;color:#fff;position:relative;overflow:hidden;min-height:120px;display:flex;flex-direction:column;justify-content:flex-start}
+.card-header{padding:24px 24px;background:transparent;border-radius:0;color:#fff;position:relative;overflow:hidden;min-height:90px;display:flex;flex-direction:column;justify-content:flex-start}
 .card-header .greet{font-size:26px;font-weight:300;margin-bottom:10px;color:#fff;line-height:1.3}
 .card-header .greet-sub{font-size:14px;opacity:0.95;color:rgba(255,255,255,0.9);line-height:1.5;font-weight:400}
 .home-card{padding:20px 24px}
@@ -233,7 +233,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:18px}
 .grid2>*,.grid3>*,.grid4>*,.hero2>*{min-width:0}
 
-.card{background:var(--surface);border:1px solid var(--container-border);border-radius:var(--radius);padding:20px 22px;box-shadow:0 1px 2px rgba(20,24,60,.03),0 3px 8px rgba(20,24,60,.03)}
+.card{background:var(--surface);border:1px solid var(--container-border);border-radius:var(--radius);padding:20px 22px;box-shadow:0 1px 2px rgba(20,24,60,.03),0 3px 8px rgba(20,24,60,.03);box-sizing:border-box;width:100%}
 .cardh{font-size:16px;font-weight:600;color:var(--navy);letter-spacing:-.005em;display:flex;align-items:center;gap:8px;margin-bottom:16px;justify-content:space-between;flex-wrap:wrap;line-height:1.4}
 .cardh .ttl{display:flex;align-items:center;gap:8px}
 .cardh .ic{display:inline-flex;color:var(--brand)}
@@ -599,7 +599,7 @@ select{padding:8px 12px;border:1px solid var(--border2);border-radius:var(--radi
 .custrow:hover{background:var(--bg)}
 .custrow.static{cursor:default}
 .custrow.static:hover{background:none}
-.custrow .av{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#4C58C9,#2E3A8C);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;box-shadow:0 2px 6px rgba(46,58,140,.15)}
+.custrow .av{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#4C58C9,#2E3A8C);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex-shrink:0;box-shadow:0 2px 6px rgba(46,58,140,.15)}
 .custrow-info{flex:1;min-width:0}
 .custrow-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-0.3px}
 .custrow-sub{font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;}
@@ -738,12 +738,12 @@ select{padding:8px 12px;border:1px solid var(--border2);border-radius:var(--radi
   .ph-right{width:100%;justify-content:flex-start}
   .ph-title,.title-trigger .tt-name{font-size:15px}
 
-  .hdr{margin-left:16px;margin-right:16px}
-  .hdr-row{padding:14px 16px;gap:16px}
+  .hdr{margin-left:0;margin-right:0;border-radius:0}
+  .hdr-row{padding:12px 16px;gap:12px;flex-direction:column}
   .hdr .grp{margin-left:0}
-  .hdr-dates{padding:10px 16px 12px;gap:18px}
+  .hdr-dates{padding:10px 16px 12px;gap:12px;flex-direction:column}
 
-  .body{padding:14px 16px;gap:16px}
+  .body{padding:12px 16px;gap:12px}
   .grid2,.grid3,.grid4{grid-template-columns:1fr}
   .dgrid{grid-template-columns:1fr}
   .formgrid{grid-template-columns:1fr}
