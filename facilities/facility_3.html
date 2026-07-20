@@ -11,6 +11,12 @@
 
   <div class="topnav">
     <img class="brand-logo" src="../assets/temenos-logo.svg" alt="Temenos"><span class="brand-product">CS360</span>
+      <input type="checkbox" id="navToggle" class="nav-toggle">
+      <label for="navToggle" class="navburger" aria-label="Menu">
+        <svg class="nb-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg class="nb-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </label>
+      
       <div class="navsearch">
         <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
@@ -25,7 +31,7 @@
 
   <div class="pagehead">
     <div class="ph-left">
-      <div class="ph-crumbs"><a href="../index.html">Home</a> <span class="sep">/</span> <a href="../customer_360.html" title="Meridian Foods PLC">Meridian Foo…</a> <span class="sep">/</span> <a href="../deals/deal_3.html" title="Trade Finance">Trade Finan…</a> <span class="sep">/</span> <span class="current" title="Trade Finance Facility">Trade Facil…</span></div>
+      <div class="ph-crumbs"><a href="../index.html">Home</a> <span class="sep">/</span> <a href="../customer_360.html" title="Meridian Foods PLC">Meridian Foods PLC</a> <span class="sep">/</span> <a href="../deals/deal_3.html" title="Trade Finance">Trade Finance</a> <span class="sep">/</span> <span class="current" title="Trade Finance Facility">Trade Finance Facility</span></div>
       <div class="ph-title-row">
       <div class="title-switcher">
         <button class="title-trigger" onclick="toggleTitleMenu(event)">
@@ -38,7 +44,7 @@
           <div class="tm-item on"><div class="tm-top"><span>Trade Finance Facility</span><span class="tm-sub">AA250512F1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Drawn <b>43%</b></span></div></div>
         </div>
       </div>
-      <span class="entity-icon facility" title="Facility"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 21 7 3 7"/></svg></span><span class="entity-label facility">Facility</span>
+      <span class="entity-tag facility" title="Facility"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 21 7 3 7"/></svg><span class="entity-label">Facility</span></span>
               <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active</span>
       <span class="pill pill-warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Amend Facility request pending (SR-10799)</span>
 </div>
@@ -82,7 +88,7 @@
       <div class="hcol"><span class="hlbl">Currency</span><span class="hval">USD</span></div>
       <div class="hcol"><span class="hlbl">Commitment</span><span class="hval key">$40,000,000</span></div>
       <div class="hcol"><span class="hlbl">Parent Deal</span><a class="hval" href="../deals/deal_3.html">AA250512D1V01 →</a></div>
-    
+
     </div>
   </div>
     <div class="hdr-dates">
@@ -95,7 +101,7 @@
 
   <div class="body">
 
-    <div class="hero3">
+    <div class="hero2">
       <div class="card">
         <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Financial Summary</span></div>
         <div class="finpage on" id="finpage-0">
@@ -127,10 +133,11 @@
         <div class="chart-caption" id="eventBarsCount"></div>
       </div>
 
-      <div class="card">
-        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Covenant Basis</span><div class="compliance-badge"><span class="l">Cross-defaulted to Group package</span><span class="b">N/A</span></div></div>
-        <p style="color:var(--text2);font-size:13px">No facility-specific financial covenants. Governed by sublimit caps and cross-default to Group covenant package.</p>
-      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Covenant Basis</span><div class="compliance-badge"><span class="l">Cross-defaulted to Group package</span><span class="b">N/A</span></div></div>
+      <p style="color:var(--text2);font-size:13px">No facility-specific financial covenants. Governed by sublimit caps and cross-default to Group covenant package.</p>
     </div>
 
     <div class="card">
