@@ -134,41 +134,6 @@
 
     </div>
 
-    <div class="grid2">
-      <div class="card">
-        <div class="sectionhdr collapse-head" onclick="toggleCollapse('dealsSection', this)">
-          <span class="t">Deals <span class="cnt" id="dealCount">3</span></span>
-          <span class="chev">▾</span>
-        </div>
-        <div class="collapse-body" id="dealsSection" style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Deal ID</th><th>Purpose</th><th>Commitment</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr class="clk" onclick="location.href='deals/deal_1.html'"><td class="lnk2">AA250112D1V01</td><td>Acquisition of Hartley Bakeries Ltd</td><td>£200,000,000</td><td><span class="st st-a">Active</span></td></tr>
-              <tr class="clk" onclick="location.href='deals/deal_2.html'"><td class="lnk2">AA250310D1V01</td><td>General corporate &amp; working capital</td><td>£75,000,000</td><td><span class="st st-a">Active</span></td></tr>
-              <tr class="clk" onclick="location.href='deals/deal_3.html'"><td class="lnk2">AA250512D1V01</td><td>Import LCs &amp; bank guarantees</td><td>$40,000,000</td><td><span class="st st-a">Active</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="sectionhdr collapse-head" onclick="toggleCollapse('facSection', this)">
-          <span class="t">Facilities <span class="cnt" id="facilityCount">3</span></span>
-          <span class="chev">▾</span>
-        </div>
-        <div class="collapse-body" id="facSection" style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Facility ID</th><th>Product</th><th>Commitment</th><th>Util.</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr class="clk" onclick="location.href='facilities/facility_1.html'"><td class="lnk2">AA250114F1V01</td><td>Term Loan A</td><td>£200,000,000</td><td>100%</td><td><span class="st st-a">Active</span></td></tr>
-              <tr class="clk" onclick="location.href='facilities/facility_2.html'"><td class="lnk2">AA250310F1V01</td><td>Revolving Credit Facility</td><td>£75,000,000</td><td>60%</td><td><span class="st st-a">Active</span></td></tr>
-              <tr class="clk" onclick="location.href='facilities/facility_3.html'"><td class="lnk2">AA250512F1V01</td><td>Multi-currency Trade Finance</td><td>$40,000,000</td><td>43%</td><td><span class="st st-a">Active</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
 
     <div class="card" style="padding:0;overflow:hidden">
       <div class="sectionhdr collapse-head" style="padding:16px 20px;margin-bottom:0;border-bottom:1px solid var(--border)" onclick="toggleCollapse('custDetails', this)">
@@ -215,11 +180,40 @@ function finPage(dir){
 
 const tabs = [
   {
+    label:'Deals &amp; Facilities',
+    html:`<div style="display:flex;flex-direction:column;gap:28px">
+      <div>
+        <div class="secttl">Deals <span class="cnt" id="dealCount">3</span></div>
+        <table>
+          <thead><tr><th>Deal ID</th><th>Purpose</th><th>Commitment</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="clk" onclick="location.href='deals/deal_1.html'"><td class="lnk2">AA250112D1V01</td><td>Acquisition of Hartley Bakeries Ltd</td><td>£200,000,000</td><td><span class="st st-a">Active</span></td></tr>
+            <tr class="clk" onclick="location.href='deals/deal_2.html'"><td class="lnk2">AA250310D1V01</td><td>General corporate &amp; working capital</td><td>£75,000,000</td><td><span class="st st-a">Active</span></td></tr>
+            <tr class="clk" onclick="location.href='deals/deal_3.html'"><td class="lnk2">AA250512D1V01</td><td>Import LCs &amp; bank guarantees</td><td>$40,000,000</td><td><span class="st st-a">Active</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="secttl">Facilities <span class="cnt" id="facilityCount">3</span></div>
+        <table>
+          <thead><tr><th>Facility ID</th><th>Product</th><th>Commitment</th><th>Util.</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="clk" onclick="location.href='facilities/facility_1.html'"><td class="lnk2">AA250114F1V01</td><td>Term Loan A</td><td>£200,000,000</td><td>100%</td><td><span class="st st-a">Active</span></td></tr>
+            <tr class="clk" onclick="location.href='facilities/facility_2.html'"><td class="lnk2">AA250310F1V01</td><td>Revolving Credit Facility</td><td>£75,000,000</td><td>60%</td><td><span class="st st-a">Active</span></td></tr>
+            <tr class="clk" onclick="location.href='facilities/facility_3.html'"><td class="lnk2">AA250512F1V01</td><td>Multi-currency Trade Finance</td><td>$40,000,000</td><td>43%</td><td><span class="st st-a">Active</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>`
+  },
+  {
     label:'Customer Details',
     html:`<div class="secttl">Borrowing Group</div>
-    <div class="row"><span class="l">Meridian Foods PLC <span class="pill pill-info" style="padding:1px 8px;font-size:10px">Parent</span></span><span class="v">UK · Obligor</span></div>
-    <div class="row"><span class="l">Meridian Holdings Ltd</span><span class="v">UK · Co-Borrower</span></div>
-    <div class="row"><span class="l">Meridian Foods (Ireland) Ltd</span><span class="v">IE · Co-Borrower</span></div>
+    <div class="dgrid">
+      <div class="df"><span class="l">Meridian Foods PLC <span class="pill pill-info" style="padding:1px 8px;font-size:10px">Parent</span></span><span class="v">UK · Obligor</span></div>
+      <div class="df"><span class="l">Meridian Holdings Ltd</span><span class="v">UK · Co-Borrower</span></div>
+      <div class="df"><span class="l">Meridian Foods (Ireland) Ltd</span><span class="v">IE · Co-Borrower</span></div>
+    </div>
     <div class="secttl" style="margin-top:24px">Relationship Team</div>
     <div class="dgrid">
       <div class="df"><span class="l">Relationship Manager</span><span class="v">R. Gerling</span></div>
