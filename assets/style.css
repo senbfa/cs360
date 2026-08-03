@@ -162,6 +162,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .hdr .hval{font-size:13px;font-weight:600;color:var(--text)}
 .hdr .hval.key{font-weight:600;color:var(--navy)}
 .hdr .hname{font-size:16px;font-weight:600;letter-spacing:-.005em;color:var(--navy);line-height:1.4}
+
+/* ---- relationship manager quick-contact chip in the header band ---- */
+.hdr-rm{display:flex;align-items:center;gap:10px;padding-left:22px;margin-left:auto;border-left:1px solid rgba(46,58,140,.15);flex-shrink:0}
+.hdr-rm-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--purple-600),var(--brand));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:11.5px;flex-shrink:0;box-shadow:0 2px 6px rgba(46,58,140,.2)}
+.hdr-rm-info{display:flex;flex-direction:column;gap:1px}
+.hdr-rm-name{font-size:12.5px;font-weight:600;color:var(--navy)}
+.hdr-rm-role{font-size:10.5px;color:var(--text2)}
+.hdr-rm-btn{width:28px;height:28px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--brand);box-shadow:0 1px 2px rgba(20,24,60,.08);flex-shrink:0;transition:background .15s,color .15s}
+.hdr-rm-btn:hover{background:var(--brand);color:#fff}
 .hdr a.hval,.hdr a.hname{cursor:pointer}
 .hdr a.hval:hover,.hdr a.hname:hover{text-decoration:underline}
 .hdr .grp{margin-left:auto;flex-shrink:0;border:1px solid var(--brand-100);border-radius:16px;padding:6px 14px;display:flex;align-items:center;gap:6px;color:var(--brand);cursor:pointer;font-weight:600;background:var(--surface)}
@@ -239,9 +248,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .grid2>*,.grid3>*,.grid4>*,.hero2>*{min-width:0}
 
 .card{background:var(--surface);border:1px solid var(--container-border);border-radius:var(--radius);padding:20px 22px;box-shadow:0 1px 2px rgba(20,24,60,.03),0 3px 8px rgba(20,24,60,.03);box-sizing:border-box;width:100%}
-.cardh{font-size:16px;font-weight:600;color:var(--navy);letter-spacing:-.005em;display:flex;align-items:center;gap:8px;margin-bottom:16px;justify-content:space-between;flex-wrap:wrap;line-height:1.4}
-.cardh .ttl{display:flex;align-items:center;gap:8px}
-.cardh .ic{display:inline-flex;color:var(--brand)}
+.cardh{font-size:16px;font-weight:600;color:var(--navy);letter-spacing:-.005em;display:flex;align-items:center;gap:10px;margin-bottom:18px;justify-content:space-between;flex-wrap:wrap;line-height:1.4}
+.cardh .ttl{display:flex;align-items:center;gap:10px}
+.cardh .ic{display:inline-flex;align-items:center;justify-content:center;color:var(--brand);background:var(--brand-50);width:30px;height:30px;border-radius:9px;flex-shrink:0}
+.cardh .ic.ic-bad{color:var(--red-600);background:var(--red-50)}
 .lnk{font-size:12px;color:var(--brand);cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:3px}
 .lnk:hover{text-decoration:underline}
 .row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--brand-50);font-size:13px;min-height:44px;line-height:1.5}
@@ -310,9 +320,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .btn-danger:hover{background:#fadcdc}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;font-weight:600;color:var(--text2);font-size:11px;padding:11px 12px;border-bottom:1px solid var(--brand-50);text-transform:uppercase;letter-spacing:.02em}
-td{padding:13px 12px;border-bottom:1px solid var(--brand-50)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-weight:600;color:var(--text2);font-size:11px;padding:14px 18px;border-bottom:1px solid var(--brand-50);text-transform:uppercase;letter-spacing:.02em}
+td{padding:17px 18px;border-bottom:1px solid var(--brand-50);line-height:1.5}
 tbody tr.clk{cursor:pointer;transition:background .12s}
 tbody tr.clk:hover{background:var(--bg)}
 tbody tr:last-child td{border-bottom:none}
@@ -347,19 +357,55 @@ select{padding:8px 12px;border:1px solid var(--border2);border-radius:var(--radi
 .tabpanel.on{display:block}
 .secttl{font-size:15px;font-weight:600;color:var(--navy);letter-spacing:-.005em;margin:0 0 16px;line-height:1.4}
 .subsecttl{font-size:13px;font-weight:600;color:var(--navy);margin:0 0 12px;line-height:1.4}
+
+/* ---- decorated info rows: Company Profile / Borrowing Group / Relationship Team ---- */
+.rowlist{display:flex;flex-direction:column;gap:8px}
+.inforow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;background:var(--bg)}
+.inforow .ic{width:32px;height:32px;border-radius:8px;background:var(--brand-50);color:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.inforow .txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.inforow .txt .l{font-size:10.5px;color:var(--text2);text-transform:uppercase;letter-spacing:.02em}
+.inforow .txt .v{font-size:13px;color:var(--text);font-weight:500}
+.teamrow{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;background:var(--bg)}
+.teamrow .av3{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--brand-l),var(--brand));color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.teamrow .txt{display:flex;flex-direction:column;gap:1px;min-width:0}
+.teamrow .txt .v{font-size:13px;font-weight:600;color:var(--navy)}
+.teamrow .txt .l{font-size:11px;color:var(--text2)}
+.entityrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;background:var(--bg)}
+.entityrow .ic{width:32px;height:32px;border-radius:8px;background:var(--purple-50);color:var(--purple-600);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.entityrow .txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.entityrow .txt .v{font-size:13px;font-weight:600;color:var(--navy)}
+.entityrow .txt .l{font-size:11px;color:var(--text2)}
 .dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 26px;margin-bottom:20px}
 .df{display:flex;flex-direction:column;gap:4px}
 .df .l{font-size:11px;color:var(--text2)}
 .df .v{font-size:14px;font-weight:400}
 .divider{border:none;border-top:1px solid var(--brand-50);margin:18px 0}
 
-/* ---- KPI stat tiles ---- */
-.kpi{background:var(--surface);border:1px solid var(--container-border);border-radius:var(--radius);padding:16px 18px;display:flex;flex-direction:column;gap:6px;box-shadow:0 1px 2px rgba(20,24,60,.03),0 3px 8px rgba(20,24,60,.03)}
-.kpi .kl{font-size:11px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.02em}
-.kpi .kv{font-size:22px;font-weight:600;color:var(--navy)}
-.kpi .kv.amber{color:var(--amber-600)}
-.kpi .kv.red{color:var(--red-600)}
-.kpi .ks{font-size:11px;color:var(--text3)}
+/* ---- primary section tabs (Overview | Accounts | Deposits | ... ) — a flush strip, not a boxed card ---- */
+.maintabs{width:100%;display:flex;gap:6px;padding:0 0 10px;margin-bottom:16px;border-bottom:1px solid var(--border);overflow-x:auto;overflow-y:hidden}
+.maintab{padding:9px 16px;font-size:13.5px;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;user-select:none;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:6px;transition:background .15s,color .15s}
+.maintab:hover{background:var(--bg);color:var(--text)}
+.maintab.on{background:linear-gradient(135deg,var(--brand-50),var(--brand-100));color:var(--navy);font-weight:600}
+.maintab .mt-badge{background:var(--brand);color:#fff;font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:10px}
+.maintab.on .mt-badge{background:var(--navy)}
+.maincontent{display:flex;flex-direction:column;gap:20px}
+
+/* ---- Overview: paired two-column rows ---- */
+.row121{display:grid;grid-template-columns:1fr 2fr 1fr;gap:20px;align-items:stretch}
+.row121>.card{display:flex;flex-direction:column;min-width:0}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.row3>.card{display:flex;flex-direction:column;min-width:0}
+
+/* ---- Needs Attention: single-line critical alerts, no alarming outline ---- */
+.attn-simple{display:flex;flex-direction:column;gap:8px;flex:1}
+.ar{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--text);line-height:1.3}
+.ar svg{flex-shrink:0}
+.ar[onclick]{cursor:pointer;transition:filter .15s}
+.ar[onclick]:hover{filter:brightness(.97)}
+.ar-bad{background:var(--red-50);color:var(--red-700,var(--red-600))}
+.ar-bad svg{color:var(--red-600)}
+.ar-warn{background:var(--amber-50);color:var(--text)}
+.ar-warn svg{color:var(--amber-mid)}
 
 /* ---- risk / rating badges ---- */
 .risk{font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px;display:inline-block;letter-spacing:0.5px}
@@ -376,7 +422,7 @@ select{padding:8px 12px;border:1px solid var(--border2);border-radius:var(--radi
 .tli .tbody{flex:1}
 .tli .ttitle{font-size:13px;}
 .tli .tmeta{font-size:11px;color:var(--text2);margin-top:2px}
-.tli .ttag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px;margin-left:8px}
+.tli .ttag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px;margin-left:8px;white-space:nowrap;display:inline-block}
 
 /* ---- forms (Service Request sheet) ---- */
 .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px}
@@ -746,6 +792,8 @@ select{padding:8px 12px;border:1px solid var(--border2);border-radius:var(--radi
   .body{padding:18px 20px}
 
   .hero2,.hero3{grid-template-columns:1fr}
+  .row121{grid-template-columns:1fr}
+  .row3{grid-template-columns:1fr}
   .b-attention,.b-composition,.b-events,.b-customers,.b-fx,.b-accounts{grid-column:span 12}
   .grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}
   .dgrid{grid-template-columns:repeat(2,1fr)}
@@ -777,6 +825,9 @@ select{padding:8px 12px;border:1px solid var(--border2);border-radius:var(--radi
   .navprofile span:not(.navavatar){display:inline}
   .home-grid{grid-template-columns:1fr}
   .home-container{max-width:100%}
+
+  .maintabs{gap:0}
+  .maintab{padding:10px 12px;font-size:12.5px}
 
   .body{padding:14px 16px}
   .card{padding:14px 16px}
