@@ -241,17 +241,18 @@ function ssWireCovenantResult(root){
   inputs.forEach(inp => inp.addEventListener('input', update));
   update();
 }
+/* returns falsy when valid; a string error message when invalid (shown in the error banner) */
 function ssValidate(formEl){
   const requiredEls = formEl.querySelectorAll('[required]');
   for (const el of requiredEls){
-    if (el.type === 'checkbox' && !el.checked){ el.reportValidity(); return false; }
-    if (el.type !== 'checkbox' && !el.value){ el.reportValidity(); return false; }
+    if (el.type === 'checkbox' && !el.checked){ el.reportValidity(); return true; }
+    if (el.type !== 'checkbox' && !el.value){ el.reportValidity(); return true; }
   }
   const closeChks = formEl.querySelectorAll('.close-chk');
   for (const c of closeChks){
-    if (!c.checked){ alert('All closure checklist items must be confirmed before submitting.'); return false; }
+    if (!c.checked){ return 'All closure checklist items must be confirmed before submitting.'; }
   }
-  return true;
+  return false;
 }
 
 /* ---- Right-side sheet ---- */
@@ -289,9 +290,13 @@ function openServiceSheet(actionId, ctxObj){
   const formFn = SS_FORMS[actionId];
   body.innerHTML = `
     <div class="ctxbanner">${ssCtxBannerHTML()}</div>
-    <div class="banner-success" id="svcSheetSuccess">
-      <div class="bs-icon">&#10003;</div>
-      <div><strong id="svcSheetSuccessTitle">Request submitted</strong><div id="svcSheetSuccessBody" style="margin-top:2px"></div></div>
+    <div class="svc-banner banner-error" id="svcSheetError">
+      <div class="sb-icon">&#33;</div>
+      <div><span class="sb-title">Unable to submit</span><div class="sb-body" id="svcSheetErrorBody"></div></div>
+    </div>
+    <div class="svc-banner banner-success" id="svcSheetSuccess">
+      <div class="sb-icon bs-icon">&#10003;</div>
+      <div><span class="sb-title" id="svcSheetSuccessTitle">Request submitted</span><div class="sb-body" id="svcSheetSuccessBody"></div></div>
     </div>
     <form id="svcSheetForm">${formFn ? formFn() : '<p class="hint">Unknown request type.</p>'}</form>`;
   ssWireCovenantResult(body);
@@ -301,7 +306,16 @@ function openServiceSheet(actionId, ctxObj){
   submitBtn.textContent = 'Submit Request';
   submitBtn.onclick = () => {
     const form = document.getElementById('svcSheetForm');
-    if (!ssValidate(form)) return;
+    const errorBanner = document.getElementById('svcSheetError');
+    errorBanner.classList.remove('on');
+    const err = ssValidate(form);
+    if (err){
+      if (typeof err === 'string'){
+        document.getElementById('svcSheetErrorBody').textContent = err;
+        errorBanner.classList.add('on');
+      }
+      return;
+    }
     const ref = ssGenRef();
     document.getElementById('svcSheetSuccessTitle').textContent = `Request submitted — ${ref}`;
     document.getElementById('svcSheetSuccessBody').textContent = 'Routed to Credit Operations for review. You will be notified once actioned.';
