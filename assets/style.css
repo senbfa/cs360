@@ -357,23 +357,23 @@ tbody tr:last-child td{border-bottom:none}
 
 /* ---- decorated info rows: Company Profile / Borrowing Group / Relationship Team ---- */
 .rowlist{display:flex;flex-direction:column;gap:8px}
-.inforow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;background:var(--bg)}
-.inforow .ic{width:32px;height:32px;border-radius:8px;background:var(--brand-50);color:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.inforow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;background:#F7F8FD}
+.inforow .ic{width:32px;height:32px;border-radius:8px;background:var(--surface);color:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 1px 2px rgba(20,24,60,.06)}
 .inforow .txt{display:flex;flex-direction:column;gap:2px;min-width:0}
 .inforow .txt .l{font-size:10.5px;color:var(--text2);text-transform:uppercase;letter-spacing:.02em}
 .inforow .txt .v{font-size:13px;color:var(--text);font-weight:500}
-.teamrow{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;background:var(--bg)}
+.teamrow{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;background:#F7F8FD}
 .av3{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--brand-l),var(--brand));color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
 .teamrow .txt{display:flex;flex-direction:column;gap:1px;min-width:0}
 .teamrow .txt .v{font-size:13px;font-weight:600;color:var(--navy)}
 .teamrow .txt .l{font-size:11px;color:var(--text2)}
-.entityrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;background:var(--bg)}
+.entityrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;background:#F7F8FD}
 .entityrow .txt{display:flex;flex-direction:column;gap:2px;min-width:0}
 .entityrow .txt .v{font-size:13px;font-weight:600;color:var(--navy)}
 .entityrow .txt .l{font-size:11px;color:var(--text2)}
 
 /* ---- simple primary-contact box (no per-field icons/labels) ---- */
-.contactbox{padding:12px 14px;border-radius:9px;background:var(--bg);display:flex;flex-direction:column;gap:4px}
+.contactbox{padding:12px 14px;border-radius:9px;background:#F7F8FD;display:flex;flex-direction:column;gap:4px}
 .contactbox .cb-name{font-size:13px;font-weight:600;color:var(--navy)}
 .contactbox .cb-line{font-size:12.5px;color:var(--text2)}
 .dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 26px;margin-bottom:20px}
@@ -743,23 +743,23 @@ tbody tr:last-child td{border-bottom:none}
 .custrow-chev{color:var(--text3);flex-shrink:0;width:16px;height:16px;opacity:0.6;transition:opacity .15s}
 .custrow:hover .custrow-chev{opacity:1}
 
-/* ---- Dashboard: "My Customers" as a colored panel with white pill rows ---- */
-.card.home-card{background:linear-gradient(135deg,#2E3A8C 0%,#6B32A8 100%);border:none;box-shadow:0 6px 24px rgba(46,58,140,.18),0 2px 8px rgba(0,0,0,.06)}
-.home-card .sectionhdr .t{color:#fff}
-.home-card .cnt{background:rgba(255,255,255,.2);color:#fff}
-.home-card .custsearch svg{color:rgba(255,255,255,.85)}
-.home-card .custsearch input{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff}
-.home-card .custsearch input::placeholder{color:rgba(255,255,255,.85)}
-.home-card .custsearch input:focus{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5)}
+/* ---- Dashboard: "My Customers" as a soft light panel with white pill rows ---- */
+.card.home-card{background:linear-gradient(135deg,var(--brand-50) 0%,var(--purple-50) 100%);border:1px solid var(--container-border);box-shadow:0 1px 2px rgba(20,24,60,.03),0 3px 8px rgba(20,24,60,.03)}
+.home-card .sectionhdr .t{color:var(--navy)}
+.home-card .cnt{background:var(--brand-100);color:var(--navy)}
+.home-card .custsearch svg{color:var(--text3)}
+.home-card .custsearch input{background:var(--surface);border:1px solid var(--border2);color:var(--text)}
+.home-card .custsearch input::placeholder{color:var(--text3)}
+.home-card .custsearch input:focus{background:var(--surface);border-color:var(--brand)}
 .home-card #custList{gap:10px}
-.home-card .custrow{background:#fff;padding:14px 16px;border-radius:16px;box-shadow:0 3px 10px rgba(20,24,60,.1)}
-.home-card .custrow:hover{background:#fff;box-shadow:0 6px 16px rgba(20,24,60,.16);transform:translateY(-1px)}
-.home-card .custrow.static:hover{transform:none;box-shadow:0 3px 10px rgba(20,24,60,.1)}
-.home-card .custempty{color:rgba(255,255,255,.85)}
-.home-card .pagination{border-top:1px solid rgba(255,255,255,.22)}
-.home-card .pag-info{color:rgba(255,255,255,.85)}
-.home-card .pag-btn{color:#fff}
-.home-card .pag-btn:hover:not(:disabled){background:rgba(255,255,255,.16)}
+.home-card .custrow{background:var(--surface);border:1px solid var(--border);padding:14px 16px;border-radius:16px;box-shadow:0 2px 6px rgba(20,24,60,.05)}
+.home-card .custrow:hover{background:var(--surface);box-shadow:0 6px 16px rgba(20,24,60,.1);transform:translateY(-1px)}
+.home-card .custrow.static:hover{transform:none;box-shadow:0 2px 6px rgba(20,24,60,.05)}
+.home-card .custempty{color:var(--text3)}
+.home-card .pagination{border-top:1px solid var(--border)}
+.home-card .pag-info{color:var(--text2)}
+.home-card .pag-btn{color:var(--brand)}
+.home-card .pag-btn:hover:not(:disabled){background:var(--brand-50)}
 .home-card .pag-btn:disabled{opacity:0.35}
 
 /* ---- Dashboard: show-more toggle (scales lists of any length) ---- */

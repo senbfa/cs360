@@ -215,6 +215,27 @@ function prevPage() {
 })();
 
 showPage(1);
+
+const custSearchInput = document.getElementById('custSearchInput');
+const custEmptyEl = document.getElementById('custEmpty');
+const custPaginationEl = document.querySelector('.home-card .pagination');
+custSearchInput.addEventListener('input', function(){
+  const q = this.value.trim().toLowerCase();
+  if (!q) {
+    custPaginationEl.style.display = '';
+    custEmptyEl.style.display = 'none';
+    showPage(currentPageNum);
+    return;
+  }
+  custPaginationEl.style.display = 'none';
+  let anyVisible = false;
+  allRows.forEach(row => {
+    const match = (row.getAttribute('data-name') || '').includes(q);
+    row.style.display = match ? 'flex' : 'none';
+    if (match) anyVisible = true;
+  });
+  custEmptyEl.style.display = anyVisible ? 'none' : 'block';
+});
 </script>
 </body>
 </html>
