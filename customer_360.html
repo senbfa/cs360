@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer 360 — Meridian Foods PLC</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topnav">
+    <img class="brand-logo" src="assets/temenos-logo.svg" alt="Temenos"><span class="brand-product">CS360</span>
+      <input type="checkbox" id="navToggle" class="nav-toggle">
+      <label for="navToggle" class="navburger" aria-label="Menu">
+        <svg class="nb-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg class="nb-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </label>
+      
+      <div class="navsearch">
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="globalSearch" placeholder="Search customer, deal, facility, drawing…" autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    <span class="right">
+      <span class="navprofile"><span class="navavatar"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>CSA User</span>
+      <span class="navicon" title="Settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+      <button class="logoff-btn" title="Log off"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+    </span>
+  </div>
+
+  <div class="pagehead">
+    <div class="ph-left">
+      <div class="ph-crumbs"><a href="index.html">Home</a> <span class="sep">/</span> <span class="current" title="Meridian Foods PLC">Meridian Foods PLC</span></div>
+      <div class="ph-title-row">
+      <span class="entity-tag customer" title="Customer"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v18Z"/><path d="M6 12H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2"/><path d="M18 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg><span class="entity-label">Customer</span></span>
+      <div class="title-switcher">
+        <div class="title-trigger">
+          <span class="tt-name">Meridian Foods PLC</span><span class="tt-id">482211</span>
+        </div>
+      </div>
+              <span class="pill pill-active"><svg class="icon status-dot" width="7" height="7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="12"/></svg> Active</span>
+</div>
+
+    </div>
+    <div class="ph-right">
+      <div class="quicknav-wrap">
+        <button class="quicknav-trigger" onclick="toggleQuickNav(event,'dealFacilityNav')">Deals & Facilities <span class="qn-chev"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="quicknav-menu" id="dealFacilityNav">
+          <div class="tm-head">3 Deals & 3 Facilities</div>
+          <div class="tm-group">
+            <div class="tm-section-title">Deals</div>
+            <div class="tm-item" onclick="location.href='deals/deal_1.html'"><div class="tm-top"><span>Acquisition of Hartley Bakeries Ltd</span><span class="tm-sub">AA250112D1V01</span></div><div class="tm-meta"><span>Commitment <b>£200.0m</b></span><span>Status <b>Active</b></span></div></div>
+            <div class="tm-item" onclick="location.href='deals/deal_2.html'"><div class="tm-top"><span>General corporate & working capital</span><span class="tm-sub">AA250310D1V01</span></div><div class="tm-meta"><span>Commitment <b>£75.0m</b></span><span>Status <b>Active</b></span></div></div>
+            <div class="tm-item" onclick="location.href='deals/deal_3.html'"><div class="tm-top"><span>Import LCs & bank guarantees</span><span class="tm-sub">AA250512D1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Status <b>Active</b></span></div></div>
+          </div>
+          <div class="tm-group">
+            <div class="tm-section-title">Facilities</div>
+            <div class="tm-item" onclick="location.href='facilities/facility_1.html'"><div class="tm-top"><span>Term Loan A</span><span class="tm-sub">AA250114F1V01</span></div><div class="tm-meta"><span>Commitment <b>£200.0m</b></span><span>Util <b>100%</b></span></div></div>
+            <div class="tm-item" onclick="location.href='facilities/facility_2.html'"><div class="tm-top"><span>Revolving Credit Facility</span><span class="tm-sub">AA250310F1V01</span></div><div class="tm-meta"><span>Commitment <b>£75.0m</b></span><span>Util <b>60%</b></span></div></div>
+            <div class="tm-item" onclick="location.href='facilities/facility_3.html'"><div class="tm-top"><span>Multi-currency Trade Finance</span><span class="tm-sub">AA250512F1V01</span></div><div class="tm-meta"><span>Commitment <b>$40.0m</b></span><span>Util <b>43%</b></span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-wrap">
+        <button class="svc-trigger" onclick="toggleSvcMenu(event)"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Quick Action <span style="opacity:.75">▾</span></button>
+        <div class="svc-menu" id="svcMenu">
+          <div class="mi" onclick="openServiceSheet('new-drawing', { customer:'Meridian Foods PLC' })">New Drawing</div>
+          <div class="mi" onclick="openServiceSheet('record-covenant-test', { customer:'Meridian Foods PLC', facility:'AA250114F1V01' })">Record Covenant Test</div>
+          <div class="mi" onclick="openServiceSheet('amend-facility', { customer:'Meridian Foods PLC' })">Amend Facility</div>
+          <div class="mi" onclick="openServiceSheet('increase-commitment', { customer:'Meridian Foods PLC', facility:'AA250310F1V01' })">Increase Commitment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdr">
+    <div class="hdr-row">
+      <div class="hdr-identity">
+        <div class="av">MF</div>
+      </div>
+    <div class="hdr-fields">
+      <div class="hcol"><span class="hlbl">Total Exposure</span><span class="hval key">£306.6m</span></div>
+      <div class="hcol"><span class="hlbl">Risk Rating</span><span class="hval key">BBB+ · Stable</span></div>
+      <div class="hcol"><span class="hlbl">Relationship Since</span><span class="hval">Mar 2019</span></div>
+      <div class="hcol"><span class="hlbl">KYC / AML Status</span><span class="hval">Verified to 15 Jan 2027</span></div>
+      <div class="hcol"><span class="hlbl">Domicile</span><span class="hval">United Kingdom</span></div>
+
+    </div>
+  </div>
+  </div>
+
+  <div class="body">
+
+    <div class="maintabs" id="mainTabs"></div>
+    <div class="maincontent" id="mainContent"></div>
+
+  </div>
+</div>
+
+<script src="assets/charts.js"></script>
+<script src="assets/quicknav.js"></script>
+<script src="assets/servicesheet.js"></script>
+<script src="assets/pilloverflow.js"></script>
+<script src="assets/search.js"></script>
+<script>
+function closeAllMenus() {
+  document.querySelectorAll('.title-menu, .quicknav-menu, .svc-menu').forEach(menu => menu.style.display = 'none');
+}
+
+const mainTabs = [
+  { label:'Overview', render: renderOverview },
+  { label:'Accounts', render: renderAccounts },
+  { label:'Deposits', render: renderDeposits },
+  { label:'Loans', render: renderLoans },
+  { label:'Cards', render: renderCards },
+  { label:'Deals', render: renderDeals },
+  { label:'Facilities', render: renderFacilities },
+  { label:'Drawings', render: renderDrawings },
+  { label:'Cases', badge:4, render: renderCases },
+  { label:'Documents', render: renderDocuments }
+];
+
+function renderOverview(){
+  return `
+    <div class="row121">
+      <div class="card">
+        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Financial Summary</span></div>
+        <div class="row"><span class="l">Total Group Commitment</span><span class="v">£306.6m</span></div>
+        <div class="row"><span class="l">Total Drawn</span><span class="v">£258.4m</span></div>
+        <div class="row"><span class="l">Total Available</span><span class="v">£48.2m</span></div>
+        <div class="row"><span class="l">Weighted Utilisation</span><span class="v">84%</span></div>
+        <div class="row"><span class="l">Active Drawings</span><span class="v">6 <span style="color:var(--text3);font-weight:500">/ 1 pending</span></span></div>
+      </div>
+
+      <div class="card">
+        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span>Group Exposure by Facility</span></div>
+        <div class="compbar-total"><span class="ct-lbl">Total Group Commitment</span><span class="ct-val">£306.6m</span></div>
+        <div class="compbar" id="compBar"></div>
+        <div class="compbar-axis"><span>0%</span><span>50%</span><span>100%</span></div>
+        <div class="compbar-legend" id="compLegend"></div>
+      </div>
+
+      <div class="card needsattn">
+        <div class="cardh"><span class="ttl"><span class="ic ic-bad"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Needs Attention</span></div>
+        <div class="covstrip">
+          <div class="cs-item" onclick="jumpTo('Cases')"><div class="cs-top"><span class="ci bad"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="cs-val">Overdue</span></div><div class="cs-label">Covenant Test · SR-10820</div></div>
+          <div class="cs-item" onclick="jumpTo('Documents')"><div class="cs-top"><span class="ci bad"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="cs-val">Overdue</span></div><div class="cs-label">Compliance Cert. · 30 Jun</div></div>
+          <div class="cs-item" style="cursor:default"><div class="cs-top"><span class="ci warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="cs-val">1.28x</span></div><div class="cs-label">DSCR near breach</div></div>
+          <div class="cs-item" onclick="jumpTo('Loans')"><div class="cs-top"><span class="ci warn"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="cs-val">£25.0m</span></div><div class="cs-label">Due in 5 days</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row3">
+      <div class="card">
+        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>Company Profile</span></div>
+        <div class="rowlist">
+          <div class="inforow"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="txt"><span class="l">Registered Address</span><span class="v">14 Riverside Way, Leeds, LS1 4AP, United Kingdom</span></span></div>
+          <div class="inforow"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span class="txt"><span class="l">Company Number</span><span class="v">04821190</span></span></div>
+          <div class="inforow"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg></span><span class="txt"><span class="l">Industry / SIC Code</span><span class="v">10.71 · Food &amp; Beverage Manufacturing</span></span></div>
+        </div>
+        <div class="subsecttl" style="margin-top:22px">Primary Contact</div>
+        <div class="contactbox">
+          <span class="cb-name">S. Whitmore, Finance Director</span>
+          <span class="cb-line">s.whitmore@meridianfoods.co.uk</span>
+          <span class="cb-line">+44 113 496 0210</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Group Structure &amp; Relationship Team</span></div>
+        <div class="rowlist">
+          <div class="entityrow"><span class="av3" style="background:linear-gradient(135deg,var(--brand-l),var(--brand))">MF</span><span class="txt"><span class="v">Meridian Foods PLC <span class="pill pill-info" style="padding:1px 8px;font-size:10px">Parent</span></span><span class="l">UK Obligor + 2 co-borrowers (UK, IE)</span></span></div>
+        </div>
+        <div class="subsecttl" style="margin-top:22px">Relationship Team</div>
+        <div class="rowlist">
+          <div class="teamrow"><span class="av3">RG</span><span class="txt"><span class="v">R. Gerling</span><span class="l">Relationship Manager</span></span></div>
+          <div class="teamrow"><span class="av3">AW</span><span class="txt"><span class="v">A. Whitfield</span><span class="l">Credit Officer</span></span></div>
+          <div class="teamrow"><span class="av3">MC</span><span class="txt"><span class="v">M. Chowdhury</span><span class="l">Trade Finance Specialist</span></span></div>
+          <div class="teamrow"><span class="av3">LN</span><span class="txt"><span class="v">L. Novak</span><span class="l">Operations Contact</span></span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardh"><span class="ttl"><span class="ic"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Upcoming Events</span></div>
+        <div class="tl">
+          <div class="tli"><span class="tdate">14 Jul 26</span><span class="tdot" style="background:var(--red-600)"></span><div class="tbody"><span class="ttitle">Scheduled repayment £25.0m due<span class="ttag" style="background:var(--red-50);color:var(--red-600)">Due in 5 days</span></span><div class="tmeta">Acquisition Term Loan</div></div></div>
+          <div class="tli"><span class="tdate">15 Jul 26</span><span class="tdot" style="background:var(--blue)"></span><div class="tbody"><span class="ttitle">Quarterly interest payment due</span><div class="tmeta">RCF Drawing · £30.0m</div></div></div>
+          <div class="tli"><span class="tdate">30 Sep 26</span><span class="tdot" style="background:var(--amber-mid)"></span><div class="tbody"><span class="ttitle">Next margin ratchet test date</span><div class="tmeta">Acquisition Term Loan</div></div></div>
+          <div class="tli"><span class="tdate">20 Nov 26</span><span class="tdot" style="background:var(--text3)"></span><div class="tbody"><span class="ttitle">Import LC expiry</span><div class="tmeta">$12.0m</div></div></div>
+          <div class="tli"><span class="tdate">10 Mar 28</span><span class="tdot" style="background:var(--text3)"></span><div class="tbody"><span class="ttitle">RCF termination date</span><div class="tmeta">Working Capital Facility</div></div></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderAccounts(){
+  return `<div class="card">
+    <div class="secttl">Operating Accounts <span class="cnt">4</span></div>
+    <table>
+      <thead><tr><th>Account</th><th>Number</th><th>Currency</th><th>Balance</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>GBP Current Account</td><td class="lnk2">GB29 NWBK 6016 1331 9268 19</td><td>GBP</td><td>£4,286,150.22</td><td><span class="st st-a">Active</span></td></tr>
+        <tr><td>USD Current Account</td><td class="lnk2">GB74 CITI 1852 0837 4610 05</td><td>USD</td><td>$1,932,480.00</td><td><span class="st st-a">Active</span></td></tr>
+        <tr><td>EUR Settlement Account</td><td class="lnk2">GB03 HBUK 4012 0678 1123 44</td><td>EUR</td><td>€612,940.55</td><td><span class="st st-a">Active</span></td></tr>
+        <tr><td>Escrow Reserve Account</td><td class="lnk2">GB55 BARC 2005 1799 3382 10</td><td>GBP</td><td>£2,000,000.00</td><td><span class="st st-d">Restricted</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderDeposits(){
+  return `<div class="card">
+    <div class="secttl">Term Deposits &amp; Notice Accounts <span class="cnt">3</span></div>
+    <table>
+      <thead><tr><th>Product</th><th>Principal</th><th>Rate</th><th>Maturity</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>90-Day Term Deposit</td><td>£5,000,000</td><td>4.35%</td><td>12 Sep 2026</td><td><span class="st st-a">Active</span></td></tr>
+        <tr><td>32-Day Notice Account</td><td>£3,250,000</td><td>3.90%</td><td>Rolling</td><td><span class="st st-a">Active</span></td></tr>
+        <tr><td>180-Day Term Deposit</td><td>£2,000,000</td><td>4.55%</td><td>4 Jan 2027</td><td><span class="st st-a">Active</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderLoans(){
+  return `<div class="card">
+    <div class="secttl">Loans <span class="cnt">7</span></div>
+    <table>
+      <thead><tr><th>Loan ID</th><th>Product</th><th>Facility</th><th>Outstanding</th><th>Next Payment</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="clk" onclick="location.href='drawings/drawing_1a.html'"><td class="lnk2">AA250128L1V01</td><td>Cash Loan</td><td>AA250114F1V01</td><td>£120,000,000</td><td>14 Jul 2026 · £17,650,000</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_1b.html'"><td class="lnk2">AA250128L1V02</td><td>Cash Loan</td><td>AA250114F1V01</td><td>£50,000,000</td><td>14 Jul 2026</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_1c.html'"><td class="lnk2">AA250228L1V03</td><td>Cash Loan</td><td>AA250114F1V01</td><td>—</td><td>Awaiting drawdown</td><td><span class="st st-p">Pending</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_2a.html'"><td class="lnk2">AA250315L2V01</td><td>Cash Loan (Revolving)</td><td>AA250310F1V01</td><td>£30,000,000</td><td>15 Jul 2026 · interest</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_2b.html'"><td class="lnk2">AA250620L2V02</td><td>Letter of Credit</td><td>AA250310F1V01</td><td>£15,000,000</td><td>—</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_3a.html'"><td class="lnk2">AA250520L3V01</td><td>Import Letter of Credit</td><td>AA250512F1V01</td><td>$12,000,000</td><td>20 Nov 2026 · expiry</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_3b.html'"><td class="lnk2">AA250715L3V02</td><td>Bank Guarantee</td><td>AA250512F1V01</td><td>$5,000,000</td><td>—</td><td><span class="st st-a">Active</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderCards(){
+  return `<div class="card">
+    <div class="secttl">Corporate Cards <span class="cnt">4</span></div>
+    <table>
+      <thead><tr><th>Card</th><th>Cardholder</th><th>Type</th><th>Limit</th><th>Spend MTD</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="lnk2">•••• 4821</td><td>S. Whitmore — Finance Director</td><td>Corporate Purchasing Card</td><td>£150,000</td><td>£42,300</td><td><span class="st st-a">Active</span></td></tr>
+        <tr><td class="lnk2">•••• 7734</td><td>D. Okafor — Procurement Lead</td><td>Corporate Purchasing Card</td><td>£75,000</td><td>£18,950</td><td><span class="st st-a">Active</span></td></tr>
+        <tr><td class="lnk2">•••• 2210</td><td>Fleet / T&amp;E Pool</td><td>Virtual Card</td><td>£25,000</td><td>£6,140</td><td><span class="st st-a">Active</span></td></tr>
+        <tr><td class="lnk2">•••• 9902</td><td>R. Sato — Operations Manager</td><td>Corporate Purchasing Card</td><td>£100,000</td><td>£0</td><td><span class="st st-d">Suspended</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderDeals(){
+  return `<div class="card">
+    <div class="secttl">Deals <span class="cnt" id="dealCount">3</span></div>
+    <table>
+      <thead><tr><th>Deal ID</th><th>Purpose</th><th>Commitment</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="clk" onclick="location.href='deals/deal_1.html'"><td class="lnk2">AA250112D1V01</td><td>Acquisition of Hartley Bakeries Ltd</td><td>£200,000,000</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='deals/deal_2.html'"><td class="lnk2">AA250310D1V01</td><td>General corporate &amp; working capital</td><td>£75,000,000</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='deals/deal_3.html'"><td class="lnk2">AA250512D1V01</td><td>Import LCs &amp; bank guarantees</td><td>$40,000,000</td><td><span class="st st-a">Active</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderFacilities(){
+  return `<div class="card">
+    <div class="secttl">Facilities <span class="cnt" id="facilityCount">3</span></div>
+    <table>
+      <thead><tr><th>Facility ID</th><th>Product</th><th>Commitment</th><th>Util.</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="clk" onclick="location.href='facilities/facility_1.html'"><td class="lnk2">AA250114F1V01</td><td>Term Loan A</td><td>£200,000,000</td><td>100%</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='facilities/facility_2.html'"><td class="lnk2">AA250310F1V01</td><td>Revolving Credit Facility</td><td>£75,000,000</td><td>60%</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='facilities/facility_3.html'"><td class="lnk2">AA250512F1V01</td><td>Multi-currency Trade Finance</td><td>$40,000,000</td><td>43%</td><td><span class="st st-a">Active</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderDrawings(){
+  return `<div class="card">
+    <div class="secttl">Drawings <span class="cnt">7</span></div>
+    <table>
+      <thead><tr><th>Drawing ID</th><th>Product</th><th>Facility</th><th>Currency</th><th>Amount</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="clk" onclick="location.href='drawings/drawing_1a.html'"><td class="lnk2">AA250128L1V01</td><td>Cash Loan</td><td>AA250114F1V01</td><td>GBP</td><td>£120,000,000</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_1b.html'"><td class="lnk2">AA250128L1V02</td><td>Cash Loan</td><td>AA250114F1V01</td><td>GBP</td><td>£50,000,000</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_1c.html'"><td class="lnk2">AA250228L1V03</td><td>Cash Loan</td><td>AA250114F1V01</td><td>EUR</td><td>€30,000,000</td><td><span class="st st-p">Pending</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_2a.html'"><td class="lnk2">AA250315L2V01</td><td>Cash Loan (Revolving)</td><td>AA250310F1V01</td><td>GBP</td><td>£30,000,000</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_2b.html'"><td class="lnk2">AA250620L2V02</td><td>Letter of Credit</td><td>AA250310F1V01</td><td>GBP</td><td>£15,000,000</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_3a.html'"><td class="lnk2">AA250520L3V01</td><td>Import Letter of Credit</td><td>AA250512F1V01</td><td>USD</td><td>$12,000,000</td><td><span class="st st-a">Active</span></td></tr>
+        <tr class="clk" onclick="location.href='drawings/drawing_3b.html'"><td class="lnk2">AA250715L3V02</td><td>Bank Guarantee</td><td>AA250512F1V01</td><td>USD</td><td>$5,000,000</td><td><span class="st st-a">Active</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderCases(){
+  return `<div class="card">
+    <div class="secttl">Cases <span class="cnt">4</span></div>
+    <table>
+      <thead><tr><th>Ref</th><th>Type</th><th>Facility</th><th>Detail</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="clk" onclick="openServiceSheet('record-covenant-test', { customer:'Meridian Foods PLC', facility:'AA250114F1V01', ref:'SR-10820' })"><td class="lnk2">SR-10820</td><td>Record Covenant Test</td><td>AA250114F1V01</td><td>Q2 2026 Compliance Certificate</td><td><span class="st st-c">Overdue</span></td></tr>
+        <tr class="clk" onclick="openServiceSheet('increase-commitment', { customer:'Meridian Foods PLC', facility:'AA250310F1V01', ref:'SR-10812' })"><td class="lnk2">SR-10812</td><td>Increase Commitment</td><td>AA250310F1V01</td><td>+£15,000,000</td><td><span class="st st-p">Pending Approval</span></td></tr>
+        <tr class="clk" onclick="openServiceSheet('amend-facility', { customer:'Meridian Foods PLC', facility:'AA250512F1V01', ref:'SR-10799' })"><td class="lnk2">SR-10799</td><td>Amend Facility</td><td>AA250512F1V01</td><td>Extend sub-limit tenor</td><td><span class="st st-p">Pending Approval</span></td></tr>
+        <tr class="clk" onclick="openServiceSheet('new-drawing', { customer:'Meridian Foods PLC', facility:'AA250114F1V01', ref:'SR-10456' })"><td class="lnk2">SR-10456</td><td>New Drawing</td><td>AA250114F1V01</td><td>€30,000,000 cash loan</td><td><span class="st st-p">Pending</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderDocuments(){
+  return `<div class="card">
+    <div class="secttl">Documents <span class="cnt">7</span></div>
+    <table>
+      <thead><tr><th>Document</th><th>Related To</th><th>Date</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="lnk2">Facility Agreement</td><td>AA250114F1V01</td><td>12 Jan 2025</td><td><span class="st st-a">Verified</span></td></tr>
+        <tr><td class="lnk2">Facility Agreement</td><td>AA250310F1V01</td><td>10 Mar 2025</td><td><span class="st st-a">Verified</span></td></tr>
+        <tr><td class="lnk2">Facility Agreement</td><td>AA250512F1V01</td><td>12 May 2025</td><td><span class="st st-a">Verified</span></td></tr>
+        <tr><td class="lnk2">KYC Certificate</td><td>Meridian Foods PLC</td><td>Verified to 15 Jan 2027</td><td><span class="st st-a">Verified</span></td></tr>
+        <tr><td class="lnk2">Q1 2026 Compliance Certificate</td><td>Group Covenants</td><td>Received</td><td><span class="st st-a">Verified</span></td></tr>
+        <tr class="clk" onclick="openServiceSheet('record-covenant-test', { customer:'Meridian Foods PLC', facility:'AA250114F1V01', ref:'SR-10820' })"><td class="lnk2">Q2 2026 Compliance Certificate</td><td>Group Covenants</td><td>Due 30 Jun 2026</td><td><span class="st st-c">Overdue</span></td></tr>
+        <tr><td class="lnk2">Corporate Guarantee</td><td>Meridian Foods PLC (cross-guarantee)</td><td>12 Jan 2025</td><td><span class="st st-a">Verified</span></td></tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+const mainTabsEl = document.getElementById('mainTabs');
+const mainContentEl = document.getElementById('mainContent');
+let currentMainTab = 0;
+
+function showMainTab(idx){
+  currentMainTab = idx;
+  mainTabsEl.querySelectorAll('.maintab').forEach((t,i) => t.classList.toggle('on', i === idx));
+  mainContentEl.innerHTML = mainTabs[idx].render();
+  if(idx === 0){
+    renderCompositionBar('compBar', 'compLegend', [
+      { label:'Acquisition Term Loan', sub:'AA250114F1V01', pct:65.2, drawnPct:100, color:'var(--chart-blue)', amountLabel:'£200.0m', href:'facilities/facility_1.html', title:'£200,000,000 commitment · 100% drawn' },
+      { label:'Working Capital RCF', sub:'AA250310F1V01', pct:24.5, drawnPct:60, color:'var(--chart-purple)', amountLabel:'£75.0m', href:'facilities/facility_2.html', title:'£75,000,000 commitment · 60% drawn' },
+      { label:'Trade Finance Facility', sub:'AA250512F1V01', pct:10.3, drawnPct:43, color:'var(--chart-amber)', amountLabel:'$40.0m', href:'facilities/facility_3.html', title:'$40,000,000 commitment · 43% drawn' }
+    ]);
+  }
+}
+
+function jumpTo(label){
+  const idx = mainTabs.findIndex(t => t.label === label);
+  if(idx >= 0) showMainTab(idx);
+}
+
+
+mainTabs.forEach((t,i) => {
+  const d = document.createElement('div');
+  d.className = 'maintab' + (i === 0 ? ' on' : '');
+  d.innerHTML = t.label + (t.badge ? ` <span class="mt-badge">${t.badge}</span>` : '');
+  d.addEventListener('click', () => showMainTab(i));
+  mainTabsEl.appendChild(d);
+});
+showMainTab(0);
+</script>
+</body>
+</html>
