@@ -88,7 +88,7 @@
       <div class="hcol"><span class="hlbl">Facility ID</span><span class="hval">AA250114F1V01</span></div>
       <div class="hcol"><span class="hlbl">Product</span><span class="hval">Term Loan A</span></div>
       <div class="hcol"><span class="hlbl">Currency</span><span class="hval">GBP</span></div>
-      <div class="hcol"><span class="hlbl">Commitment</span><span class="hval key">£200,000,000</span></div>
+      <div class="hcol"><span class="hlbl">Commitment</span><span class="hval">£200,000,000</span></div>
       <div class="hcol"><span class="hlbl">Parent Deal</span><a class="hval" href="../deals/deal_1.html">AA250112D1V01 →</a></div>
 
     </div>
@@ -152,7 +152,7 @@
         <span class="t">Drawings <span class="cnt">3</span></span>
         <span style="display:flex;align-items:center;gap:10px">
           <button class="btn btn-primary" onclick="event.stopPropagation();openServiceSheet('new-drawing', svcCtx)">+ New Drawing</button>
-          <span class="chev">▾</span>
+          <span class="chev"><svg class="chev-up" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><svg class="chev-down" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </span>
       </div>
       <div class="collapse-body" id="drawSection">
@@ -168,9 +168,9 @@
     </div>
 
     <div class="card" style="padding:0;overflow:hidden">
-      <div class="sectionhdr collapse-head" style="padding:16px 20px;margin-bottom:0;border-bottom:1px solid var(--border)" onclick="toggleCollapse('facDetails', this)">
+      <div class="sectionhdr collapse-head" style="padding:16px 20px;margin-bottom:0" onclick="toggleCollapse('facDetails', this)">
         <span class="t">Facility Details<span class="freshness">Updated just now</span></span>
-        <span class="chev">▾</span>
+        <span class="chev"><svg class="chev-up" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><svg class="chev-down" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
       </div>
       <div class="collapse-body" id="facDetails">
         <div class="detailwrap" style="border:none;border-radius:0">
@@ -311,14 +311,14 @@ const tabs = [
       <div class="df"><span class="l">Effective Date Rule</span><span class="v">Certificate + 5 days</span></div>
       <div class="df"><span class="l">Current Metric</span><span class="v">3.20x</span></div>
       <div class="df"><span class="l">Current Margin</span><span class="v">2.25%</span></div>
-      <div class="df"><span class="l">Next Test Date</span><span class="v" style="color:var(--amber-600)">30 Sep 2026</span></div>
+      <div class="df"><span class="l">Next Test Date</span><span class="v" style="color:var(--warning-text)">30 Sep 2026</span></div>
     </div>
     <div class="subsecttl">Margin Grid</div>
     <table><thead><tr><th>Leverage (Net Debt / EBITDA)</th><th>Margin</th></tr></thead>
     <tbody>
       <tr><td>≤ 2.50x</td><td>1.75%</td></tr>
       <tr><td>&gt; 2.50x ≤ 3.00x</td><td>2.00%</td></tr>
-      <tr style="background:var(--amber-50)"><td>&gt; 3.00x ≤ 3.50x &nbsp;← current</td><td>2.25%</td></tr>
+      <tr style="background:var(--warning-tint)"><td>&gt; 3.00x ≤ 3.50x &nbsp;← current</td><td>2.25%</td></tr>
       <tr><td>&gt; 3.50x ≤ 4.00x</td><td>2.50%</td></tr>
       <tr><td>&gt; 4.00x</td><td>2.75%</td></tr>
     </tbody></table>`

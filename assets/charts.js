@@ -30,7 +30,7 @@ function renderDonutChart(svgHostId, centerHostId, legendHostId, segments, cente
   const r = 64, cx = 80, cy = 80, sw = 20;
   const circumference = 2 * Math.PI * r;
   let offset = 0;
-  let arcs = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--gray-50)" stroke-width="${sw}"/>`;
+  let arcs = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--neutral-tint)" stroke-width="${sw}"/>`;
   segments.forEach(s => {
     const len = circumference * (s.pct / 100);
     arcs += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${len} ${circumference}" stroke-dashoffset="${-offset}" transform="rotate(-90 ${cx} ${cy})"/>`;
