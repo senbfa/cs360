@@ -258,7 +258,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .icon{display:inline-block;vertical-align:middle;flex-shrink:0}
 
 /* ---- top nav ---- */
-.topnav{background:linear-gradient(135deg,#1a2555 0%,#3d1d5c 100%);padding:6px 24px;display:flex;align-items:center;gap:16px;color:#fff;font-size:12px;box-shadow:0 8px 32px rgba(26,37,85,.15),0 2px 8px rgba(0,0,0,.08);position:relative;border:none;backdrop-filter:none;margin:0;border-radius:0;width:100%;box-sizing:border-box}
+.topnav{background:linear-gradient(135deg,#1a2555 0%,#3d1d5c 100%);padding:6px 24px;display:flex;align-items:center;gap:16px;color:#fff;font-size:12px;box-shadow:0 8px 32px rgba(26,37,85,.15),0 2px 8px rgba(0,0,0,.08);position:relative;border:none;backdrop-filter:none;margin:0;border-radius:0;width:100%;box-sizing:border-box;grid-column:1/-1}
 
 
 
@@ -530,7 +530,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .unavail-sm{margin-top:8px;padding:8px 11px;background:var(--danger-tint);border-radius:var(--radius-sm);font-size:11px;color:var(--danger)}
 
 .sectionhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.sectionhdr.collapse-head{margin-bottom:0}
+.sectionhdr.collapse-head{margin-bottom:16px}
 .sectionhdr .t{font-size:16px;font-weight:600;color:var(--brand-dark);letter-spacing:-.008em;display:flex;align-items:center;gap:9px;line-height:1.4}
 .cnt{background:var(--brand-tint);color:var(--brand);font-size:12px;font-weight:600;border-radius:12px;padding:2px 10px}
 .freshness{background:var(--brand-tint);color:var(--brand);font-size:11px;font-weight:600;border-radius:12px;padding:3px 10px;margin-left:10px}
@@ -711,7 +711,7 @@ tbody tr:last-child td{border-bottom:var(--table-last-row-border)}
 }
 
 /* file upload — native input, restyled selector button */
-.field input[type=file]{padding:0 6px;display:flex;align-items:center;color:var(--text2);font-size:13px}
+.field input[type=file]{padding:6px;display:flex;align-items:center;color:var(--text2);font-size:13px}
 .field input[type=file]::file-selector-button{
   height:30px;margin-right:12px;padding:0 14px;border:none;border-radius:6px;background:var(--brand-tint);
   color:var(--brand-dark);font-size:12.5px;font-weight:600;font-family:inherit;cursor:pointer;transition:background .15s;
@@ -1139,7 +1139,7 @@ tbody tr:last-child td{border-bottom:var(--table-last-row-border)}
   body{font-size:12.5px}
   .app{max-width:100%}
 
-  .topnav{flex-wrap:wrap;padding:10px 16px;gap:8px;border-radius:0;margin:0;width:100%}
+  .topnav{flex-wrap:wrap;padding:10px 16px;gap:8px;border-radius:0;margin:0;width:100%;grid-column:1/-1}
   .navburger{display:flex;order:2;margin-left:auto}
   .nav-toggle:checked ~ .navburger .nb-open{display:none}
   .nav-toggle:checked ~ .navburger .nb-close{display:block}
