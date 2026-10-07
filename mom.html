@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nifty 500 Momentum Scanner</title>
+
+<style>
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        font-family: Inter, Arial, sans-serif;
+        background: #07111f;
+        color: #e8eef7;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: auto;
+        padding: 28px;
+    }
+
+    h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+    }
+
+    .subtitle {
+        color: #8fa3bb;
+        margin-bottom: 25px;
+    }
+
+    .controls {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        background: #0d1a2b;
+        padding: 18px;
+        border-radius: 14px;
+        border: 1px solid #1c3048;
+        margin-bottom: 20px;
+    }
+
+    button, input, select {
+        background: #101f33;
+        color: white;
+        border: 1px solid #29415e;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    button {
+        cursor: pointer;
+        background: #1473e6;
+        border-color: #1473e6;
+        font-weight: 600;
+    }
+
+    button:hover {
+        background: #0d5fbe;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background: #0d1a2b;
+        border: 1px solid #1c3048;
+        border-radius: 12px;
+        padding: 18px;
+    }
+
+    .card-label {
+        color: #8fa3bb;
+        font-size: 13px;
+    }
+
+    .card-value {
+        font-size: 25px;
+        font-weight: 700;
+        margin-top: 5px;
+    }
+
+    .table-wrap {
+        overflow-x: auto;
+        background: #0d1a2b;
+        border-radius: 14px;
+        border: 1px solid #1c3048;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1000px;
+    }
+
+    th, td {
+        padding: 13px 12px;
+        border-bottom: 1px solid #1c3048;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    th {
+        color: #8fa3bb;
+        font-size: 12px;
+        text-transform: uppercase;
+        cursor: pointer;
+        background: #0b1727;
+    }
+
+    th:first-child,
+    td:first-child,
+    th:nth-child(2),
+    td:nth-child(2) {
+        text-align: left;
+    }
+
+    tr:hover td {
+        background: #11243a;
+    }
+
+    .rank {
+        font-weight: 700;
+        color: #7fb4ff;
+    }
+
+    .positive {
+        color: #32d583;
+    }
+
+    .negative {
+        color: #ff6b7a;
+    }
+
+    .score {
+        font-weight: 700;
+        color: #ffd166;
+    }
+
+    .vol-low {
+        color: #32d583;
+    }
+
+    .vol-high {
+        color: #ff8b94;
+    }
+
+    .formula {
+        background: #091525;
+        border: 1px solid #1c3048;
+        padding: 18px;
+        border-radius: 12px;
+        margin: 20px 0;
+        font-family: monospace;
+        line-height: 1.8;
+        color: #b9d7ff;
+        overflow-x: auto;
+    }
+
+    .note {
+        color: #8fa3bb;
+        font-size: 13px;
+        margin-top: 15px;
+        line-height: 1.6;
+    }
+
+    @media(max-width: 800px) {
+        .stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .container {
+            padding: 15px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📈 Nifty 500 Momentum Scanner</h1>
+    <div class="subtitle">
+        Volatility-adjusted 6M + 12M momentum ranking
+    </div>
+
+    <div class="controls">
+        <button onclick="runScanner()">Run Scanner</button>
+
+        <label>
+            Min 12M Return
+            <input id="minReturn" type="number" value="0" step="5">
+        </label>
+
+        <label>
+            Max Volatility %
+            <input id="maxVol" type="number" value="60" step="5">
+        </label>
+
+        <label>
+            Number of Stocks
+            <input id="topN" type="number" value="20" min="5" max="100">
+        </label>
+
+        <button onclick="exportCSV()">Export CSV</button>
+    </div>
+
+    <div class="stats">
+        <div class="card">
+            <div class="card-label">Universe</div>
+            <div class="card-value" id="universe">500</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">Stocks Passed</div>
+            <div class="card-value" id="passed">--</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">Average Volatility</div>
+            <div class="card-value" id="avgVol">--</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">Top Score</div>
+            <div class="card-value" id="topScore">--</div>
+        </div>
+    </div>
+
+    <div class="formula">
+        12M Return = Price(t-1) / Price(t-13) - 1<br>
+        6M Return  = Price(t-1) / Price(t-7) - 1<br>
+        σ = StdDev(daily log returns) × √252<br>
+        MR12 = 12M Return / σ<br>
+        MR6  = 6M Return / σ<br>
+        Z12 = (MR12 - Mean(MR12)) / StdDev(MR12)<br>
+        Z6  = (MR6 - Mean(MR6)) / StdDev(MR6)<br>
+        Momentum Z = 0.50 × Z12 + 0.50 × Z6
+    </div>
+
+    <div class="table-wrap">
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Symbol</th>
+                    <th>12M Return</th>
+                    <th>6M Return</th>
+                    <th>Volatility</th>
+                    <th>MR12</th>
+                    <th>MR6</th>
+                    <th>Z12</th>
+                    <th>Z6</th>
+                    <th>Momentum Score</th>
+                </tr>
+            </thead>
+
+            <tbody id="resultsBody"></tbody>
+        </table>
+    </div>
+
+    <div class="note">
+        This scanner is a research tool, not investment advice.
+        The ranking should be calculated using adjusted historical prices
+        and the current Nifty 500 constituent universe.
+    </div>
+
+</div>
+
+<script>
+
+/*
+==========================================================
+DATA FORMAT EXPECTED
+==========================================================
+
+Replace loadNifty500Data() with your NSE/Nifty data source.
+
+Each stock should contain at least:
+
+{
+    symbol: "RELIANCE",
+    prices: [
+        1400,
+        1410,
+        1398,
+        ...
+    ]
+}
+
+The prices array should contain approximately 252+
+daily adjusted closing prices.
+
+For a true 12-month calculation you need at least
+~252 trading observations plus the historical points
+needed for the 6M/12M lookback.
+
+==========================================================
+*/
+
+
+let results = [];
+
+
+/* ---------- MATH FUNCTIONS ---------- */
+
+function mean(arr) {
+    if (!arr.length) return 0;
+
+    return arr.reduce((a,b) => a+b, 0) / arr.length;
+}
+
+
+function stdDev(arr) {
+    if (arr.length < 2) return 0;
+
+    const m = mean(arr);
+
+    const variance =
+        arr.reduce((sum, x) => sum + Math.pow(x - m, 2), 0)
+        / (arr.length - 1);
+
+    return Math.sqrt(variance);
+}
+
+
+function logReturns(prices) {
+
+    const returns = [];
+
+    for (let i = 1; i < prices.length; i++) {
+
+        if (prices[i] > 0 && prices[i-1] > 0) {
+            returns.push(
+                Math.log(prices[i] / prices[i-1])
+            );
+        }
+    }
+
+    return returns;
+}
+
+
+function annualizedVolatility(prices) {
+
+    const r = logReturns(prices.slice(-252));
+
+    return stdDev(r) * Math.sqrt(252);
+}
+
+
+function calculateStock(stock) {
+
+    const prices = stock.prices;
+
+    if (!prices || prices.length < 252) {
+        return null;
+    }
+
+    const current = prices[prices.length - 1];
+
+    // Approximate 6 month / 12 month trading-day lookbacks
+    const p6 = prices[prices.length - 126];
+    const p12 = prices[prices.length - 252];
+
+    if (!p6 || !p12 || !current) {
+        return null;
+    }
+
+    const return6 = current / p6 - 1;
+    const return12 = current / p12 - 1;
+
+    const volatility = annualizedVolatility(prices);
+
+    if (!volatility || volatility <= 0) {
+        return null;
+    }
+
+    const mr6 = return6 / volatility;
+    const mr12 = return12 / volatility;
+
+    return {
+        symbol: stock.symbol,
+        return6,
+        return12,
+        volatility,
+        mr6,
+        mr12
+    };
+}
+
+
+/* ---------- MAIN SCANNER ---------- */
+
+function runScanner() {
+
+    const universe = loadNifty500Data();
+
+    const minReturn =
+        Number(document.getElementById("minReturn").value) / 100;
+
+    const maxVol =
+        Number(document.getElementById("maxVol").value) / 100;
+
+    const topN =
+        Number(document.getElementById("topN").value);
+
+    let stocks = [];
+
+    for (const stock of universe) {
+
+        const x = calculateStock(stock);
+
+        if (!x) continue;
+
+        if (x.return12 < minReturn) continue;
+
+        if (x.volatility > maxVol) continue;
+
+        stocks.push(x);
+    }
+
+
+    /*
+       Cross-sectional Z scores
+       calculated across the eligible universe.
+    */
+
+    const mr12Values = stocks.map(x => x.mr12);
+    const mr6Values = stocks.map(x => x.mr6);
+
+    const mean12 = mean(mr12Values);
+    const mean6 = mean(mr6Values);
+
+    const sd12 = stdDev(mr12Values);
+    const sd6 = stdDev(mr6Values);
+
+
+    stocks.forEach(x => {
+
+        x.z12 =
+            sd12 === 0
+                ? 0
+                : (x.mr12 - mean12) / sd12;
+
+        x.z6 =
+            sd6 === 0
+                ? 0
+                : (x.mr6 - mean6) / sd6;
+
+        /*
+           NSE-style 50/50 combination
+        */
+
+        x.score =
+            0.50 * x.z12 +
+            0.50 * x.z6;
+    });
+
+
+    stocks.sort((a,b) => b.score - a.score);
+
+    results = stocks.slice(0, topN);
+
+    renderResults(results);
+
+    document.getElementById("passed").innerText =
+        stocks.length;
+
+    document.getElementById("topScore").innerText =
+        results.length
+            ? results[0].score.toFixed(2)
+            : "--";
+
+    document.getElementById("avgVol").innerText =
+        stocks.length
+            ? (
+                mean(stocks.map(x => x.volatility)) * 100
+              ).toFixed(1) + "%"
+            : "--";
+}
+
+
+/* ---------- TABLE ---------- */
+
+function renderResults(data) {
+
+    const body =
+        document.getElementById("resultsBody");
+
+    body.innerHTML = "";
+
+    data.forEach((x, i) => {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td class="rank">${i + 1}</td>
+
+            <td>
+                <strong>${x.symbol}</strong>
+            </td>
+
+            <td class="${x.return12 >= 0 ? 'positive' : 'negative'}">
+                ${(x.return12 * 100).toFixed(1)}%
+            </td>
+
+            <td class="${x.return6 >= 0 ? 'positive' : 'negative'}">
+                ${(x.return6 * 100).toFixed(1)}%
+            </td>
+
+            <td class="${x.volatility < 0.30 ? 'vol-low' : 'vol-high'}">
+                ${(x.volatility * 100).toFixed(1)}%
+            </td>
+
+            <td>
+                ${x.mr12.toFixed(2)}
+            </td>
+
+            <td>
+                ${x.mr6.toFixed(2)}
+            </td>
+
+            <td>
+                ${x.z12.toFixed(2)}
+            </td>
+
+            <td>
+                ${x.z6.toFixed(2)}
+            </td>
+
+            <td class="score">
+                ${x.score.toFixed(2)}
+            </td>
+        `;
+
+        body.appendChild(row);
+    });
+}
+
+
+/* ---------- CSV EXPORT ---------- */
+
+function exportCSV() {
+
+    if (!results.length) {
+        alert("Run the scanner first.");
+        return;
+    }
+
+    let csv =
+        "Rank,Symbol,12M Return,6M Return,Volatility,MR12,MR6,Z12,Z6,Momentum Score\n";
+
+    results.forEach((x,i) => {
+
+        csv += [
+            i + 1,
+            x.symbol,
+            (x.return12 * 100).toFixed(2),
+            (x.return6 * 100).toFixed(2),
+            (x.volatility * 100).toFixed(2),
+            x.mr12.toFixed(4),
+            x.mr6.toFixed(4),
+            x.z12.toFixed(4),
+            x.z6.toFixed(4),
+            x.score.toFixed(4)
+        ].join(",") + "\n";
+    });
+
+    const blob =
+        new Blob([csv], {type: "text/csv"});
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+    a.download = "nifty500_momentum_top20.csv";
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
+
+/* ---------- DATA SOURCE ---------- */
+
+/*
+   IMPORTANT:
+
+   This demo function generates sample data so that
+   the UI works immediately.
+
+   Replace this function with your actual NSE data
+   loader/API.
+
+   DO NOT use the generated data for trading decisions.
+*/
+
+function loadNifty500Data() {
+
+    const symbols = [
+        "RELIANCE",
+        "HDFCBANK",
+        "ICICIBANK",
+        "BHARTIARTL",
+        "INFY",
+        "TCS",
+        "LT",
+        "SBIN",
+        "AXISBANK",
+        "KOTAKBANK",
+        "M&M",
+        "SUNPHARMA",
+        "ITC",
+        "HINDUNILVR",
+        "MARUTI",
+        "TITAN",
+        "BAJFINANCE",
+        "ADANIENT",
+        "BEL",
+        "TRENT"
+    ];
+
+    /*
+       Demo only.
+       Replace with all current Nifty 500 symbols
+       and real adjusted close prices.
+    */
+
+    return symbols.map((symbol, stockIndex) => {
+
+        let price = 100 + stockIndex * 20;
+
+        const prices = [];
+
+        for (let i = 0; i < 300; i++) {
+
+            const trend =
+                0.0005 +
+                stockIndex * 0.00003;
+
+            const noise =
+                (Math.random() - 0.48) * 0.025;
+
+            price *=
+                1 + trend + noise;
+
+            prices.push(price);
+        }
+
+        return {
+            symbol,
+            prices
+        };
+    });
+}
+
+
+/* Run once */
+runScanner();
+
+</script>
+
+</body>
+</html>
+
+One change I'd make for your actual scanner
+I would not use a simple “volatility < X%” rule as the main low-volatility condition.
+Instead, calculate volatility for all 500 stocks and use it in the momentum ratio:
+
+Momentum Ratio = Return / σ
+
+Then rank the stocks cross-sectionally.
+
+That is more robust because a stock with 35% return and 20% volatility can legitimately outrank one with 50% return and 50% volatility. It also follows the logic used by NSE's Nifty500 Momentum 50. 
+N
+Nifty Indices
+
+For the next version, I'd make the scanner considerably more useful by adding Nifty 500 live/current constituents + NSE historical prices + 20-stock ranking + 20-day/50-day/200-day trend filters + volume breakout + RSI + sector diversification, so it becomes a proper daily momentum dashboard rather than a demo HTML page.
+
+N
+Sources
+
+
+Log in for more personalized help with work, projects, and career goals.
+
+Log in
+
+Sign up for free
+You said:
+
+Give
+ChatGPT said:
+Sure — I can give you the full working version with the Nifty 500 universe, real price-data input, momentum/volatility calculations, filters, and a Top-20 dashboard.
+If you mean “give me the complete HTML code”, say “full code” and I’ll provide it as one ready-to-save .html file.
+
+
+You said:
+
+Yes
+ChatGPT said:
+Absolutely. Below is the full single-file HTML version. I’ve also corrected the methodology so it is closer to the current NSE/Nifty approach.
+The important point is that Nifty 500 Momentum 50 uses 6-month and 12-month price returns adjusted for volatility, while the Nifty500 Low Volatility methodology uses the standard deviation of daily log-normal returns over one year. 
+N
+Nifty Indices
++1
+
+NSE also provides daily UDiFF bhavcopy files through its reports section, so the production version should ultimately feed the scanner with actual historical NSE data rather than simulated prices. 
+N
+NSE India
+
+Full Nifty 500 Momentum Scanner
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Nifty 500 Momentum Scanner</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #07111f;
+    color: #e8eef7;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 25px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.subtitle {
+    color: #8fa3bb;
+    margin-top: 6px;
+    margin-bottom: 22px;
+}
+
+.panel {
+    background: #0d1a2b;
+    border: 1px solid #1d324b;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+.control {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    color: #91a5bc;
+    font-size: 12px;
+}
+
+input,
+select,
+button {
+    background: #101f33;
+    color: white;
+    border: 1px solid #29435f;
+    border-radius: 8px;
+    padding: 10px 13px;
+}
+
+button {
+    background: #1677e8;
+    border-color: #1677e8;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #0e5fbe;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.stat {
+    background: #0d1a2b;
+    border: 1px solid #1d324b;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.stat-title {
+    font-size: 12px;
+    color: #8fa3bb;
+}
+
+.stat-value {
+    margin-top: 5px;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.formula {
+    font-family: monospace;
+    color: #b9d8ff;
+    line-height: 1.8;
+    overflow-x: auto;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+}
+
+th {
+    background: #091626;
+    color: #8fa3bb;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 13px 10px;
+    cursor: pointer;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #1c3047;
+    text-align: right;
+}
+
+td:nth-child(1),
+td:nth-child(2) {
+    text-align: left;
+}
+
+tr:hover td {
+    background: #11263d;
+}
+
+.rank {
+    color: #7eb5ff;
+    font-weight: bold;
+}
+
+.symbol {
+    font-weight: bold;
+}
+
+.green {
+    color: #35d083;
+}
+
+.red {
+    color: #ff6878;
+}
+
+.yellow {
+    color: #ffd166;
+    font-weight: bold;
+}
+
+.blue {
+    color: #73b3ff;
+}
+
+.badge {
+    padding: 4px 7px;
+    border-radius: 6px;
+    font-size: 11px;
+}
+
+.badge-low {
+    background: #103b2b;
+    color: #41d995;
+}
+
+.badge-mid {
+    background: #3d3210;
+    color: #ffd166;
+}
+
+.badge-high {
+    background: #411c24;
+    color: #ff7180;
+}
+
+.status {
+    color: #8fa3bb;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.note {
+    color: #8195ad;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+@media(max-width:900px) {
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .container {
+        padding: 14px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📈 Nifty 500 Momentum Scanner</h1>
+
+<div class="subtitle">
+Risk-adjusted momentum • 6M + 12M • Annualised volatility • Top 20
+</div>
+
+
+<!-- CONTROLS -->
+
+<div class="panel">
+
+<div class="controls">
+
+<div class="control">
+<label>Minimum 12M Return %</label>
+<input id="minReturn" type="number" value="0">
+</div>
+
+<div class="control">
+<label>Maximum Volatility %</label>
+<input id="maxVol" type="number" value="80">
+</div>
+
+<div class="control">
+<label>Minimum 6M Return %</label>
+<input id="min6m" type="number" value="0">
+</div>
+
+<div class="control">
+<label>Top Stocks</label>
+<select id="topN">
+<option>10</option>
+<option selected>20</option>
+<option>30</option>
+<option>50</option>
+</select>
+</div>
+
+<button onclick="runScanner()">
+🔎 Run Scanner
+</button>
+
+<button onclick="exportCSV()">
+⬇ Export CSV
+</button>
+
+</div>
+
+<div class="status" id="status">
+Ready
+</div>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-title">Universe</div>
+<div class="stat-value" id="universe">500</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">Eligible</div>
+<div class="stat-value" id="eligible">—</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">Average Volatility</div>
+<div class="stat-value" id="averageVol">—</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">Top Momentum Score</div>
+<div class="stat-value" id="topScore">—</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">Scanner Date</div>
+<div class="stat-value" id="scanDate">—</div>
+</div>
+
+</div>
+
+
+<!-- FORMULA -->
+
+<div class="panel">
+
+<h3>Momentum Formula</h3>
+
+<div class="formula">
+
+12M Return = Current Price / Price 252 trading days ago − 1
+
+<br>
+
+6M Return = Current Price / Price 126 trading days ago − 1
+
+<br>
+
+Daily Log Return = ln(Pt / Pt−1)
+
+<br>
+
+Annual Volatility = StdDev(Daily Log Returns) × √252
+
+<br><br>
+
+12M Momentum Ratio = 12M Return / Volatility
+
+<br>
+
+6M Momentum Ratio = 6M Return / Volatility
+
+<br><br>
+
+Z12 = (MR12 − Mean(MR12)) / StdDev(MR12)
+
+<br>
+
+Z6 = (MR6 − Mean(MR6)) / StdDev(MR6)
+
+<br><br>
+
+Final Momentum Score =
+0.50 × Z12 + 0.50 × Z6
+
+</div>
+
+</div>
+
+
+<!-- TABLE -->
+
+<div class="panel">
+
+<h3>🏆 Top Momentum Stocks</h3>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Rank</th>
+<th>Symbol</th>
+<th>12M Return</th>
+<th>6M Return</th>
+<th>Volatility</th>
+<th>MR12</th>
+<th>MR6</th>
+<th>Z12</th>
+<th>Z6</th>
+<th>Momentum Score</th>
+<th>Risk</th>
+
+</tr>
+
+</thead>
+
+<tbody id="results"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- EXPLANATION -->
+
+<div class="panel note">
+
+<strong>How to read the scanner</strong>
+
+<br><br>
+
+<strong>12M Return:</strong>
+Longer-term price momentum.
+
+<br>
+
+<strong>6M Return:</strong>
+Medium-term momentum.
+
+<br>
+
+<strong>Volatility:</strong>
+One-year annualised standard deviation of daily log returns.
+
+<br>
+
+<strong>MR12 / MR6:</strong>
+Return divided by volatility. Higher is better.
+
+<br>
+
+<strong>Z12 / Z6:</strong>
+Cross-sectional standardised momentum scores.
+
+<br>
+
+<strong>Momentum Score:</strong>
+50% 12-month risk-adjusted momentum + 50% 6-month risk-adjusted momentum.
+
+<br><br>
+
+<strong>Important:</strong>
+This is a research scanner. It does not constitute investment advice.
+
+</div>
+
+</div>
+
+
+<script>
+
+/*
+============================================================
+NIFTY 500 MOMENTUM ENGINE
+============================================================
+
+This file contains the complete calculation engine.
+
+For production use, replace getNifty500Data()
+with your real NSE historical-price dataset.
+
+Expected format:
+
+[
+    {
+        symbol: "RELIANCE",
+        prices: [ ... daily adjusted closing prices ... ]
+    },
+
+    {
+        symbol: "TCS",
+        prices: [ ... ]
+    }
+]
+
+At least 252 trading observations are required.
+
+For corporate-action-correct calculations,
+use adjusted historical prices.
+
+============================================================
+*/
+
+
+let scannerResults = [];
+
+
+/* =========================================================
+   BASIC STATISTICS
+========================================================= */
+
+function mean(values) {
+
+    if (!values.length) return 0;
+
+    return values.reduce(
+        (sum, value) => sum + value,
+        0
+    ) / values.length;
+}
+
+
+function standardDeviation(values) {
+
+    if (values.length < 2) return 0;
+
+    const avg = mean(values);
+
+    const variance =
+        values.reduce(
+            (sum, value) =>
+                sum + Math.pow(value - avg, 2),
+            0
+        ) / (values.length - 1);
+
+    return Math.sqrt(variance);
+}
+
+
+/* =========================================================
+   DAILY LOG RETURNS
+========================================================= */
+
+function calculateLogReturns(prices) {
+
+    const returns = [];
+
+    for (let i = 1; i < prices.length; i++) {
+
+        const previous = Number(prices[i - 1]);
+        const current = Number(prices[i]);
+
+        if (
+            previous > 0 &&
+            current > 0
+        ) {
+
+            returns.push(
+                Math.log(current / previous)
+            );
+
+        }
+
+    }
+
+    return returns;
+}
+
+
+/* =========================================================
+   ANNUALISED VOLATILITY
+========================================================= */
+
+function calculateVolatility(prices) {
+
+    /*
+       Last 252 trading days
+    */
+
+    const lastYear =
+        prices.slice(-252);
+
+    const logReturns =
+        calculateLogReturns(lastYear);
+
+    if (logReturns.length < 200) {
+        return null;
+    }
+
+    const dailyStd =
+        standardDeviation(logReturns);
+
+    return dailyStd * Math.sqrt(252);
+}
+
+
+/* =========================================================
+   STOCK MOMENTUM
+========================================================= */
+
+function calculateMomentum(stock) {
+
+    const prices = stock.prices;
+
+    if (
+        !prices ||
+        prices.length < 252
+    ) {
+        return null;
+    }
+
+
+    const current =
+        prices[prices.length - 1];
+
+    const price6M =
+        prices[prices.length - 126];
+
+    const price12M =
+        prices[prices.length - 252];
+
+
+    if (
+        !current ||
+        !price6M ||
+        !price12M
+    ) {
+        return null;
+    }
+
+
+    const return6M =
+        current / price6M - 1;
+
+    const return12M =
+        current / price12M - 1;
+
+
+    const volatility =
+        calculateVolatility(prices);
+
+
+    if (
+        volatility === null ||
+        volatility <= 0
+    ) {
+        return null;
+    }
+
+
+    const mr6 =
+        return6M / volatility;
+
+    const mr12 =
+        return12M / volatility;
+
+
+    return {
+
+        symbol: stock.symbol,
+
+        price: current,
+
+        return6M,
+
+        return12M,
+
+        volatility,
+
+        mr6,
+
+        mr12
+
+    };
+
+}
+
+
+/* =========================================================
+   Z SCORE
+========================================================= */
+
+function zScore(value, values) {
+
+    const avg = mean(values);
+
+    const sd = standardDeviation(values);
+
+    if (sd === 0) {
+        return 0;
+    }
+
+    return (value - avg) / sd;
+
+}
+
+
+/* =========================================================
+   MAIN SCANNER
+========================================================= */
+
+function runScanner() {
+
+    document.getElementById("status").innerText =
+        "Calculating...";
+
+
+    const universe =
+        getNifty500Data();
+
+
+    const minReturn =
+        Number(
+            document.getElementById(
+                "minReturn"
+            ).value
+        ) / 100;
+
+
+    const min6M =
+        Number(
+            document.getElementById(
+                "min6m"
+            ).value
+        ) / 100;
+
+
+    const maxVol =
+        Number(
+            document.getElementById(
+                "maxVol"
+            ).value
+        ) / 100;
+
+
+    const topN =
+        Number(
+            document.getElementById(
+                "topN"
+            ).value
+        );
+
+
+    let stocks = [];
+
+
+    /*
+       Calculate raw metrics
+    */
+
+    for (
+        const stock of universe
+    ) {
+
+        const result =
+            calculateMomentum(stock);
+
+
+        if (!result) {
+            continue;
+        }
+
+
+        /*
+           Optional filters
+        */
+
+        if (
+            result.return12M <
+            minReturn
+        ) {
+            continue;
+        }
+
+
+        if (
+            result.return6M <
+            min6M
+        ) {
+            continue;
+        }
+
+
+        if (
+            result.volatility >
+            maxVol
+        ) {
+            continue;
+        }
+
+
+        stocks.push(result);
+
+    }
+
+
+    /*
+       Cross-sectional momentum ratios
+    */
+
+    const mr12Values =
+        stocks.map(
+            stock => stock.mr12
+        );
+
+
+    const mr6Values =
+        stocks.map(
+            stock => stock.mr6
+        );
+
+
+    /*
+       Calculate Z scores
+    */
+
+    stocks.forEach(stock => {
+
+        stock.z12 =
+            zScore(
+                stock.mr12,
+                mr12Values
+            );
+
+
+        stock.z6 =
+            zScore(
+                stock.mr6,
+                mr6Values
+            );
+
+
+        /*
+           50 / 50 combination
+        */
+
+        stock.momentumScore =
+            (
+                0.50 * stock.z12
+            ) +
+            (
+                0.50 * stock.z6
+            );
+
+    });
+
+
+    /*
+       Highest score first
+    */
+
+    stocks.sort(
+        (a,b) =>
+            b.momentumScore -
+            a.momentumScore
+    );
+
+
+    scannerResults =
+        stocks.slice(
+            0,
+            topN
+        );
+
+
+    renderTable(
+        scannerResults
+    );
+
+
+    /*
+       Dashboard statistics
+    */
+
+    document.getElementById(
+        "universe"
+    ).innerText =
+        universe.length;
+
+
+    document.getElementById(
+        "eligible"
+    ).innerText =
+        stocks.length;
+
+
+    document.getElementById(
+        "averageVol"
+    ).innerText =
+        stocks.length
+        ?
+        (
+            mean(
+                stocks.map(
+                    x => x.volatility
+                )
+            ) * 100
+        ).toFixed(1) + "%"
+        :
+        "—";
+
+
+    document.getElementById(
+        "topScore"
+    ).innerText =
+        scannerResults.length
+        ?
+        scannerResults[0]
+            .momentumScore
+            .toFixed(2)
+        :
+        "—";
+
+
+    document.getElementById(
+        "scanDate"
+    ).innerText =
+        new Date()
+            .toLocaleDateString(
+                "en-IN"
+            );
+
+
+    document.getElementById(
+        "status"
+    ).innerText =
+        "Scanner completed";
+
+}
+
+
+/* =========================================================
+   TABLE RENDER
+========================================================= */
+
+function renderTable(data) {
+
+    const tbody =
+        document.getElementById(
+            "results"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    data.forEach(
+        (stock, index) => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            const volatility =
+                stock.volatility * 100;
+
+
+            let riskClass =
+                "badge-low";
+
+            let riskText =
+                "LOW";
+
+
+            if (volatility >= 40) {
+
+                riskClass =
+                    "badge-high";
+
+                riskText =
+                    "HIGH";
+
+            }
+
+            else if (volatility >= 25) {
+
+                riskClass =
+                    "badge-mid";
+
+                riskText =
+                    "MEDIUM";
+
+            }
+
+
+            row.innerHTML = `
+
+<td class="rank">
+    ${index + 1}
+</td>
+
+<td class="symbol">
+    ${stock.symbol}
+</td>
+
+<td class="${
+    stock.return12M >= 0
+    ? "green"
+    : "red"
+}">
+    ${(stock.return12M * 100).toFixed(1)}%
+</td>
+
+<td class="${
+    stock.return6M >= 0
+    ? "green"
+    : "red"
+}">
+    ${(stock.return6M * 100).toFixed(1)}%
+</td>
+
+<td>
+    ${volatility.toFixed(1)}%
+</td>
+
+<td class="blue">
+    ${stock.mr12.toFixed(2)}
+</td>
+
+<td class="blue">
+    ${stock.mr6.toFixed(2)}
+</td>
+
+<td>
+    ${stock.z12.toFixed(2)}
+</td>
+
+<td>
+    ${stock.z6.toFixed(2)}
+</td>
+
+<td class="yellow">
+    ${stock.momentumScore.toFixed(2)}
+</td>
+
+<td>
+    <span class="badge ${riskClass}">
+        ${riskText}
+    </span>
+</td>
+
+`;
+
+            tbody.appendChild(row);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CSV EXPORT
+========================================================= */
+
+function exportCSV() {
+
+    if (!scannerResults.length) {
+
+        alert(
+            "Run the scanner first."
+        );
+
+        return;
+
+    }
+
+
+    let csv =
+        "Rank,Symbol,12M Return,6M Return,Volatility,MR12,MR6,Z12,Z6,Momentum Score\n";
+
+
+    scannerResults.forEach(
+        (stock,index) => {
+
+            csv += [
+
+                index + 1,
+
+                stock.symbol,
+
+                (
+                    stock.return12M * 100
+                ).toFixed(2),
+
+                (
+                    stock.return6M * 100
+                ).toFixed(2),
+
+                (
+                    stock.volatility * 100
+                ).toFixed(2),
+
+                stock.mr12.toFixed(4),
+
+                stock.mr6.toFixed(4),
+
+                stock.z12.toFixed(4),
+
+                stock.z6.toFixed(4),
+
+                stock.momentumScore
+                    .toFixed(4)
+
+            ].join(",") + "\n";
+
+        }
+    );
+
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href = url;
+
+    link.download =
+        "nifty500_momentum_top20.csv";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+/* =========================================================
+   DATA CONNECTION
+=========================================================
+
+IMPORTANT:
+
+The function below is intentionally separated from
+the calculation engine.
+
+Replace it with your real Nifty 500 historical data.
+
+Example:
+
+return [
+    {
+        symbol: "RELIANCE",
+        prices: [
+            1450,
+            1462,
+            1471,
+            ...
+        ]
+    }
+];
+
+========================================================= */
+
+
+/*
+------------------------------------------------------------
+DEMO DATA
+------------------------------------------------------------
+
+This allows the HTML to run immediately.
+
+It is NOT real market data.
+
+Replace this function before using the scanner for
+investment decisions.
+------------------------------------------------------------
+*/
+
+function getNifty500Data() {
+
+    /*
+       Demo symbols.
+
+       Production:
+       Load all current Nifty 500 constituents.
+    */
+
+    const symbols = [
+
+        "RELIANCE",
+        "HDFCBANK",
+        "ICICIBANK",
+        "BHARTIARTL",
+        "INFY",
+        "TCS",
+        "LT",
+        "SBIN",
+        "AXISBANK",
+        "KOTAKBANK",
+
+        "M&M",
+        "SUNPHARMA",
+        "ITC",
+        "HINDUNILVR",
+        "MARUTI",
+        "TITAN",
+        "BAJFINANCE",
+        "ADANIENT",
+        "BEL",
+        "TRENT",
+
+        "HAL",
+        "POWERGRID",
+        "NTPC",
+        "COALINDIA",
+        "ONGC",
+        "ADANIPORTS",
+        "JSWSTEEL",
+        "TATASTEEL",
+        "HINDALCO",
+        "TECHM",
+
+        "WIPRO",
+        "HCLTECH",
+        "EICHERMOT",
+        "HEROMOTOCO",
+        "BAJAJ-AUTO",
+        "APOLLOHOSP",
+        "CIPLA",
+        "DRREDDY",
+        "DIVISLAB",
+        "LTIM",
+
+        "PIDILITIND",
+        "ASIANPAINT",
+        "DMART",
+        "INDUSINDBK",
+        "SBILIFE",
+        "HDFCLIFE",
+        "ICICIPRULI",
+        "BAJAJFINSV",
+        "ULTRACEMCO",
+        "GRASIM"
+
+    ];
+
+
+    /*
+       Generate demo historical prices.
+
+       DO NOT use these values for trading.
+    */
+
+    return symbols.map(
+        (
+            symbol,
+            index
+        ) => {
+
+            let price =
+                100 +
+                index * 10;
+
+
+            const prices = [];
+
+
+            for (
+                let day = 0;
+                day < 300;
+                day++
+            ) {
+
+                /*
+                   Simulated trend
+                */
+
+                const trend =
+                    0.0002 +
+                    (
+                        index % 12
+                    ) * 0.00004;
+
+
+                /*
+                   Simulated noise
+                */
+
+                const noise =
+                    (
+                        Math.random() -
+                        0.48
+                    ) * 0.018;
+
+
+                price *=
+                    1 +
+                    trend +
+                    noise;
+
+
+                prices.push(
+                    price
+                );
+
+            }
+
+
+            return {
+
+                symbol,
+
+                prices
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+runScanner();
+
+</script>
+
+</body>
+</html>
+
