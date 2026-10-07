@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Tokens Editor</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { background: var(--bg); }
+    .editor-container { max-width: 1400px; margin: 0 auto; padding: 32px; }
+    .editor-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--brand-50);
+    }
+    .editor-header h1 { color: var(--navy); margin: 0 0 8px; font-size: 24px; }
+    .editor-header p { color: var(--text2); margin: 0; }
+
+    .editor-toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-action {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-size: 14px;
+    }
+    .btn-save {
+      background: var(--brand);
+      color: white;
+    }
+    .btn-save:hover {
+      background: var(--brand-l);
+      transform: translateY(-2px);
+    }
+    .btn-reset {
+      background: var(--red-50);
+      color: var(--red-600);
+      border: 1px solid var(--red-200);
+    }
+    .btn-reset:hover {
+      background: var(--red-200);
+    }
+    .btn-download {
+      background: var(--teal-50);
+      color: var(--teal-600);
+      border: 1px solid var(--teal-600);
+    }
+    .btn-download:hover {
+      background: var(--teal-600);
+      color: white;
+    }
+    .status-message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      display: none;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .status-message.success {
+      background: linear-gradient(135deg, #E1F7E9, #CDEEDA);
+      color: var(--teal-800);
+      display: block;
+    }
+    .status-message.error {
+      background: linear-gradient(135deg, #FCE6E6, #F8D0D0);
+      color: var(--red-600);
+      display: block;
+    }
+
+    .editor-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .editor-section h2 {
+      color: var(--navy);
+      font-size: 18px;
+      margin: 0 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--brand-50);
+    }
+
+    .token-editor {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .token-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 16px;
+      background: var(--bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: all 0.18s ease;
+    }
+    .token-input-group:hover {
+      border-color: var(--brand-50);
+      box-shadow: 0 2px 8px rgba(46,58,140,.06);
+    }
+    .token-input-group label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+    .token-input-group .token-name {
+      font-size: 12px;
+      color: var(--brand);
+      font-family: monospace;
+      margin-bottom: 4px;
+    }
+    .token-input-group input[type="text"],
+    .token-input-group input[type="number"] {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+      background: var(--surface);
+      color: var(--text);
+    }
+    .token-input-group input[type="color"] {
+      height: 40px;
+      cursor: pointer;
+      padding: 4px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .token-input-group input:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px var(--brand-50);
+    }
+    .token-input-group .color-value {
+      font-size: 12px;
+      color: var(--text2);
+      font-family: monospace;
+      word-break: break-all;
+    }
+
+    .color-tokens {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .color-token {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+      background: var(--bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .color-token label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navy);
+      text-transform: uppercase;
+    }
+    .color-preview {
+      width: 100%;
+      height: 50px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .color-preview:hover {
+      transform: scale(1.05);
+    }
+    .color-token input[type="color"] {
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .color-token input[type="text"] {
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      background: var(--surface);
+    }
+
+    .info-box {
+      background: var(--brand-50);
+      border: 1px solid var(--brand-100);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 13px;
+      color: var(--navy);
+      margin-top: 32px;
+      line-height: 1.6;
+    }
+    .info-box strong { font-weight: 600; }
+    .info-box code {
+      background: var(--surface);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .info-box ol {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+    .info-box li {
+      margin-bottom: 6px;
+    }
+    .info-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .token-modified {
+      background: linear-gradient(135deg, #FEF1DB, #FBE2B8) !important;
+      border-color: var(--amber-mid) !important;
+    }
+    .token-modified .token-name {
+      color: var(--amber-600);
+    }
+
+    .changes-indicator {
+      background: linear-gradient(135deg, #FEF1DB, #FBE2B8);
+      color: var(--amber-600);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="editor-container">
+    <div class="editor-header">
+      <h1>🎨 Design Tokens Editor</h1>
+      <p>Edit tokens and see them update instantly across the page. Changes are saved to your browser.</p>
+    </div>
+
+    <div class="editor-toolbar">
+      <button class="btn-action btn-save" id="applyBtn">✨ Apply Changes</button>
+      <button class="btn-action btn-reset" id="resetBtn">↻ Reset to Default</button>
+      <button class="btn-action btn-download" id="downloadBtn">⬇ Download CSS</button>
+      <div class="changes-indicator" id="changesIndicator" style="display: none;">
+        <span id="changesCount">0</span> changes
+      </div>
+      <div class="status-message" id="statusMsg"></div>
+    </div>
+
+    <!-- COLORS -->
+    <div class="editor-section">
+      <h2>🎨 Brand Colors</h2>
+      <div class="color-tokens" id="brandColors">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>🎨 Neutral Colors</h2>
+      <div class="color-tokens" id="neutralColors">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>🎨 Status Colors</h2>
+      <div class="color-tokens" id="statusColors">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <!-- SPACING -->
+    <div class="editor-section">
+      <h2>📐 Spacing Scale</h2>
+      <div class="token-editor" id="spacingTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="editor-section">
+      <h2>⭕ Border Radius</h2>
+      <div class="token-editor" id="radiusTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <!-- COMPONENT TOKENS -->
+    <div class="editor-section">
+      <h2>🧩 Card Component</h2>
+      <div class="token-editor" id="cardTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>🔘 Button Component</h2>
+      <div class="token-editor" id="buttonTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>📑 Tab Component</h2>
+      <div class="token-editor" id="tabTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>🎫 Accordion Component</h2>
+      <div class="token-editor" id="accordionTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>🏷️ Badge Component</h2>
+      <div class="token-editor" id="badgeTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>👤 Avatar Component</h2>
+      <div class="token-editor" id="avatarTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>📋 Input Component</h2>
+      <div class="token-editor" id="inputTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>📑 Dropdown Component</h2>
+      <div class="token-editor" id="selectTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>☰ Menu Component</h2>
+      <div class="token-editor" id="menuTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>📊 Table Component</h2>
+      <div class="token-editor" id="tableTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>💬 Modal Component</h2>
+      <div class="token-editor" id="modalTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>🔗 Link Component</h2>
+      <div class="token-editor" id="linkTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>✨ Shadow Component</h2>
+      <div class="token-editor" id="shadowTokens">
+        <!-- Generated by jQuery -->
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>📝 How It Works:</strong>
+      <ol>
+        <li>Edit any token value below</li>
+        <li>Click "Apply Changes" to update tokens on this page</li>
+        <li>Changes are saved to your browser's localStorage</li>
+        <li>Click "Download CSS" to get the updated CSS file to add to your project</li>
+        <li>Click "Reset to Default" to revert all changes</li>
+      </ol>
+      <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--brand-100);">
+        <strong>💡 Tip:</strong> After downloading the CSS, replace the <code>assets/style.css</code> file in your project with the updated version.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const tokenDefinitions = {
+      brandColors: {
+        navy: '#161E4D',
+        brand: '#2E3A8C',
+        'brand-l': '#4C58C9',
+        'brand-50': '#EEF0FB',
+        'brand-100': '#C9CDF0',
+        'container-border': '#E4E9FB',
+      },
+      neutralColors: {
+        surface: '#fff',
+        bg: '#F3F4F8',
+        border: '#E2E5F3',
+        'border2': '#CDD1E6',
+        text: '#161A2E',
+        'text2': '#5B6184',
+        'text3': '#7A80A0',
+      },
+      statusColors: {
+        'teal-600': '#15803D',
+        'teal-50': '#E7F6ED',
+        'amber-mid': '#D97706',
+        'amber-50': '#FEF3E2',
+        'red-600': '#B91C1C',
+        'red-50': '#FDECEC',
+        'purple-50': '#F1EAFB',
+      },
+      spacingTokens: {
+        'spacing-2xs': '2px',
+        'spacing-xs': '4px',
+        'spacing-sm': '8px',
+        'spacing-md': '12px',
+        'spacing-lg': '16px',
+        'spacing-xl': '24px',
+        'spacing-2xl': '32px',
+      },
+      radiusTokens: {
+        'radius-xs': '4px',
+        'radius-sm': '8px',
+        'radius-md': '10px',
+        'radius-lg': '12px',
+        'radius-full': '9999px',
+      },
+      cardTokens: {
+        'card-padding': '20px 22px',
+        'card-border-radius': '10px',
+      },
+      buttonTokens: {
+        'button-height-md': '40px',
+        'button-padding-md': '10px 18px',
+        'button-border-radius': '10px',
+        'button-font-weight': '500',
+      },
+      tabTokens: {
+        'tab-padding': '10px 18px',
+        'tab-border-radius': '10px',
+        'tab-font-size': '13px',
+        'tab-gap': '8px',
+      },
+      accordionTokens: {
+        'accordion-header-padding': '16px 20px',
+        'accordion-header-font-size': '15px',
+        'accordion-header-font-weight': '600',
+        'accordion-border-radius': '10px',
+      },
+      badgeTokens: {
+        'badge-padding': '4px 10px',
+        'badge-border-radius': '14px',
+        'badge-font-size': '11px',
+        'badge-font-weight': '600',
+      },
+      avatarTokens: {
+        'avatar-size-sm': '24px',
+        'avatar-size-md': '32px',
+        'avatar-size-lg': '36px',
+        'avatar-border-radius': '50%',
+      },
+      inputTokens: {
+        'input-height': '40px',
+        'input-padding': '10px 12px',
+        'input-border-radius': '8px',
+      },
+      selectTokens: {
+        'select-padding': '8px 12px',
+        'select-border-radius': '8px',
+      },
+      menuTokens: {
+        'menu-item-padding': '10px 16px',
+        'menu-border-radius': '8px',
+      },
+      tableTokens: {
+        'table-header-padding': '14px 18px',
+        'table-cell-padding': '17px 18px',
+        'table-header-font-size': '11px',
+      },
+      modalTokens: {
+        'modal-padding': '24px',
+        'modal-border-radius': '10px',
+      },
+      linkTokens: {
+        'link-color': 'var(--brand)',
+        'link-font-weight': '600',
+        'link-text-decoration': 'underline',
+      },
+      shadowTokens: {
+        'shadow-1': '0 1px 2px rgba(15,23,42,.02)',
+        'shadow-2': '0 1px 2px rgba(20,24,60,.03)',
+        'shadow-5': '0 14px 34px rgba(20,24,60,.18)',
+      },
+    };
+
+    $(document).ready(function() {
+      // Load saved tokens from localStorage
+      loadSavedTokens();
+
+      // Render editors
+      renderColorEditor('brandColors', 'brandColors');
+      renderColorEditor('neutralColors', 'neutralColors');
+      renderColorEditor('statusColors', 'statusColors');
+      renderValueEditor('spacingTokens', 'spacingTokens');
+      renderValueEditor('radiusTokens', 'radiusTokens');
+      renderValueEditor('cardTokens', 'cardTokens');
+      renderValueEditor('buttonTokens', 'buttonTokens');
+      renderValueEditor('tabTokens', 'tabTokens');
+      renderValueEditor('accordionTokens', 'accordionTokens');
+      renderValueEditor('badgeTokens', 'badgeTokens');
+      renderValueEditor('avatarTokens', 'avatarTokens');
+      renderValueEditor('inputTokens', 'inputTokens');
+      renderValueEditor('selectTokens', 'selectTokens');
+      renderValueEditor('menuTokens', 'menuTokens');
+      renderValueEditor('tableTokens', 'tableTokens');
+      renderValueEditor('modalTokens', 'modalTokens');
+      renderValueEditor('linkTokens', 'linkTokens');
+      renderValueEditor('shadowTokens', 'shadowTokens');
+
+      // Bind events
+      bindInputEvents();
+
+      // Button events
+      $('#applyBtn').click(applyChanges);
+      $('#resetBtn').click(resetToDefault);
+      $('#downloadBtn').click(downloadCSS);
+    });
+
+    function renderColorEditor(elementId, dataKey) {
+      const container = $('#' + elementId);
+      const tokens = tokenDefinitions[dataKey];
+
+      let html = '';
+      for (const [name, value] of Object.entries(tokens)) {
+        html += `
+          <div class="color-token" data-token="--${name}">
+            <label>${name}</label>
+            <div class="color-preview" style="background-color: ${value}"></div>
+            <input type="color" data-token="--${name}" value="${value}" class="color-input">
+            <input type="text" class="color-value" value="${value}" readonly>
+          </div>
+        `;
+      }
+      container.html(html);
+    }
+
+    function renderValueEditor(elementId, dataKey) {
+      const container = $('#' + elementId);
+      const tokens = tokenDefinitions[dataKey];
+
+      let html = '';
+      for (const [name, value] of Object.entries(tokens)) {
+        html += `
+          <div class="token-input-group" data-token="--${name}">
+            <label>${name}</label>
+            <div class="token-name">--${name}</div>
+            <input type="text" data-token="--${name}" value="${value}" class="token-value-input">
+          </div>
+        `;
+      }
+      container.html(html);
+    }
+
+    function bindInputEvents() {
+      // Color inputs
+      $(document).on('change', '.color-input', function() {
+        const token = $(this).data('token');
+        const value = $(this).val();
+
+        // Update the text display
+        $(this).siblings('.color-value').val(value);
+
+        // Mark as modified
+        $(this).closest('.color-token').addClass('token-modified');
+
+        // Update color preview
+        $(this).closest('.color-token').find('.color-preview').css('background-color', value);
+
+        updateChangeIndicator();
+      });
+
+      // Text inputs
+      $(document).on('input change', '.token-value-input', function() {
+        $(this).closest('.token-input-group').addClass('token-modified');
+        updateChangeIndicator();
+      });
+    }
+
+    function updateChangeIndicator() {
+      const changedCount = $('.token-modified').length;
+      if (changedCount > 0) {
+        $('#changesIndicator').show().find('#changesCount').text(changedCount);
+      } else {
+        $('#changesIndicator').hide();
+      }
+    }
+
+    function applyChanges() {
+      const changes = {};
+      const root = document.documentElement;
+
+      // Collect all changed values
+      $('.token-modified').each(function() {
+        const $this = $(this);
+        const token = $this.data('token');
+        let value;
+
+        if ($this.hasClass('color-token')) {
+          value = $this.find('.color-value').val();
+        } else {
+          value = $this.find('.token-value-input').val();
+        }
+
+        if (value) {
+          changes[token] = value;
+          root.style.setProperty(token, value);
+        }
+      });
+
+      // Save to localStorage
+      const savedTokens = JSON.parse(localStorage.getItem('designTokens') || '{}');
+      Object.assign(savedTokens, changes);
+      localStorage.setItem('designTokens', JSON.stringify(savedTokens));
+
+      // Show success
+      showMessage(`✓ Applied ${Object.keys(changes).length} token(s)!`, 'success');
+
+      // Clear modified state
+      $('.token-modified').removeClass('token-modified');
+      updateChangeIndicator();
+    }
+
+    function resetToDefault() {
+      if (confirm('Reset all tokens to default values?')) {
+        localStorage.removeItem('designTokens');
+        location.reload();
+      }
+    }
+
+    function downloadCSS() {
+      // Get current CSS file
+      fetch('assets/style.css')
+        .then(response => response.text())
+        .then(cssContent => {
+          const root = document.documentElement;
+
+          // Replace all tokens with current values
+          let updatedCSS = cssContent;
+
+          const computedStyle = getComputedStyle(root);
+          for (const [token, value] of Object.entries(getAllTokenValues())) {
+            const tokenName = token.replace(/^--/, '');
+            const regex = new RegExp(`(--${tokenName}:\\s*)([^;]+)(;)`, 'g');
+            updatedCSS = updatedCSS.replace(regex, `$1${value}$3`);
+          }
+
+          // Download file
+          const blob = new Blob([updatedCSS], { type: 'text/css' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'style.css';
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(a);
+
+          showMessage('✓ CSS file downloaded! Replace your assets/style.css with this file.', 'success');
+        })
+        .catch(err => {
+          showMessage('❌ Error downloading CSS: ' + err.message, 'error');
+        });
+    }
+
+    function getAllTokenValues() {
+      const tokens = {};
+      const root = document.documentElement;
+      const computedStyle = getComputedStyle(root);
+
+      // Get all CSS variables
+      for (let i = 0; i < computedStyle.length; i++) {
+        const propName = computedStyle[i];
+        if (propName.startsWith('--')) {
+          tokens[propName] = computedStyle.getPropertyValue(propName).trim();
+        }
+      }
+
+      return tokens;
+    }
+
+    function loadSavedTokens() {
+      const savedTokens = JSON.parse(localStorage.getItem('designTokens') || '{}');
+      const root = document.documentElement;
+
+      for (const [token, value] of Object.entries(savedTokens)) {
+        root.style.setProperty(token, value);
+      }
+    }
+
+    function showMessage(text, type) {
+      const $msg = $('#statusMsg');
+      $msg.text(text).removeClass('success error').addClass(type).show();
+
+      setTimeout(() => {
+        $msg.fadeOut(300);
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

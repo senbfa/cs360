@@ -105,11 +105,16 @@ function goBack(){
 
 function submitRequest(){
   const form = document.getElementById('reqForm');
-  if (!ssValidate(form)) return;
+  const err = ssValidate(form);
+  if (err){
+    if (window.a11yAnnounce) a11yAnnounce('Unable to submit. ' + (typeof err === 'string' ? err : 'Complete the required field.'), true);
+    return;
+  }
   const ref = ssGenRef();
   document.getElementById('successTitle').textContent = `Request submitted — ${ref}`;
   document.getElementById('successBody').textContent = 'Routed to Credit Operations for review. You will be notified once actioned.';
   document.getElementById('successBanner').classList.add('on');
+  if (window.a11yAnnounce) a11yAnnounce('Request submitted. Reference ' + ref + '.');
   document.getElementById('submitBtn').setAttribute('disabled', 'disabled');
   form.querySelectorAll('input,select,textarea,button').forEach(el => el.setAttribute('disabled', 'disabled'));
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -119,5 +124,6 @@ renderCtx();
 const initial = SS_REQUESTS.some(r => r.id === ssCtx.action) ? ssCtx.action : 'new-drawing';
 selectRequest(initial);
 </script>
+<script src="../assets/a11y.js"></script>
 </body>
 </html>

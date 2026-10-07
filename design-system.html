@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { background: var(--bg); }
+    .ds-container { max-width: 1600px; margin: 0 auto; padding: 32px; }
+
+    .ds-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--brand-50);
+    }
+    .ds-header h1 { color: var(--navy); margin: 0 0 8px; font-size: 28px; font-weight: 600; }
+    .ds-header p { color: var(--text2); margin: 0; font-size: 14px; }
+
+    .ds-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px;
+    }
+    .ds-tab {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text2);
+      border-radius: 8px;
+      transition: all 0.18s ease;
+      text-align: center;
+    }
+    .ds-tab:hover {
+      background: var(--brand-50);
+      color: var(--navy);
+    }
+    .ds-tab.active {
+      background: linear-gradient(135deg, var(--brand-50), var(--brand-100));
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .ds-content {
+      display: none;
+    }
+    .ds-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .ds-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .ds-section h2 {
+      color: var(--navy);
+      font-size: 18px;
+      margin: 0 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--brand-50);
+    }
+
+    /* VIEW TAB */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+    }
+    .color-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+    .color-swatch {
+      width: 100%;
+      height: 60px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .color-swatch:hover {
+      transform: scale(1.05);
+    }
+    .color-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .color-value {
+      font-size: 10px;
+      color: var(--text2);
+      font-family: monospace;
+    }
+
+    .tokens-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    .tokens-table th {
+      text-align: left;
+      padding: 12px;
+      background: var(--bg);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .tokens-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--brand-50);
+      font-size: 13px;
+    }
+    .mono {
+      font-family: monospace;
+      color: var(--brand);
+      font-size: 12px;
+    }
+
+    /* EDIT TAB */
+    .editor-toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-action {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-size: 14px;
+    }
+    .btn-save {
+      background: var(--brand);
+      color: white;
+    }
+    .btn-save:hover {
+      background: var(--brand-l);
+      transform: translateY(-2px);
+    }
+    .btn-reset {
+      background: var(--red-50);
+      color: var(--red-600);
+      border: 1px solid var(--red-200);
+    }
+    .btn-reset:hover {
+      background: var(--red-200);
+    }
+    .btn-download {
+      background: var(--teal-50);
+      color: var(--teal-600);
+      border: 1px solid var(--teal-600);
+    }
+    .btn-download:hover {
+      background: var(--teal-600);
+      color: white;
+    }
+
+    .status-message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      display: none;
+    }
+    .status-message.success {
+      background: linear-gradient(135deg, #E1F7E9, #CDEEDA);
+      color: var(--teal-800);
+      display: block;
+    }
+    .status-message.error {
+      background: linear-gradient(135deg, #FCE6E6, #F8D0D0);
+      color: var(--red-600);
+      display: block;
+    }
+
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .token-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 16px;
+      background: var(--bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: all 0.18s ease;
+    }
+    .token-input-group:hover {
+      border-color: var(--brand-50);
+      box-shadow: 0 2px 8px rgba(46,58,140,.06);
+    }
+    .token-input-group label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+    .token-input-group .token-name {
+      font-size: 12px;
+      color: var(--brand);
+      font-family: monospace;
+    }
+    .token-input-group input {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+      background: var(--surface);
+      color: var(--text);
+    }
+    .token-input-group input[type="color"] {
+      height: 40px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .token-input-group input:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px var(--brand-50);
+    }
+    .token-modified {
+      background: linear-gradient(135deg, #FEF1DB, #FBE2B8) !important;
+      border-color: var(--amber-mid) !important;
+    }
+    .changes-indicator {
+      background: linear-gradient(135deg, #FEF1DB, #FBE2B8);
+      color: var(--amber-600);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* COMPONENTS TAB */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .component-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .component-preview {
+      background: var(--surface);
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .component-info {
+      padding: 16px;
+    }
+    .component-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .component-tokens {
+      font-size: 12px;
+      color: var(--text2);
+      font-family: monospace;
+      line-height: 1.6;
+    }
+    .component-tokens code {
+      display: block;
+      background: var(--bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin: 4px 0;
+    }
+
+    .info-box {
+      background: var(--brand-50);
+      border: 1px solid var(--brand-100);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 13px;
+      color: var(--navy);
+      margin-top: 32px;
+      line-height: 1.6;
+    }
+    .info-box strong { font-weight: 600; }
+    .info-box code {
+      background: var(--surface);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ds-container">
+    <div class="ds-header">
+      <h1>🎨 Design System</h1>
+      <p>View, edit, and manage all design tokens and components</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="ds-tabs">
+      <button class="ds-tab active" data-tab="view">👁 View</button>
+      <button class="ds-tab" data-tab="edit">✏️ Edit</button>
+      <button class="ds-tab" data-tab="components">🧩 Components</button>
+    </div>
+
+    <!-- VIEW TAB -->
+    <div id="view" class="ds-content active">
+      <!-- Colors -->
+      <div class="ds-section">
+        <h2>🎨 Brand Colors</h2>
+        <div class="color-grid" id="viewBrandColors"></div>
+      </div>
+
+      <div class="ds-section">
+        <h2>🎨 Neutral Colors</h2>
+        <div class="color-grid" id="viewNeutralColors"></div>
+      </div>
+
+      <div class="ds-section">
+        <h2>🎨 Status Colors</h2>
+        <div class="color-grid" id="viewStatusColors"></div>
+      </div>
+
+      <!-- Spacing -->
+      <div class="ds-section">
+        <h2>📐 Spacing Scale</h2>
+        <table class="tokens-table">
+          <thead><tr><th>Token (Name / CSS / Size)</th><th>Use Case</th></tr></thead>
+          <tbody id="viewSpacing"></tbody>
+        </table>
+      </div>
+
+      <!-- Radius -->
+      <div class="ds-section">
+        <h2>⭕ Border Radius</h2>
+        <table class="tokens-table">
+          <thead><tr><th>Token (Name / CSS / Size)</th><th>Use Case</th></tr></thead>
+          <tbody id="viewRadius"></tbody>
+        </table>
+      </div>
+
+      <!-- Shadows -->
+      <div class="ds-section">
+        <h2>✨ Shadows</h2>
+        <table class="tokens-table">
+          <thead><tr><th>Token</th><th>Value</th><th>Use Case</th></tr></thead>
+          <tbody id="viewShadows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EDIT TAB -->
+    <div id="edit" class="ds-content">
+      <div class="editor-toolbar">
+        <button class="btn-action btn-save" id="applyBtn">✨ Apply Changes</button>
+        <button class="btn-action btn-reset" id="resetBtn">↻ Reset</button>
+        <button class="btn-action btn-download" id="downloadBtn">⬇ Download CSS</button>
+        <div class="changes-indicator" id="changesIndicator" style="display: none;">
+          <span id="changesCount">0</span> changes
+        </div>
+        <div class="status-message" id="statusMsg"></div>
+      </div>
+
+      <div class="ds-section">
+        <h2>🎨 Colors</h2>
+        <div class="token-grid" id="editColors"></div>
+      </div>
+
+      <div class="ds-section">
+        <h2>📐 Spacing</h2>
+        <div class="token-grid" id="editSpacing"></div>
+      </div>
+
+      <div class="ds-section">
+        <h2>⭕ Radius</h2>
+        <div class="token-grid" id="editRadius"></div>
+      </div>
+
+      <div class="ds-section">
+        <h2>🧩 Components</h2>
+        <div class="token-grid" id="editComponents"></div>
+      </div>
+
+      <div class="info-box">
+        <strong>📝 How to Edit:</strong>
+        <ol style="margin: 12px 0 0; padding-left: 20px;">
+          <li>Change any token value</li>
+          <li>Click "Apply Changes" to see updates on this page</li>
+          <li>Click "Download CSS" to get the updated file</li>
+          <li>Replace your <code>assets/style.css</code> file with the downloaded version</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- COMPONENTS TAB -->
+    <div id="components" class="ds-content">
+      <div class="component-grid" id="componentsGrid"></div>
+
+      <div class="info-box" style="margin-top: 24px;">
+        <strong>🧩 Component Tokens:</strong> Each component uses specific tokens for consistency. Edit these tokens in the "Edit" tab to update component styles across your entire design system.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const allTokens = {
+      brandColors: {
+        navy: '#161E4D',
+        brand: '#2E3A8C',
+        'brand-l': '#4C58C9',
+        'brand-50': '#EEF0FB',
+        'brand-100': '#C9CDF0',
+        'container-border': '#E4E9FB',
+      },
+      neutralColors: {
+        surface: '#fff',
+        bg: '#F3F4F8',
+        border: '#E2E5F3',
+        'border2': '#CDD1E6',
+        text: '#161A2E',
+        'text2': '#5B6184',
+        'text3': '#7A80A0',
+      },
+      statusColors: {
+        'teal-600': '#15803D',
+        'teal-50': '#E7F6ED',
+        'amber-mid': '#D97706',
+        'amber-50': '#FEF3E2',
+        'red-600': '#B91C1C',
+        'red-50': '#FDECEC',
+        'purple-50': '#F1EAFB',
+      },
+      spacingTokens: {
+        'spacing-2xs': { value: '2px', use: 'Minimal gaps, dividers' },
+        'spacing-xs': { value: '4px', use: 'Micro spacing, icon offsets' },
+        'spacing-sm': { value: '8px', use: 'Small component spacing' },
+        'spacing-md': { value: '12px', use: 'Medium-small spacing' },
+        'spacing-lg': { value: '16px', use: 'Regular spacing, medium padding' },
+        'spacing-xl': { value: '24px', use: 'Large section spacing' },
+        'spacing-2xl': { value: '32px', use: 'Page margin, major spacing' },
+      },
+      radiusTokens: {
+        'radius-xs': { value: '4px', use: 'Small components' },
+        'radius-sm': { value: '8px', use: 'Input fields, buttons' },
+        'radius-md': { value: '10px', use: 'Cards, tabs, modals' },
+        'radius-lg': { value: '12px', use: 'Large elements' },
+        'radius-full': { value: '9999px', use: 'Circular elements' },
+      },
+      shadowTokens: {
+        'shadow-1': { value: '0 1px 2px rgba(15,23,42,.02)', use: 'Subtle depth' },
+        'shadow-2': { value: '0 1px 2px rgba(20,24,60,.03), 0 3px 8px rgba(20,24,60,.03)', use: 'Light elevation' },
+        'shadow-3': { value: '0 2px 6px rgba(46,58,140,.28)', use: 'Medium elevation' },
+        'shadow-5': { value: '0 14px 34px rgba(20,24,60,.18)', use: 'Dark elevation' },
+        'shadow-6': { value: '0 16px 38px rgba(20,24,60,.24)', use: 'Darkest elevation' },
+      },
+      componentTokens: {
+        card: {
+          name: 'Card Component',
+          tokens: {
+            'card-bg': 'var(--surface)',
+            'card-border': '1px solid #F1F5F9',
+            'card-padding': '20px 22px',
+            'card-border-radius': '10px',
+          }
+        },
+        button: {
+          name: 'Button Component',
+          tokens: {
+            'button-height-md': '40px',
+            'button-padding-md': '10px 18px',
+            'button-border-radius': '10px',
+            'button-font-weight': '500',
+          }
+        },
+        tab: {
+          name: 'Tab Component',
+          tokens: {
+            'tab-padding': '10px 18px',
+            'tab-border-radius': '10px',
+            'tab-font-size': '13px',
+            'tab-gap': '8px',
+          }
+        },
+        badge: {
+          name: 'Badge Component',
+          tokens: {
+            'badge-padding': '4px 10px',
+            'badge-border-radius': '14px',
+            'badge-font-size': '11px',
+            'badge-font-weight': '600',
+          }
+        },
+        input: {
+          name: 'Input Component',
+          tokens: {
+            'input-height': '40px',
+            'input-padding': '10px 12px',
+            'input-border-radius': '8px',
+          }
+        },
+        avatar: {
+          name: 'Avatar Component',
+          tokens: {
+            'avatar-size-md': '32px',
+            'avatar-border-radius': '50%',
+            'avatar-font-weight': '600',
+          }
+        },
+      }
+    };
+
+    $(document).ready(function() {
+      loadSavedTokens();
+      renderViewTab();
+      renderEditTab();
+      renderComponentsTab();
+      bindEvents();
+    });
+
+    function renderViewTab() {
+      // Brand colors
+      let html = '';
+      for (const [name, value] of Object.entries(allTokens.brandColors)) {
+        html += `
+          <div class="color-card">
+            <div class="color-swatch" style="background: ${value};"></div>
+            <div class="color-name">${name}</div>
+            <div class="color-value">${value}</div>
+            <div class="color-value" style="font-size: 9px;">--${name}</div>
+          </div>
+        `;
+      }
+      $('#viewBrandColors').html(html);
+
+      // Neutral colors
+      html = '';
+      for (const [name, value] of Object.entries(allTokens.neutralColors)) {
+        html += `
+          <div class="color-card">
+            <div class="color-swatch" style="background: ${value};"></div>
+            <div class="color-name">${name}</div>
+            <div class="color-value">${value}</div>
+            <div class="color-value" style="font-size: 9px;">--${name}</div>
+          </div>
+        `;
+      }
+      $('#viewNeutralColors').html(html);
+
+      // Status colors
+      html = '';
+      for (const [name, value] of Object.entries(allTokens.statusColors)) {
+        html += `
+          <div class="color-card">
+            <div class="color-swatch" style="background: ${value};"></div>
+            <div class="color-name">${name}</div>
+            <div class="color-value">${value}</div>
+            <div class="color-value" style="font-size: 9px;">--${name}</div>
+          </div>
+        `;
+      }
+      $('#viewStatusColors').html(html);
+
+      // Spacing
+      html = '';
+      for (const [name, {value, use}] of Object.entries(allTokens.spacingTokens)) {
+        html += `
+          <tr>
+            <td><strong>${name}</strong><br/><span class="mono">--${name}</span><br/><span class="mono">${value}</span></td>
+            <td>${use}</td>
+          </tr>
+        `;
+      }
+      $('#viewSpacing').html(html);
+
+      // Radius
+      html = '';
+      for (const [name, {value, use}] of Object.entries(allTokens.radiusTokens)) {
+        html += `
+          <tr>
+            <td><strong>${name}</strong><br/><span class="mono">--${name}</span><br/><span class="mono">${value}</span></td>
+            <td>${use}</td>
+          </tr>
+        `;
+      }
+      $('#viewRadius').html(html);
+
+      // Shadows
+      html = '';
+      for (const [name, {value, use}] of Object.entries(allTokens.shadowTokens)) {
+        html += `
+          <tr>
+            <td><span class="mono">--${name}</span></td>
+            <td><span class="mono" style="font-size: 11px;">${value}</span></td>
+            <td>${use}</td>
+          </tr>
+        `;
+      }
+      $('#viewShadows').html(html);
+    }
+
+    function renderEditTab() {
+      let html = '';
+
+      // Colors
+      const allColors = { ...allTokens.brandColors, ...allTokens.neutralColors, ...allTokens.statusColors };
+      for (const [name, value] of Object.entries(allColors)) {
+        html += `
+          <div class="token-input-group" data-token="--${name}">
+            <label>${name}</label>
+            <div class="token-name">--${name}</div>
+            <input type="color" data-token="--${name}" value="${value}" class="color-input">
+            <input type="text" class="color-value" value="${value}" readonly>
+          </div>
+        `;
+      }
+      $('#editColors').html(html);
+
+      // Spacing
+      html = '';
+      for (const [name, {value}] of Object.entries(allTokens.spacingTokens)) {
+        html += `
+          <div class="token-input-group" data-token="--${name}">
+            <label>${name}</label>
+            <div class="token-name">--${name}</div>
+            <input type="text" data-token="--${name}" value="${value}" class="token-input">
+          </div>
+        `;
+      }
+      $('#editSpacing').html(html);
+
+      // Radius
+      html = '';
+      for (const [name, {value}] of Object.entries(allTokens.radiusTokens)) {
+        html += `
+          <div class="token-input-group" data-token="--${name}">
+            <label>${name}</label>
+            <div class="token-name">--${name}</div>
+            <input type="text" data-token="--${name}" value="${value}" class="token-input">
+          </div>
+        `;
+      }
+      $('#editRadius').html(html);
+
+      // Components
+      html = '';
+      for (const [key, {tokens}] of Object.entries(allTokens.componentTokens)) {
+        for (const [name, value] of Object.entries(tokens)) {
+          html += `
+            <div class="token-input-group" data-token="--${name}">
+              <label>${name}</label>
+              <div class="token-name">--${name}</div>
+              <input type="text" data-token="--${name}" value="${value}" class="token-input">
+            </div>
+          `;
+        }
+      }
+      $('#editComponents').html(html);
+    }
+
+    function renderComponentsTab() {
+      let html = '';
+      for (const [key, {name, tokens}] of Object.entries(allTokens.componentTokens)) {
+        html += `
+          <div class="component-card">
+            <div class="component-preview">
+              <!-- Preview content here -->
+            </div>
+            <div class="component-info">
+              <div class="component-name">${name}</div>
+              <div class="component-tokens">
+        `;
+
+        for (const [tokenName, tokenValue] of Object.entries(tokens)) {
+          html += `<code>--${tokenName}: ${tokenValue};</code>`;
+        }
+
+        html += `
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      $('#componentsGrid').html(html);
+    }
+
+    function bindEvents() {
+      // Tab switching
+      $('.ds-tab').click(function() {
+        const tab = $(this).data('tab');
+        $('.ds-tab').removeClass('active');
+        $('.ds-content').removeClass('active');
+        $(this).addClass('active');
+        $('#' + tab).addClass('active');
+      });
+
+      // Color input change
+      $(document).on('change', '.color-input', function() {
+        const value = $(this).val();
+        $(this).closest('.token-input-group').find('.color-value').val(value);
+        $(this).closest('.token-input-group').addClass('token-modified');
+        updateChangeIndicator();
+      });
+
+      // Text input change
+      $(document).on('input', '.token-input', function() {
+        $(this).closest('.token-input-group').addClass('token-modified');
+        updateChangeIndicator();
+      });
+
+      // Buttons
+      $('#applyBtn').click(applyChanges);
+      $('#resetBtn').click(() => {
+        if (confirm('Reset all changes?')) {
+          localStorage.removeItem('designTokens');
+          location.reload();
+        }
+      });
+      $('#downloadBtn').click(downloadCSS);
+    }
+
+    function updateChangeIndicator() {
+      const count = $('.token-modified').length;
+      if (count > 0) {
+        $('#changesIndicator').show().find('#changesCount').text(count);
+      } else {
+        $('#changesIndicator').hide();
+      }
+    }
+
+    function applyChanges() {
+      const changes = {};
+      const root = document.documentElement;
+
+      $('.token-modified').each(function() {
+        const $this = $(this);
+        const token = $this.data('token');
+        let value;
+
+        if ($this.find('.color-input').length) {
+          value = $this.find('.color-value').val();
+        } else {
+          value = $this.find('.token-input').val();
+        }
+
+        if (value) {
+          changes[token] = value;
+          root.style.setProperty(token, value);
+        }
+      });
+
+      // Save to localStorage
+      const savedTokens = JSON.parse(localStorage.getItem('designTokens') || '{}');
+      Object.assign(savedTokens, changes);
+      localStorage.setItem('designTokens', JSON.stringify(savedTokens));
+
+      showMessage(`✓ Applied ${Object.keys(changes).length} changes!`, 'success');
+      $('.token-modified').removeClass('token-modified');
+      updateChangeIndicator();
+    }
+
+    function downloadCSS() {
+      fetch('assets/style.css')
+        .then(r => r.text())
+        .then(css => {
+          let updated = css;
+          const root = document.documentElement;
+
+          $('[data-token]').each(function() {
+            const token = $(this).data('token');
+            const name = token.replace(/^--/, '');
+            let value;
+
+            if ($(this).find('.color-input').length) {
+              value = $(this).find('.color-value').val();
+            } else {
+              value = $(this).find('.token-input').val();
+            }
+
+            const regex = new RegExp(`(--${name.replace(/[-[\]{}()*+?.\\^$|#\s]/g, '\\$&')}:\\s*)([^;]+)(;)`, 'g');
+            updated = updated.replace(regex, `$1${value}$3`);
+          });
+
+          const blob = new Blob([updated], { type: 'text/css' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'style.css';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+
+          showMessage('✓ CSS downloaded!', 'success');
+        })
+        .catch(err => showMessage('❌ Error: ' + err.message, 'error'));
+    }
+
+    function loadSavedTokens() {
+      const saved = JSON.parse(localStorage.getItem('designTokens') || '{}');
+      const root = document.documentElement;
+      for (const [token, value] of Object.entries(saved)) {
+        root.style.setProperty(token, value);
+      }
+    }
+
+    function showMessage(text, type) {
+      $('#statusMsg').text(text).removeClass('success error').addClass(type).fadeIn().delay(4000).fadeOut();
+    }
+  </script>
+</body>
+</html>

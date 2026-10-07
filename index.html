@@ -174,6 +174,8 @@ function showPage(page) {
     row.style.display = (i >= start && i < end) ? 'flex' : 'none';
   });
 
+  if (window.a11yAnnounce && page !== showPage._last && showPage._last !== undefined) a11yAnnounce('Page ' + page + ' of ' + totalPages);
+  showPage._last = page;
   document.getElementById('currentPage').textContent = page;
   document.getElementById('totalPages').textContent = totalPages;
 
@@ -235,7 +237,12 @@ custSearchInput.addEventListener('input', function(){
     if (match) anyVisible = true;
   });
   custEmptyEl.style.display = anyVisible ? 'none' : 'block';
+  if (window.a11yAnnounce) {
+    const n = allRows.filter(r => r.style.display !== 'none').length;
+    a11yAnnounce(n ? n + (n === 1 ? ' customer found' : ' customers found') : 'No customers match your search');
+  }
 });
 </script>
+<script src="assets/a11y.js"></script>
 </body>
 </html>

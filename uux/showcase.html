@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="cds sm xs" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UUX / CDS Component Showcase</title>
+<link href="base.css" rel="stylesheet" />
+<script src="unified-ux-web.min.js"></script>
+<style>
+  body{margin:0;padding:32px;background:#fafafa;font-family:"Work Sans",sans-serif}
+  section{margin-bottom:40px}
+  h2{font-family:Utile,sans-serif;margin-bottom:16px}
+  .row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+</style>
+</head>
+<body>
+
+<h1>UUX / CDS Component Showcase</h1>
+
+<section>
+  <h2>Buttons</h2>
+  <div class="row">
+    <uwc-button raised label="Primary (raised)"></uwc-button>
+    <uwc-button outlined label="Outlined"></uwc-button>
+    <uwc-button label="Text"></uwc-button>
+    <uwc-button raised color="secondary" label="Secondary (raised)"></uwc-button>
+    <uwc-button raised color="tertiary" label="Tertiary (raised)"></uwc-button>
+    <uwc-button raised disabled label="Disabled"></uwc-button>
+    <uwc-icon-button icon="settings"></uwc-icon-button>
+  </div>
+  <div class="row" style="margin-top:12px">
+    <uwc-button unelevated label="Unelevated"></uwc-button>
+    <uwc-button raised dense label="Dense raised"></uwc-button>
+  </div>
+</section>
+
+<section>
+  <h2>Card</h2>
+  <uwc-card style="max-width:320px;display:block">
+    <div>This is uwc-card content, rendered by the real component (no header slot — testing plain content).</div>
+  </uwc-card>
+</section>
+
+<section>
+  <h2>Avatar &amp; Badge</h2>
+  <div class="row">
+    <uwc-avatar text="MF"></uwc-avatar>
+    <uwc-avatar text="NR" color="secondary"></uwc-avatar>
+    <span style="position:relative;display:inline-block">
+      <uwc-icon icon="notifications"></uwc-icon>
+      <uwc-badge value="4"></uwc-badge>
+    </span>
+    <uwc-badge value="7" color="secondary"></uwc-badge>
+  </div>
+</section>
+
+<section>
+  <h2>Alerts</h2>
+  <div class="row" style="flex-direction:column;align-items:stretch">
+    <uwc-alert severity="success">Success alert (severity attr)</uwc-alert>
+    <uwc-alert severity="warning">Warning alert (severity attr)</uwc-alert>
+    <uwc-alert severity="error">Error alert (severity attr)</uwc-alert>
+    <uwc-alert severity="info">Info alert (severity attr)</uwc-alert>
+    <uwc-alert status="success">Success alert (status attr)</uwc-alert>
+    <uwc-alert status="error">Error alert (status attr)</uwc-alert>
+  </div>
+</section>
+
+<section>
+  <h2>Form controls</h2>
+  <div class="row">
+    <uwc-text-field label="Customer name"></uwc-text-field>
+    <uwc-select label="Status"></uwc-select>
+    <uwc-checkbox label="Active"></uwc-checkbox>
+    <uwc-radio label="Yes" name="demo"></uwc-radio>
+    <uwc-switch label="Enabled"></uwc-switch>
+  </div>
+</section>
+
+<section>
+  <h2>Tabs</h2>
+  <uwc-tab-bar>
+    <uwc-tab label="Deals &amp; Facilities"></uwc-tab>
+    <uwc-tab label="Customer Details"></uwc-tab>
+    <uwc-tab label="Upcoming Events"></uwc-tab>
+  </uwc-tab-bar>
+</section>
+
+<section>
+  <h2>Breadcrumbs</h2>
+  <uwc-breadcrumbs></uwc-breadcrumbs>
+</section>
+
+<section>
+  <h2>Divider &amp; Progress</h2>
+  <uwc-divider></uwc-divider>
+  <br>
+  <uwc-linear-progress progress="0.6"></uwc-linear-progress>
+</section>
+
+</body>
+</html>

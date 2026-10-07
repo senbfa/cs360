@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Tokens - View</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    body { background: var(--bg); }
+    .container { max-width: 1400px; margin: 0 auto; padding: 32px; }
+
+    .page-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--brand-50);
+    }
+    .page-header h1 { color: var(--navy); margin: 0 0 8px; font-size: 28px; font-weight: 600; }
+    .page-header p { color: var(--text2); margin: 0; font-size: 14px; }
+
+    .page-nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px;
+    }
+    .nav-btn {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text2);
+      border-radius: 8px;
+      transition: all 0.18s ease;
+      text-decoration: none;
+    }
+    .nav-btn:hover {
+      background: var(--brand-50);
+      color: var(--navy);
+    }
+    .nav-btn.active {
+      background: linear-gradient(135deg, var(--brand-50), var(--brand-100));
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .section { margin-bottom: 32px; }
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--brand-50);
+    }
+
+    .subsection { margin-bottom: 24px; }
+    .subsection-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .color-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.18s ease;
+    }
+    .color-card:hover {
+      box-shadow: 0 4px 12px rgba(46,58,140,.1);
+      transform: translateY(-2px);
+    }
+    .color-swatch {
+      width: 100%;
+      height: 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .color-info {
+      padding: 12px;
+    }
+    .color-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .color-value {
+      font-size: 11px;
+      color: var(--text2);
+      font-family: monospace;
+      margin-bottom: 4px;
+    }
+    .color-token {
+      font-size: 10px;
+      color: var(--brand);
+      font-family: monospace;
+    }
+
+    .tokens-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .tokens-table th {
+      background: var(--bg);
+      padding: 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 12px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    .tokens-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--brand-50);
+      font-size: 13px;
+    }
+    .tokens-table tr:last-child td {
+      border-bottom: none;
+    }
+    .mono {
+      font-family: monospace;
+      color: var(--brand);
+      font-size: 12px;
+    }
+    .use-case {
+      color: var(--text2);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1>🎨 Design Tokens</h1>
+      <p>Complete design system tokens with organized grouping and semantic naming</p>
+    </div>
+
+    <div class="page-nav">
+      <a href="tokens.html" class="nav-btn active">👁 View</a>
+      <a href="tokens-edit.html" class="nav-btn">✏️ Edit</a>
+      <a href="components.html" class="nav-btn">🧩 Components</a>
+    </div>
+
+    <!-- COLORS -->
+    <div class="section">
+      <h2 class="section-title">🎨 Colors</h2>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Brand Colors</h3>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background: #161E4D;"></div>
+            <div class="color-info">
+              <div class="color-name">Navy</div>
+              <div class="color-value">#161E4D</div>
+              <div class="color-token">--navy</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #2E3A8C;"></div>
+            <div class="color-info">
+              <div class="color-name">Brand</div>
+              <div class="color-value">#2E3A8C</div>
+              <div class="color-token">--brand</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #4C58C9;"></div>
+            <div class="color-info">
+              <div class="color-name">Brand Light</div>
+              <div class="color-value">#4C58C9</div>
+              <div class="color-token">--brand-l</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #EEF0FB;"></div>
+            <div class="color-info">
+              <div class="color-name">Brand 50</div>
+              <div class="color-value">#EEF0FB</div>
+              <div class="color-token">--brand-50</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #C9CDF0;"></div>
+            <div class="color-info">
+              <div class="color-name">Brand 100</div>
+              <div class="color-value">#C9CDF0</div>
+              <div class="color-token">--brand-100</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #E4E9FB;"></div>
+            <div class="color-info">
+              <div class="color-name">Container Border</div>
+              <div class="color-value">#E4E9FB</div>
+              <div class="color-token">--container-border</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Neutral & Semantic</h3>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background: #fff; border: 1px solid var(--border);"></div>
+            <div class="color-info">
+              <div class="color-name">Surface</div>
+              <div class="color-value">#fff</div>
+              <div class="color-token">--surface</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #F3F4F8;"></div>
+            <div class="color-info">
+              <div class="color-name">Background</div>
+              <div class="color-value">#F3F4F8</div>
+              <div class="color-token">--bg</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #E2E5F3;"></div>
+            <div class="color-info">
+              <div class="color-name">Border</div>
+              <div class="color-value">#E2E5F3</div>
+              <div class="color-token">--border</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #CDD1E6;"></div>
+            <div class="color-info">
+              <div class="color-name">Border 2</div>
+              <div class="color-value">#CDD1E6</div>
+              <div class="color-token">--border2</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #161A2E;"></div>
+            <div class="color-info">
+              <div class="color-name">Text</div>
+              <div class="color-value">#161A2E</div>
+              <div class="color-token">--text</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #5B6184;"></div>
+            <div class="color-info">
+              <div class="color-name">Text 2</div>
+              <div class="color-value">#5B6184</div>
+              <div class="color-token">--text2</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #7A80A0;"></div>
+            <div class="color-info">
+              <div class="color-name">Text 3</div>
+              <div class="color-value">#7A80A0</div>
+              <div class="color-token">--text3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Status Colors</h3>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background: #15803D;"></div>
+            <div class="color-info">
+              <div class="color-name">Teal 600</div>
+              <div class="color-value">#15803D</div>
+              <div class="color-token">--teal-600</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #E7F6ED;"></div>
+            <div class="color-info">
+              <div class="color-name">Teal 50</div>
+              <div class="color-value">#E7F6ED</div>
+              <div class="color-token">--teal-50</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #D97706;"></div>
+            <div class="color-info">
+              <div class="color-name">Amber Mid</div>
+              <div class="color-value">#D97706</div>
+              <div class="color-token">--amber-mid</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #FEF3E2;"></div>
+            <div class="color-info">
+              <div class="color-name">Amber 50</div>
+              <div class="color-value">#FEF3E2</div>
+              <div class="color-token">--amber-50</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #B91C1C;"></div>
+            <div class="color-info">
+              <div class="color-name">Red 600</div>
+              <div class="color-value">#B91C1C</div>
+              <div class="color-token">--red-600</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #FDECEC;"></div>
+            <div class="color-info">
+              <div class="color-name">Red 50</div>
+              <div class="color-value">#FDECEC</div>
+              <div class="color-token">--red-50</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPACING -->
+    <div class="section">
+      <h2 class="section-title">📐 Spacing</h2>
+      <table class="tokens-table">
+        <thead>
+          <tr>
+            <th>Token (Name / CSS)</th>
+            <th>Size</th>
+            <th>Use Case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>2xs</strong><br><span class="mono">--spacing-2xs</span></td><td>2px</td><td class="use-case">Minimal gaps, dividers</td></tr>
+          <tr><td><strong>xs</strong><br><span class="mono">--spacing-xs</span></td><td>4px</td><td class="use-case">Micro spacing, icon offsets</td></tr>
+          <tr><td><strong>sm</strong><br><span class="mono">--spacing-sm</span></td><td>8px</td><td class="use-case">Small component spacing</td></tr>
+          <tr><td><strong>md</strong><br><span class="mono">--spacing-md</span></td><td>12px</td><td class="use-case">Medium-small spacing</td></tr>
+          <tr><td><strong>lg</strong><br><span class="mono">--spacing-lg</span></td><td>16px</td><td class="use-case">Regular spacing, medium padding</td></tr>
+          <tr><td><strong>xl</strong><br><span class="mono">--spacing-xl</span></td><td>24px</td><td class="use-case">Large section spacing</td></tr>
+          <tr><td><strong>2xl</strong><br><span class="mono">--spacing-2xl</span></td><td>32px</td><td class="use-case">Page margin, major spacing</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="section">
+      <h2 class="section-title">⭕ Border Radius</h2>
+      <table class="tokens-table">
+        <thead>
+          <tr>
+            <th>Token (Name / CSS)</th>
+            <th>Size</th>
+            <th>Use Case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>xs</strong><br><span class="mono">--radius-xs</span></td><td>4px</td><td class="use-case">Small components</td></tr>
+          <tr><td><strong>sm</strong><br><span class="mono">--radius-sm</span></td><td>8px</td><td class="use-case">Input fields, buttons</td></tr>
+          <tr><td><strong>md</strong><br><span class="mono">--radius-md</span></td><td>10px</td><td class="use-case">Cards, tabs, modals</td></tr>
+          <tr><td><strong>lg</strong><br><span class="mono">--radius-lg</span></td><td>12px</td><td class="use-case">Large elements</td></tr>
+          <tr><td><strong>full</strong><br><span class="mono">--radius-full</span></td><td>9999px</td><td class="use-case">Circular elements</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SHADOWS -->
+    <div class="section">
+      <h2 class="section-title">✨ Shadows</h2>
+      <table class="tokens-table">
+        <thead>
+          <tr>
+            <th>Token (CSS)</th>
+            <th>Elevation</th>
+            <th>Use Case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="mono">--shadow-1</span></td><td>1</td><td class="use-case">Subtle depth, card shadows</td></tr>
+          <tr><td><span class="mono">--shadow-2</span></td><td>2</td><td class="use-case">Light elevation, headers</td></tr>
+          <tr><td><span class="mono">--shadow-3</span></td><td>3</td><td class="use-case">Medium elevation, avatars</td></tr>
+          <tr><td><span class="mono">--shadow-5</span></td><td>5</td><td class="use-case">Dark elevation, dropdowns</td></tr>
+          <tr><td><span class="mono">--shadow-6</span></td><td>6</td><td class="use-case">Darkest elevation, modals</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="section">
+      <h2 class="section-title">📝 Typography</h2>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Font Families</h3>
+        <table class="tokens-table">
+          <thead>
+            <tr>
+              <th>Token (CSS)</th>
+              <th>Font</th>
+              <th>Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="mono">--font-heading</span></td><td>Nunito</td><td class="use-case">Page titles, headings</td></tr>
+            <tr><td><span class="mono">--font-body</span></td><td>Work Sans</td><td class="use-case">Body copy, paragraphs</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Font Sizes</h3>
+        <table class="tokens-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Weight</th>
+              <th>Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>10.5px</td><td>600</td><td class="use-case">Labels, uppercase text</td></tr>
+            <tr><td>11px</td><td>600</td><td class="use-case">Secondary labels, hints</td></tr>
+            <tr><td>13px</td><td>400-500</td><td class="use-case">Body text (default)</td></tr>
+            <tr><td>14px</td><td>600</td><td class="use-case">Subheadings, secondary titles</td></tr>
+            <tr><td>15px</td><td>600</td><td class="use-case">Section titles</td></tr>
+            <tr><td>16px</td><td>600</td><td class="use-case">Card headers, main sections</td></tr>
+            <tr><td>18px</td><td>600</td><td class="use-case">Page titles</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

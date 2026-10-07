@@ -14,7 +14,7 @@
   --info-tint:#F1EAFB;--info:#6B32A8;
   --neutral-tint:#EEF0F8;
   --bg:#F3F4F8;--surface:#fff;--border:#E2E5F3;--border2:#CDD1E6;
-  --text:#161A2E;--text2:#5B6184;--text3:#7A80A0;
+  --text:#161A2E;--text2:#5B6184;--text3:#646A8C;
   --background-neutral-white-container:#FFF;
   /* chart palette — distinct from the semantic brand/purple/amber tokens used for buttons & badges */
   --chart-blue:#4C72B0;--chart-purple:#7A64A8;--chart-amber:#B35A28;--chart-green:#55A868;
@@ -253,7 +253,7 @@
 html,body{font-family:var(--font-body);background:linear-gradient(180deg,#FBFDFF 0%,#F3F7FD 100%);background-attachment:fixed;color:var(--text);font-size:14px;line-height:1.6;font-variant-numeric:tabular-nums}
 h1,h2,h3,.title-trigger .tt-name,.hdr .hname,.cardh,.sectionhdr .t,.secttl,.subsecttl,.sheet-head .ttl,.milestone-big .mb-amount{font-family:var(--font-heading)}
 a{color:inherit;text-decoration:none}
-a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
+
 .app{width:100%;margin:0;display:flex;flex-direction:column;min-height:100vh}
 .icon{display:inline-block;vertical-align:middle;flex-shrink:0}
 
@@ -783,7 +783,7 @@ tbody tr:last-child td{border-bottom:var(--table-last-row-border)}
 .sheet-panel::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;cursor:col-resize;background:transparent;z-index:100}
 .sheet-panel.on{transform:translateX(0)}
 .sheet-head{padding:16px 20px;border-bottom:1px solid var(--brand-tint);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.sheet-head .ttl{font-size:16px;font-weight:600;color:var(--brand-dark)}
+.sheet-head .ttl{font-size:16px;font-weight:600;color:var(--brand-dark);margin:0}
 .sheet-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--border2);background:var(--surface);cursor:pointer;font-size:14px;color:var(--text2);flex-shrink:0}
 .sheet-close:hover{background:var(--bg)}
 .sheet-body{flex:1;overflow-y:auto;padding:18px 20px}
@@ -1290,3 +1290,44 @@ tbody tr:last-child td{border-bottom:var(--table-last-row-border)}
   .milestone-big .mb-date{font-size:20px}
 }
 
+
+
+/* ============================================================
+   Accessibility layer (pairs with assets/a11y.js)
+   ============================================================ */
+.sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:fixed;left:12px;top:-64px;z-index:10000;background:var(--brand-dark);color:#fff;padding:12px 18px;border-radius:8px;font-weight:600;text-decoration:none;box-shadow:0 6px 18px rgba(20,24,60,.3);transition:top .15s ease}
+.skip-link:focus{top:12px}
+#main-content:focus{outline:none}
+
+/* Visible keyboard focus for every interactive control (Material: 2px+ indicator, 3:1 contrast) */
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
+.topnav :focus-visible,.sheet-head :focus-visible,.card-header :focus-visible{outline-color:#fff}
+.navsearch:focus-within{outline:2px solid #fff;outline-offset:2px}
+tr[data-a11y-click]:focus-visible{outline-offset:-2px;background:var(--brand-tint)}
+[role="menuitem"]:focus-visible,.search-results .sr-item.active{outline-offset:-2px;background:var(--brand-tint)}
+.search-results .sr-item.active{outline:2px solid var(--brand)}
+.sidetab:focus-visible,.maintab:focus-visible,.rn:focus-visible{outline-offset:-2px}
+.collapse-head:focus-visible{outline-offset:-2px}
+.wgt-handle:focus-visible{opacity:1}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible,.custsearch input:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+[aria-invalid="true"]{border-color:var(--danger,#B3261E)!important}
+
+/* Material minimum touch target (48px) on coarse pointers */
+@media (pointer:coarse){
+  .pag-btn,.logoff-btn,.navicon,.navburger,.sheet-close,.finnav button,.btn,.sidetab,.maintab,.rn,
+  .title-trigger,.svc-trigger,.quicknav-trigger,[role="menuitem"]{min-height:48px}
+  .pag-btn,.logoff-btn,.navicon,.navburger,.sheet-close,.finnav button{min-width:48px}
+}
+
+/* Respect user motion preference */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* Windows high-contrast / forced colors */
+@media (forced-colors:active){
+  :focus-visible{outline:3px solid Highlight}
+  .pill,.st,.risk,.sw{border:1px solid CanvasText;forced-color-adjust:none}
+  .sheet-panel{border-left:2px solid CanvasText}
+}

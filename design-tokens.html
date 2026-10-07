@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Tokens</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .token-section { margin-bottom: 48px; }
+    .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 16px; }
+    .token-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+    }
+    .color-swatch {
+      width: 100%;
+      height: 80px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+    .token-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .token-value {
+      font-size: 11px;
+      color: var(--text2);
+      font-family: monospace;
+      word-break: break-all;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    th {
+      text-align: left;
+      padding: 12px;
+      background: var(--bg);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--brand-50);
+      font-size: 13px;
+    }
+    .mono {
+      font-family: monospace;
+      color: var(--brand);
+      font-size: 12px;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--brand-50);
+    }
+    .sample-preview {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+    .button-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .btn-primary {
+      background: var(--brand);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--brand-l);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: var(--brand-50);
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: var(--brand-100);
+    }
+    .btn-text {
+      background: transparent;
+      color: var(--brand);
+      text-decoration: underline;
+    }
+    .btn-text:hover {
+      color: var(--brand-l);
+    }
+    .sample-card {
+      background: var(--surface);
+      border: 1px solid #F1F5F9;
+      border-radius: 10px;
+      padding: 20px;
+      width: 100%;
+      max-width: 300px;
+    }
+    .card-header {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .card-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--brand-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+      font-weight: 600;
+    }
+    .sample-row {
+      padding: 10px 12px;
+      background: #F8FAFC;
+      border-radius: 9px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .sample-row .label {
+      font-size: 10.5px;
+      color: var(--text2);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .sample-row .value {
+      font-weight: 500;
+      color: var(--text);
+    }
+    .status-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge-active {
+      background: linear-gradient(135deg, #E1F7E9, #CDEEDA);
+      color: var(--teal-800);
+    }
+    .badge-pending {
+      background: linear-gradient(135deg, #FEF1DB, #FBE2B8);
+      color: var(--amber-600);
+    }
+    .badge-caution {
+      background: linear-gradient(135deg, #FCE6E6, #F8D0D0);
+      color: var(--red-600);
+    }
+    .badge-default {
+      background: var(--gray-50);
+      color: var(--text3);
+    }
+    .tab-preview {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      background: var(--surface);
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .tab-item {
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all 0.18s ease;
+    }
+    .tab-item:hover {
+      background: var(--brand-50);
+      color: var(--navy);
+    }
+    .tab-item.active {
+      background: linear-gradient(135deg, var(--brand-50), var(--brand-100));
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .sample-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+    .sample-table th {
+      padding: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-weight: 600;
+      text-align: left;
+      font-size: 12px;
+    }
+    .sample-table td {
+      padding: 8px;
+      border: 1px solid var(--border);
+    }
+    .side-by-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+    @media (max-width: 1024px) {
+      .side-by-side {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div style="max-width: 1400px; margin: 0 auto; padding: 32px;">
+    <h1 style="color: var(--navy); margin-bottom: 8px;">Design System Tokens</h1>
+    <p style="color: var(--text2); margin-bottom: 32px;">Primitive and semantic design tokens for colors, typography, spacing, radius, borders, and shadows.</p>
+
+    <!-- COLORS -->
+    <div class="token-section">
+      <h2 class="section-title">Colors</h2>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Brand Palette</h3>
+      <table>
+        <thead><tr><th style="width: 80px;">Swatch</th><th>Token (Name / CSS / Hex)</th><th>Semantic Use</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #161E4D; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Navy</strong><br/><span class="mono">--navy</span><br/><span class="mono">#161E4D</span></td>
+            <td>Primary text, headings</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #2E3A8C; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Brand</strong><br/><span class="mono">--brand</span><br/><span class="mono">#2E3A8C</span></td>
+            <td>Primary brand color, links, buttons</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #4C58C9; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Brand Light</strong><br/><span class="mono">--brand-l</span><br/><span class="mono">#4C58C9</span></td>
+            <td>Lighter brand shade, hover states</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #EEF0FB; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Brand 50</strong><br/><span class="mono">--brand-50</span><br/><span class="mono">#EEF0FB</span></td>
+            <td>Light background, hover states</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #C9CDF0; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Brand 100</strong><br/><span class="mono">--brand-100</span><br/><span class="mono">#C9CDF0</span></td>
+            <td>Medium light background</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #E4E9FB; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Container Border</strong><br/><span class="mono">--container-border</span><br/><span class="mono">#E4E9FB</span></td>
+            <td>Container and card borders</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Semantic & Neutral Colors</h3>
+      <table>
+        <thead><tr><th style="width: 80px;">Swatch</th><th>Token (Name / CSS / Hex)</th><th>Semantic Use</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #fff; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Surface</strong><br/><span class="mono">--surface</span><br/><span class="mono">#fff</span></td>
+            <td>Card and container backgrounds</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #F3F4F8; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Background</strong><br/><span class="mono">--bg</span><br/><span class="mono">#F3F4F8</span></td>
+            <td>Page background, hover states</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #E2E5F3; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Border</strong><br/><span class="mono">--border</span><br/><span class="mono">#E2E5F3</span></td>
+            <td>Primary border color</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #CDD1E6; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Border 2</strong><br/><span class="mono">--border2</span><br/><span class="mono">#CDD1E6</span></td>
+            <td>Secondary border color</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #161A2E; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Text</strong><br/><span class="mono">--text</span><br/><span class="mono">#161A2E</span></td>
+            <td>Primary text, body text</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #5B6184; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Text 2</strong><br/><span class="mono">--text2</span><br/><span class="mono">#5B6184</span></td>
+            <td>Secondary text, labels</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #7A80A0; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Text 3</strong><br/><span class="mono">--text3</span><br/><span class="mono">#7A80A0</span></td>
+            <td>Tertiary text, hints, disabled</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Status & Feedback Colors</h3>
+      <table>
+        <thead><tr><th style="width: 80px;">Swatch</th><th>Token (Name / CSS / Hex)</th><th>Semantic Use</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #15803D; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Teal 600</strong><br/><span class="mono">--teal-600</span><br/><span class="mono">#15803D</span></td>
+            <td>Approved, active, success states</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #E7F6ED; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Teal 50</strong><br/><span class="mono">--teal-50</span><br/><span class="mono">#E7F6ED</span></td>
+            <td>Success background, light feedback</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #D97706; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Amber Mid</strong><br/><span class="mono">--amber-mid</span><br/><span class="mono">#D97706</span></td>
+            <td>Pending, warning states</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #FEF3E2; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Amber 50</strong><br/><span class="mono">--amber-50</span><br/><span class="mono">#FEF3E2</span></td>
+            <td>Warning background, light alert</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #B91C1C; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Red 600</strong><br/><span class="mono">--red-600</span><br/><span class="mono">#B91C1C</span></td>
+            <td>Error, danger, caution states</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #FDECEC; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Red 50</strong><br/><span class="mono">--red-50</span><br/><span class="mono">#FDECEC</span></td>
+            <td>Error background, light error</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Chart & Data Visualization Colors</h3>
+      <table>
+        <thead><tr><th style="width: 80px;">Swatch</th><th>Token (Name / CSS / Hex)</th><th>Use Case</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #4C72B0; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Chart Blue</strong><br/><span class="mono">--chart-blue</span><br/><span class="mono">#4C72B0</span></td>
+            <td>Chart data series 1</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #7A64A8; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Chart Purple</strong><br/><span class="mono">--chart-purple</span><br/><span class="mono">#7A64A8</span></td>
+            <td>Chart data series 2</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #B35A28; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Chart Amber</strong><br/><span class="mono">--chart-amber</span><br/><span class="mono">#B35A28</span></td>
+            <td>Chart data series 3</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #55A868; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Chart Green</strong><br/><span class="mono">--chart-green</span><br/><span class="mono">#55A868</span></td>
+            <td>Chart data series 4</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #6366F1; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Dash 1</strong><br/><span class="mono">--dash-1</span><br/><span class="mono">#6366F1</span></td>
+            <td>Dashboard accent 1</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #06B6D4; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Dash 2</strong><br/><span class="mono">--dash-2</span><br/><span class="mono">#06B6D4</span></td>
+            <td>Dashboard accent 2</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #F59E0B; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Dash 3</strong><br/><span class="mono">--dash-3</span><br/><span class="mono">#F59E0B</span></td>
+            <td>Dashboard accent 3</td>
+          </tr>
+          <tr>
+            <td><div style="width: 60px; height: 40px; background: #10B981; border-radius: 4px; border: 1px solid var(--border);"></div></td>
+            <td><strong>Dash 4</strong><br/><span class="mono">--dash-4</span><br/><span class="mono">#10B981</span></td>
+            <td>Dashboard accent 4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="token-section">
+      <h2 class="section-title">Typography</h2>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Font Families</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Font Family</th><th>Semantic Use</th><th>Fallback</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--font-heading</span></td><td>Nunito</td><td>Page titles, headings (h1, h2, h3)</td><td>-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif</td></tr>
+          <tr><td><span class="mono">--font-body</span></td><td>Work Sans</td><td>Body copy, paragraphs, regular text</td><td>-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Font Weight Scale</h3>
+      <table>
+        <thead><tr><th>Weight</th><th>Value</th><th>Semantic Use</th><th>Components</th></tr></thead>
+        <tbody>
+          <tr><td>Normal</td><td>400</td><td>Regular body text, paragraphs</td><td>Body copy, field values</td></tr>
+          <tr><td>Medium</td><td>500</td><td>Secondary emphasis, medium importance</td><td>Tab labels, info values, button text</td></tr>
+          <tr><td>Semibold</td><td>600</td><td>Primary emphasis, strong importance</td><td>Headings, active tabs, section titles</td></tr>
+          <tr><td>Bold</td><td>700</td><td>Very strong emphasis, high importance</td><td>Badges, status indicators, labels</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Font Size Scale</h3>
+      <table>
+        <thead><tr><th>Size</th><th>Component/Use Case</th><th>Semantic Use</th><th>Weight</th></tr></thead>
+        <tbody>
+          <tr><td>10.5px</td><td>Field labels</td><td>Uppercase labels, badges, hints</td><td>600</td></tr>
+          <tr><td>11px</td><td>Secondary labels, section header</td><td>Secondary text, captions, meta info</td><td>600</td></tr>
+          <tr><td>12px</td><td>Small text, meta, help</td><td>Hints, footnotes, secondary info</td><td>400-500</td></tr>
+          <tr><td>12.5px</td><td>Avatar text, small headings</td><td>Small titles, compact text</td><td>500-600</td></tr>
+          <tr><td>13px</td><td>Body text (default)</td><td>Primary content, paragraphs, button text</td><td>400-500</td></tr>
+          <tr><td>13.5px</td><td>Table cells</td><td>Table content, data display</td><td>400</td></tr>
+          <tr><td>14px</td><td>Subheadings, secondary titles</td><td>Section subheadings, card titles</td><td>600</td></tr>
+          <tr><td>15px</td><td>Section titles</td><td>Major section headers, detail titles</td><td>600</td></tr>
+          <tr><td>16px</td><td>Card headers, main sections</td><td>Card titles, primary section headers</td><td>600</td></tr>
+          <tr><td>18px</td><td>Page titles</td><td>Main page heading, primary title</td><td>600</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Typography Components Preview</h3>
+      <div class="sample-preview">
+        <h1 style="font-family: var(--font-heading); font-size: 18px; font-weight: 600; color: var(--navy); margin: 0 0 8px;">Page Title (18px, 600)</h1>
+        <h2 style="font-family: var(--font-heading); font-size: 16px; font-weight: 600; color: var(--navy); margin: 0 0 8px;">Card Header (16px, 600)</h2>
+        <h3 style="font-family: var(--font-heading); font-size: 15px; font-weight: 600; color: var(--navy); margin: 0 0 8px;">Section Title (15px, 600)</h3>
+        <p style="font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--text); margin: 0 0 8px;">Body text (13px, 400) - This is regular paragraph content that flows naturally.</p>
+        <p style="font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text); margin: 0 0 8px;">Medium text (13px, 500) - Used for emphasis or tab labels.</p>
+        <p style="font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: .02em; margin: 0;">LABEL (11px, 600) - Uppercase field labels</p>
+      </div>
+    </div>
+
+    <!-- SPACING -->
+    <div class="token-section">
+      <h2 class="section-title">Spacing Scale</h2>
+      <table>
+        <thead><tr><th>Token (Name / CSS / Size)</th><th>Use Case</th><th>Components</th></tr></thead>
+        <tbody>
+          <tr><td><strong>2xs</strong><br/><span class="mono">--spacing-2xs</span><br/><span class="mono">2px</span></td><td>Minimal gaps between elements</td><td>Dividers, tight spacing</td></tr>
+          <tr><td><strong>xs</strong><br/><span class="mono">--spacing-xs</span><br/><span class="mono">4px</span></td><td>Micro spacing, icon offsets</td><td>Icon spacing, tight gaps</td></tr>
+          <tr><td><strong>sm</strong><br/><span class="mono">--spacing-sm</span><br/><span class="mono">8px</span></td><td>Small component spacing</td><td>Tab gaps, small padding</td></tr>
+          <tr><td><strong>md</strong><br/><span class="mono">--spacing-md</span><br/><span class="mono">12px</span></td><td>Medium-small spacing</td><td>Component padding, form field gaps</td></tr>
+          <tr><td><strong>lg</strong><br/><span class="mono">--spacing-lg</span><br/><span class="mono">16px</span></td><td>Regular spacing, medium padding</td><td>Menu items, form fields, section padding</td></tr>
+          <tr><td><strong>xl</strong><br/><span class="mono">--spacing-xl</span><br/><span class="mono">24px</span></td><td>Large section spacing</td><td>Card padding, section margins, large gaps</td></tr>
+          <tr><td><strong>2xl</strong><br/><span class="mono">--spacing-2xl</span><br/><span class="mono">32px</span></td><td>Page margin, major spacing</td><td>Page padding, layout spacing, major gaps</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Special Spacing Values (No Token Yet)</h3>
+      <table>
+        <thead><tr><th>Size</th><th>Use Case</th><th>Components</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td><strong>14px</strong></td><td>Header padding</td><td>Table headers, badges</td><td>Consider using <span class="mono">--spacing-md (12px)</span> + 2px</td></tr>
+          <tr><td><strong>18px</strong></td><td>Tab and component padding</td><td>Tabs, buttons</td><td>Between <span class="mono">--spacing-lg</span> and <span class="mono">--spacing-xl</span></td></tr>
+          <tr><td><strong>20px</strong></td><td>Card padding (top/bottom)</td><td>Card containers</td><td>Near <span class="mono">--spacing-xl (24px)</span></td></tr>
+          <tr><td><strong>22px</strong></td><td>Card padding (left/right)</td><td>Card containers</td><td>Near <span class="mono">--spacing-xl (24px)</span></td></tr>
+          <tr><td><strong>28px</strong></td><td>Detail view padding</td><td>Content body, panels</td><td>Between <span class="mono">--spacing-xl</span> and <span class="mono">--spacing-2xl</span></td></tr>
+          <tr><td><strong>42px</strong></td><td>Large header spacing</td><td>Header gaps, major sections</td><td>Custom value for header layout</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- BORDER RADIUS -->
+    <div class="token-section">
+      <h2 class="section-title">Border Radius</h2>
+      <table>
+        <thead><tr><th>Token</th><th>Size</th><th>Semantic Use</th><th>Components</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--radius-sm</span></td><td>8px</td><td>Small, compact components</td><td>Button icons, input fields, small badges</td></tr>
+          <tr><td><span class="mono">--radius</span></td><td>10px</td><td>Primary rounding, main components</td><td>Cards, tabs, dropdowns, buttons</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- BORDERS -->
+    <div class="token-section">
+      <h2 class="section-title">Borders</h2>
+      <table>
+        <thead><tr><th>Style</th><th>Width</th><th>Color Token</th><th>Color Value</th><th>Use Case</th></tr></thead>
+        <tbody>
+          <tr><td>Solid (full)</td><td>1px</td><td><span class="mono">--border</span></td><td>#E2E5F3</td><td>Card borders, input borders, container borders</td></tr>
+          <tr><td>Solid (full)</td><td>1px</td><td><span class="mono">--container-border</span></td><td>#E4E9FB</td><td>Detail wrap containers, main container borders</td></tr>
+          <tr><td>Solid (full)</td><td>1px</td><td><span class="mono">--brand-50</span></td><td>#EEF0FB</td><td>Subtle dividers, section separators</td></tr>
+          <tr><td>Top only</td><td>1px</td><td><span class="mono">--brand-50</span></td><td>#EEF0FB</td><td>Header separator, section dividers</td></tr>
+          <tr><td>Bottom only</td><td>1px</td><td><span class="mono">--brand-50</span></td><td>#EEF0FB</td><td>Table row separator, menu item dividers</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SHADOWS -->
+    <div class="token-section">
+      <h2 class="section-title">Shadows & Elevation</h2>
+      <table>
+        <thead><tr><th>Elevation</th><th>Name</th><th>CSS Value</th><th>Semantic Use</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Subtle</td><td><span class="mono">0 1px 2px rgba(15,23,42,.02)</span></td><td>Card shadows, minimal elevation</td></tr>
+          <tr><td>2</td><td>Light</td><td><span class="mono">0 1px 2px rgba(20,24,60,.03), 0 3px 8px rgba(20,24,60,.03)</span></td><td>Header bands, containers</td></tr>
+          <tr><td>3</td><td>Medium</td><td><span class="mono">0 2px 6px rgba(46,58,140,.28)</span></td><td>Avatar badges, focused elements</td></tr>
+          <tr><td>4</td><td>Dark</td><td><span class="mono">0 14px 34px rgba(20,24,60,.18)</span></td><td>Dropdown menus, popovers, secondary menus</td></tr>
+          <tr><td>5</td><td>Darkest</td><td><span class="mono">0 16px 38px rgba(20,24,60,.24)</span></td><td>Search results, modals, main overlays</td></tr>
+          <tr><td>-</td><td>Hover</td><td><span class="mono">0 4px 14px rgba(20,24,60,.08)</span></td><td>Interactive element hover state</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ANIMATION -->
+    <div class="token-section">
+      <h2 class="section-title">Animation & Motion</h2>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Easing Functions</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Bezier Value</th><th>Semantic Use</th><th>Feel</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--ease</span></td><td><span class="mono">cubic-bezier(.4,0,.2,1)</span></td><td>Standard easing for all transitions</td><td>Smooth, natural, ease-in-out</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Transition Durations</h3>
+      <table>
+        <thead><tr><th>Speed</th><th>Duration</th><th>Semantic Use</th><th>Components</th></tr></thead>
+        <tbody>
+          <tr><td>Fast</td><td>0.12s - 0.15s</td><td>Quick feedback, immediate response</td><td>Hover states, background transitions, color changes</td></tr>
+          <tr><td>Medium</td><td>0.18s</td><td>Standard transitions, smooth state changes</td><td>Tab transitions, menu animations, button hovers</td></tr>
+          <tr><td>Slow</td><td>0.2s</td><td>Complex animations, deliberate motion</td><td>Page transitions, modal open/close, major layout changes</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Motion Principles</h3>
+      <table>
+        <thead><tr><th>Principle</th><th>Application</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Entrance</td><td>Elements appearing for first time</td><td>Fade-in, slide-up, scale-up on page load</td></tr>
+          <tr><td>Exit</td><td>Elements leaving the view</td><td>Fade-out, slide-down, scale-down on close</td></tr>
+          <tr><td>Feedback</td><td>User interaction response</td><td>Button press, hover highlight, loading spinner</td></tr>
+          <tr><td>Navigation</td><td>Moving between states</td><td>Tab switches, menu open/close, expand/collapse</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SEMANTIC COMPONENT TOKENS -->
+    <div class="token-section">
+      <h2 class="section-title">Semantic Component Tokens</h2>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Card</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--card-bg</span></td><td><span class="mono">var(--surface)</span></td><td>Card background color</td></tr>
+          <tr><td><span class="mono">--card-border</span></td><td><span class="mono">1px solid #F1F5F9</span></td><td>Card border</td></tr>
+          <tr><td><span class="mono">--card-border-radius</span></td><td><span class="mono">10px</span></td><td>Card corner rounding</td></tr>
+          <tr><td><span class="mono">--card-padding</span></td><td><span class="mono">20px 22px</span></td><td>Card internal spacing</td></tr>
+          <tr><td><span class="mono">--card-shadow</span></td><td><span class="mono">var(--shadow-1)</span></td><td>Card elevation shadow</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Button</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--button-height-md</span></td><td><span class="mono">40px</span></td><td>Standard button height</td></tr>
+          <tr><td><span class="mono">--button-padding-md</span></td><td><span class="mono">10px 18px</span></td><td>Standard button padding</td></tr>
+          <tr><td><span class="mono">--button-border-radius</span></td><td><span class="mono">10px</span></td><td>Button corner rounding</td></tr>
+          <tr><td><span class="mono">--button-font-weight</span></td><td><span class="mono">500</span></td><td>Button text weight</td></tr>
+          <tr><td><span class="mono">--button-transition</span></td><td><span class="mono">all 0.18s var(--ease)</span></td><td>Button animation</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Tabs</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--tab-padding</span></td><td><span class="mono">10px 18px</span></td><td>Tab item padding</td></tr>
+          <tr><td><span class="mono">--tab-border-radius</span></td><td><span class="mono">10px</span></td><td>Tab corner rounding</td></tr>
+          <tr><td><span class="mono">--tab-font-size</span></td><td><span class="mono">13px</span></td><td>Tab text size</td></tr>
+          <tr><td><span class="mono">--tab-font-weight</span></td><td><span class="mono">500</span></td><td>Tab text weight (inactive)</td></tr>
+          <tr><td><span class="mono">--tab-active-font-weight</span></td><td><span class="mono">600</span></td><td>Tab text weight (active)</td></tr>
+          <tr><td><span class="mono">--tab-active-bg</span></td><td><span class="mono">linear-gradient(135deg, var(--brand-50), var(--brand-100))</span></td><td>Active tab background</td></tr>
+          <tr><td><span class="mono">--tab-hover-bg</span></td><td><span class="mono">var(--brand-50)</span></td><td>Tab hover background</td></tr>
+          <tr><td><span class="mono">--tab-gap</span></td><td><span class="mono">8px</span></td><td>Gap between tabs</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Accordion</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--accordion-header-padding</span></td><td><span class="mono">16px 20px</span></td><td>Accordion header spacing</td></tr>
+          <tr><td><span class="mono">--accordion-header-font-size</span></td><td><span class="mono">15px</span></td><td>Accordion header text size</td></tr>
+          <tr><td><span class="mono">--accordion-header-font-weight</span></td><td><span class="mono">600</span></td><td>Accordion header text weight</td></tr>
+          <tr><td><span class="mono">--accordion-border</span></td><td><span class="mono">1px solid var(--container-border)</span></td><td>Accordion border</td></tr>
+          <tr><td><span class="mono">--accordion-border-radius</span></td><td><span class="mono">10px</span></td><td>Accordion corner rounding</td></tr>
+          <tr><td><span class="mono">--accordion-chevron-size</span></td><td><span class="mono">24px</span></td><td>Chevron icon size</td></tr>
+          <tr><td><span class="mono">--accordion-chevron-bg</span></td><td><span class="mono">var(--brand-50)</span></td><td>Chevron background</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Badge / Pill</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--badge-padding</span></td><td><span class="mono">4px 10px</span></td><td>Badge internal spacing</td></tr>
+          <tr><td><span class="mono">--badge-border-radius</span></td><td><span class="mono">14px</span></td><td>Badge corner rounding (pill shape)</td></tr>
+          <tr><td><span class="mono">--badge-font-size</span></td><td><span class="mono">11px</span></td><td>Badge text size</td></tr>
+          <tr><td><span class="mono">--badge-font-weight</span></td><td><span class="mono">600</span></td><td>Badge text weight</td></tr>
+          <tr><td><span class="mono">--badge-active-bg</span></td><td><span class="mono">linear-gradient(...)</span></td><td>Success status background</td></tr>
+          <tr><td><span class="mono">--badge-pending-bg</span></td><td><span class="mono">linear-gradient(...)</span></td><td>Pending status background</td></tr>
+          <tr><td><span class="mono">--badge-caution-bg</span></td><td><span class="mono">linear-gradient(...)</span></td><td>Error/Caution background</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Avatar</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--avatar-size-sm</span></td><td><span class="mono">24px</span></td><td>Small avatar size</td></tr>
+          <tr><td><span class="mono">--avatar-size-md</span></td><td><span class="mono">32px</span></td><td>Medium avatar size</td></tr>
+          <tr><td><span class="mono">--avatar-size-lg</span></td><td><span class="mono">36px</span></td><td>Large avatar size</td></tr>
+          <tr><td><span class="mono">--avatar-border-radius</span></td><td><span class="mono">50%</span></td><td>Avatar shape (circular)</td></tr>
+          <tr><td><span class="mono">--avatar-bg</span></td><td><span class="mono">linear-gradient(135deg, var(--brand-l), var(--brand))</span></td><td>Avatar background gradient</td></tr>
+          <tr><td><span class="mono">--avatar-color</span></td><td><span class="mono">#fff</span></td><td>Avatar text color</td></tr>
+          <tr><td><span class="mono">--avatar-shadow</span></td><td><span class="mono">var(--shadow-3)</span></td><td>Avatar elevation shadow</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Input / Form</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--input-height</span></td><td><span class="mono">40px</span></td><td>Input field height</td></tr>
+          <tr><td><span class="mono">--input-padding</span></td><td><span class="mono">10px 12px</span></td><td>Input field padding</td></tr>
+          <tr><td><span class="mono">--input-border-radius</span></td><td><span class="mono">8px</span></td><td>Input field corner rounding</td></tr>
+          <tr><td><span class="mono">--input-border</span></td><td><span class="mono">1px solid var(--border)</span></td><td>Input field border</td></tr>
+          <tr><td><span class="mono">--input-bg</span></td><td><span class="mono">var(--surface)</span></td><td>Input field background</td></tr>
+          <tr><td><span class="mono">--input-focus-border</span></td><td><span class="mono">1px solid var(--brand)</span></td><td>Input focus border</td></tr>
+          <tr><td><span class="mono">--input-focus-shadow</span></td><td><span class="mono">0 0 0 3px var(--brand-50)</span></td><td>Input focus shadow</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Dropdown / Select</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--select-padding</span></td><td><span class="mono">8px 12px</span></td><td>Select field padding</td></tr>
+          <tr><td><span class="mono">--select-border-radius</span></td><td><span class="mono">8px</span></td><td>Select field corner rounding</td></tr>
+          <tr><td><span class="mono">--select-border</span></td><td><span class="mono">1px solid var(--border2)</span></td><td>Select field border</td></tr>
+          <tr><td><span class="mono">--select-bg</span></td><td><span class="mono">var(--surface)</span></td><td>Select field background</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Menu / Dropdown</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--menu-bg</span></td><td><span class="mono">var(--surface)</span></td><td>Menu background</td></tr>
+          <tr><td><span class="mono">--menu-border</span></td><td><span class="mono">1px solid var(--border)</span></td><td>Menu border</td></tr>
+          <tr><td><span class="mono">--menu-shadow</span></td><td><span class="mono">var(--shadow-5)</span></td><td>Menu elevation shadow</td></tr>
+          <tr><td><span class="mono">--menu-item-padding</span></td><td><span class="mono">10px 16px</span></td><td>Menu item spacing</td></tr>
+          <tr><td><span class="mono">--menu-item-hover-bg</span></td><td><span class="mono">var(--brand-50)</span></td><td>Menu item hover state</td></tr>
+          <tr><td><span class="mono">--menu-divider</span></td><td><span class="mono">1px solid var(--brand-50)</span></td><td>Menu item separator</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Table</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--table-header-padding</span></td><td><span class="mono">14px 18px</span></td><td>Table header cell spacing</td></tr>
+          <tr><td><span class="mono">--table-header-bg</span></td><td><span class="mono">var(--bg)</span></td><td>Table header background</td></tr>
+          <tr><td><span class="mono">--table-header-font-size</span></td><td><span class="mono">11px</span></td><td>Table header text size</td></tr>
+          <tr><td><span class="mono">--table-header-font-weight</span></td><td><span class="mono">600</span></td><td>Table header text weight</td></tr>
+          <tr><td><span class="mono">--table-cell-padding</span></td><td><span class="mono">17px 18px</span></td><td>Table cell spacing</td></tr>
+          <tr><td><span class="mono">--table-cell-border</span></td><td><span class="mono">1px solid var(--brand-50)</span></td><td>Table cell border</td></tr>
+          <tr><td><span class="mono">--table-row-hover-bg</span></td><td><span class="mono">var(--bg)</span></td><td>Table row hover state</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Dialog / Modal</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--modal-bg</span></td><td><span class="mono">var(--surface)</span></td><td>Modal background</td></tr>
+          <tr><td><span class="mono">--modal-border</span></td><td><span class="mono">1px solid var(--border)</span></td><td>Modal border</td></tr>
+          <tr><td><span class="mono">--modal-border-radius</span></td><td><span class="mono">10px</span></td><td>Modal corner rounding</td></tr>
+          <tr><td><span class="mono">--modal-shadow</span></td><td><span class="mono">var(--shadow-6)</span></td><td>Modal elevation shadow</td></tr>
+          <tr><td><span class="mono">--modal-padding</span></td><td><span class="mono">24px</span></td><td>Modal internal spacing</td></tr>
+          <tr><td><span class="mono">--modal-overlay-bg</span></td><td><span class="mono">rgba(0, 0, 0, 0.4)</span></td><td>Modal overlay background</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: var(--navy); font-size: 14px; margin-bottom: 16px; margin-top: 24px;">Link</h3>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">--link-color</span></td><td><span class="mono">var(--brand)</span></td><td>Link text color</td></tr>
+          <tr><td><span class="mono">--link-font-weight</span></td><td><span class="mono">600</span></td><td>Link text weight</td></tr>
+          <tr><td><span class="mono">--link-text-decoration</span></td><td><span class="mono">underline</span></td><td>Link text decoration</td></tr>
+          <tr><td><span class="mono">--link-hover-color</span></td><td><span class="mono">var(--brand-l)</span></td><td>Link hover color</td></tr>
+          <tr><td><span class="mono">--link-transition</span></td><td><span class="mono">color 0.15s var(--ease)</span></td><td>Link animation</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="token-section">
+      <h2 class="section-title">Components</h2>
+      <div style="margin-bottom: 16px;">
+        <div class="maintabs" id="componentTabs" style="margin-bottom: 0; flex-wrap: wrap;">
+          <div class="maintab on" onclick="switchComponent('buttons')" style="flex: 0 1 calc(50% - 4px); min-width: 100px;">Buttons</div>
+          <div class="maintab" onclick="switchComponent('cards')" style="flex: 0 1 calc(50% - 4px); min-width: 100px;">Cards</div>
+          <div class="maintab" onclick="switchComponent('tabs')" style="flex: 0 1 calc(50% - 4px); min-width: 100px;">Tabs</div>
+          <div class="maintab" onclick="switchComponent('forms')" style="flex: 0 1 calc(50% - 4px); min-width: 100px;">Forms</div>
+          <div class="maintab" onclick="switchComponent('badges')" style="flex: 0 1 calc(50% - 4px); min-width: 100px;">Badges</div>
+          <div class="maintab" onclick="switchComponent('tables')" style="flex: 0 1 calc(50% - 4px); min-width: 100px;">Tables</div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div id="buttons-panel" class="component-panel" style="display: block;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Documentation</h4>
+            <table style="font-size: 12px;">
+              <thead><tr><th>Component</th><th>Class</th></tr></thead>
+              <tbody>
+                <tr><td>Primary</td><td><span class="mono">btn-primary</span></td></tr>
+                <tr><td>Secondary</td><td><span class="mono">btn-secondary</span></td></tr>
+                <tr><td>Text</td><td><span class="mono">btn-text</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Preview</h4>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Primary</button>
+              <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 12px;">Secondary</button>
+              <button class="btn btn-text" style="padding: 8px 16px; font-size: 12px;">Text</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div id="cards-panel" class="component-panel" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Documentation</h4>
+            <table style="font-size: 12px;">
+              <thead><tr><th>Component</th><th>Class</th></tr></thead>
+              <tbody>
+                <tr><td>Container</td><td><span class="mono">.card</span></td></tr>
+                <tr><td>Header</td><td><span class="mono">.cardh</span></td></tr>
+                <tr><td>Icon</td><td><span class="mono">.ic</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Preview</h4>
+            <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+              <div style="font-weight: 600; color: var(--navy); margin-bottom: 8px; font-size: 12px;">Card Title</div>
+              <div style="font-size: 11px; color: var(--text2);">Sample card content</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div id="tabs-panel" class="component-panel" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Documentation</h4>
+            <table style="font-size: 12px;">
+              <thead><tr><th>Type</th><th>Class</th></tr></thead>
+              <tbody>
+                <tr><td>Main</td><td><span class="mono">.maintab</span></td></tr>
+                <tr><td>Side</td><td><span class="mono">.sidetab</span></td></tr>
+                <tr><td>Active</td><td><span class="mono">.on</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Preview</h4>
+            <div style="display: flex; gap: 6px;">
+              <button class="maintab on" style="padding: 8px 12px; font-size: 11px;">Active</button>
+              <button class="maintab" style="padding: 8px 12px; font-size: 11px;">Tab</button>
+              <button class="maintab" style="padding: 8px 12px; font-size: 11px;">Tab</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Forms -->
+      <div id="forms-panel" class="component-panel" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Documentation</h4>
+            <table style="font-size: 12px;">
+              <thead><tr><th>Component</th><th>Class</th></tr></thead>
+              <tbody>
+                <tr><td>Input</td><td><span class="mono">input</span></td></tr>
+                <tr><td>Select</td><td><span class="mono">select</span></td></tr>
+                <tr><td>Field</td><td><span class="mono">.field</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Preview</h4>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <input type="text" placeholder="Input field" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 12px;">
+              <select style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 12px;">
+                <option>Select option</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div id="badges-panel" class="component-panel" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Documentation</h4>
+            <table style="font-size: 12px;">
+              <thead><tr><th>Status</th><th>Class</th></tr></thead>
+              <tbody>
+                <tr><td>Active</td><td><span class="mono">.st-a</span></td></tr>
+                <tr><td>Pending</td><td><span class="mono">.st-p</span></td></tr>
+                <tr><td>Caution</td><td><span class="mono">.st-c</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Preview</h4>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="badge badge-active" style="font-size: 10px;">Active</span>
+              <span class="badge badge-pending" style="font-size: 10px;">Pending</span>
+              <span class="badge badge-caution" style="font-size: 10px;">Caution</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tables -->
+      <div id="tables-panel" class="component-panel" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Documentation</h4>
+            <table style="font-size: 12px;">
+              <thead><tr><th>Element</th><th>Class</th></tr></thead>
+              <tbody>
+                <tr><td>Header</td><td><span class="mono">th</span></td></tr>
+                <tr><td>Cell</td><td><span class="mono">td</span></td></tr>
+                <tr><td>Link</td><td><span class="mono">.lnk2</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 style="color: var(--navy); font-size: 12px; margin-bottom: 12px; font-weight: 600;">Preview</h4>
+            <table style="font-size: 11px; width: 100%; border-collapse: collapse;">
+              <thead><tr><th style="padding: 6px; text-align: left; border-bottom: 1px solid var(--brand-50);">Name</th><th style="padding: 6px; text-align: left; border-bottom: 1px solid var(--brand-50);">Status</th></tr></thead>
+              <tbody>
+                <tr><td style="padding: 6px; border-bottom: 1px solid var(--brand-50);"><span style="color: var(--brand); font-weight: 600;">Link</span></td><td style="padding: 6px;"><span class="badge badge-active" style="font-size: 9px;">Active</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function switchComponent(tab) {
+        const panels = document.querySelectorAll('.component-panel');
+        const tabs = document.querySelectorAll('#componentTabs .maintab');
+
+        panels.forEach(p => p.style.display = 'none');
+        tabs.forEach(t => t.classList.remove('on'));
+
+        document.getElementById(tab + '-panel').style.display = 'block';
+        event.target.classList.add('on');
+      }
+    </script>
+
+  </div>
+</body>
+</html>

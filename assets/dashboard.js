@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function(){
     var prefix = el.getAttribute('data-prefix') || '';
     var suffix = el.getAttribute('data-suffix') || '';
     var start = null;
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){
+      el.textContent = prefix + target.toFixed(decimals) + suffix;
+      return;
+    }
     function frame(ts){
       if(start === null) start = ts;
       var progress = Math.min((ts - start) / DURATION, 1);

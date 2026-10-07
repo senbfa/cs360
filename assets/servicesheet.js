@@ -237,6 +237,8 @@ function ssWireCovenantResult(root){
     const res = root.querySelector('#covResult');
     res.textContent = compliant ? 'Compliant' : 'Breach Detected';
     res.className = 'st ' + (compliant ? 'st-a' : 'st-c');
+    res.setAttribute('role', 'status');
+    res.setAttribute('aria-live', 'polite');
   };
   inputs.forEach(inp => inp.addEventListener('input', update));
   update();
@@ -245,8 +247,8 @@ function ssWireCovenantResult(root){
 function ssValidate(formEl){
   const requiredEls = formEl.querySelectorAll('[required]');
   for (const el of requiredEls){
-    if (el.type === 'checkbox' && !el.checked){ el.reportValidity(); return true; }
-    if (el.type !== 'checkbox' && !el.value){ el.reportValidity(); return true; }
+    if (el.type === 'checkbox' && !el.checked){ el.setAttribute('aria-invalid', 'true'); el.focus(); el.reportValidity(); return true; }
+    if (el.type !== 'checkbox' && !el.value){ el.setAttribute('aria-invalid', 'true'); el.focus(); el.reportValidity(); return true; }
   }
   const closeChks = formEl.querySelectorAll('.close-chk');
   for (const c of closeChks){
@@ -260,11 +262,11 @@ function ssEnsureSheetDom(){
   if (document.getElementById('svcSheetOverlay')) return;
   const wrap = document.createElement('div');
   wrap.innerHTML = `
-    <div class="sheet-overlay" id="svcSheetOverlay"></div>
-    <div class="sheet-panel" id="svcSheetPanel">
+    <div class="sheet-overlay" id="svcSheetOverlay" aria-hidden="true"></div>
+    <div class="sheet-panel" id="svcSheetPanel" role="dialog" aria-modal="true" aria-labelledby="svcSheetTitle" tabindex="-1" inert>
       <div class="sheet-head">
-        <span class="ttl" id="svcSheetTitle">Service Request</span>
-        <button class="sheet-close" id="svcSheetCloseBtn" type="button">&#10005;</button>
+        <h2 class="ttl" id="svcSheetTitle">Service Request</h2>
+        <button class="sheet-close" id="svcSheetCloseBtn" type="button" aria-label="Close service request panel"><span aria-hidden="true">&#10005;</span></button>
       </div>
       <div class="sheet-body" id="svcSheetBody"></div>
       <div class="sheet-foot">
@@ -276,11 +278,20 @@ function ssEnsureSheetDom(){
   document.getElementById('svcSheetOverlay').addEventListener('click', closeServiceSheet);
   document.getElementById('svcSheetCloseBtn').addEventListener('click', closeServiceSheet);
   document.getElementById('svcSheetCancelBtn').addEventListener('click', closeServiceSheet);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeServiceSheet(); });
+  document.addEventListener('keydown', (e) => {
+    const panel = document.getElementById('svcSheetPanel');
+    if (e.key === 'Escape' && panel && panel.classList.contains('on') && !e.defaultPrevented) closeServiceSheet();
+  });
+}
+
+let ssOpener = null;
+function ssSetBackgroundInert(on){
+  document.querySelectorAll('.app, .skip-link').forEach(el => { if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert'); });
 }
 
 function openServiceSheet(actionId, ctxObj){
   ssEnsureSheetDom();
+  if (!document.getElementById('svcSheetPanel').classList.contains('on')) ssOpener = document.activeElement;
   const panel = document.getElementById('svcSheetPanel');
   panel.style.width = '50vw';
   ssSetCtx(Object.assign({ action: actionId }, ctxObj || {}));
@@ -291,11 +302,11 @@ function openServiceSheet(actionId, ctxObj){
   body.innerHTML = `
     <div class="ctxbanner">${ssCtxBannerHTML()}</div>
     <div class="svc-banner banner-error" id="svcSheetError">
-      <div class="sb-icon">&#33;</div>
+      <div class="sb-icon" aria-hidden="true">&#33;</div>
       <div><span class="sb-title">Unable to submit</span><div class="sb-body" id="svcSheetErrorBody"></div></div>
     </div>
     <div class="svc-banner banner-success" id="svcSheetSuccess">
-      <div class="sb-icon bs-icon">&#10003;</div>
+      <div class="sb-icon bs-icon" aria-hidden="true">&#10003;</div>
       <div><span class="sb-title" id="svcSheetSuccessTitle">Request submitted</span><div class="sb-body" id="svcSheetSuccessBody"></div></div>
     </div>
     <form id="svcSheetForm">${formFn ? formFn() : '<p class="hint">Unknown request type.</p>'}</form>`;
@@ -313,6 +324,9 @@ function openServiceSheet(actionId, ctxObj){
       if (typeof err === 'string'){
         document.getElementById('svcSheetErrorBody').textContent = err;
         errorBanner.classList.add('on');
+        if (window.a11yAnnounce) a11yAnnounce('Unable to submit. ' + err, true);
+      } else if (window.a11yAnnounce) {
+        a11yAnnounce('Unable to submit. Complete the required field.', true);
       }
       return;
     }
@@ -320,12 +334,19 @@ function openServiceSheet(actionId, ctxObj){
     document.getElementById('svcSheetSuccessTitle').textContent = `Request submitted — ${ref}`;
     document.getElementById('svcSheetSuccessBody').textContent = 'Routed to Credit Operations for review. You will be notified once actioned.';
     document.getElementById('svcSheetSuccess').classList.add('on');
+    if (window.a11yAnnounce) a11yAnnounce(`Request submitted. Reference ${ref}. Routed to Credit Operations for review.`);
     submitBtn.disabled = true;
     form.querySelectorAll('input,select,textarea,button').forEach(el => el.setAttribute('disabled', 'disabled'));
   };
 
   document.getElementById('svcSheetOverlay').classList.add('on');
-  document.getElementById('svcSheetPanel').classList.add('on');
+  panel.removeAttribute('inert');
+  panel.classList.add('on');
+  ssSetBackgroundInert(true);
+  if (window.a11yEnhance) a11yEnhance();
+  const firstField = body.querySelector('input:not([readonly]):not([type=hidden]), select, textarea');
+  setTimeout(() => (firstField || document.getElementById('svcSheetCloseBtn')).focus(), 60);
+  if (window.a11yAnnounce) a11yAnnounce((req ? req.label : 'Service request') + ' dialog opened');
 
   const menu = document.getElementById('svcMenu');
   if (menu) menu.classList.remove('on');
@@ -334,9 +355,16 @@ function openServiceSheet(actionId, ctxObj){
 function closeServiceSheet(){
   const overlay = document.getElementById('svcSheetOverlay');
   const panel = document.getElementById('svcSheetPanel');
+  const wasOpen = panel && panel.classList.contains('on');
   if (overlay) overlay.classList.remove('on');
-  if (panel) panel.classList.remove('on');
+  if (panel){ panel.classList.remove('on'); panel.setAttribute('inert', ''); }
   document.body.style.overflow = '';
+  ssSetBackgroundInert(false);
+  if (wasOpen){
+    if (ssOpener && document.contains(ssOpener) && ssOpener.focus) ssOpener.focus();
+    if (window.a11yAnnounce) a11yAnnounce('Dialog closed');
+  }
+  ssOpener = null;
 }
 
 /* ---- Top-bar dropdown triggers: "Service Action" menu + product switcher ---- */
